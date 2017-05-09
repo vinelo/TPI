@@ -1,0 +1,10 @@
+C:\Users\NAEFV_INFO\Desktop\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe.config
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe.config
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.pdb
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csprojResolveAssemblyReference.cache
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmPrincipale.resources
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.exe
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.pdb
