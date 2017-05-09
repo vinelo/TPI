@@ -74,12 +74,13 @@
             // 
             // mspMenu
             // 
+            this.mspMenu.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.mspMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmFichier,
             this.toolStripMenuItem1});
             this.mspMenu.Location = new System.Drawing.Point(0, 0);
             this.mspMenu.Name = "mspMenu";
-            this.mspMenu.Size = new System.Drawing.Size(924, 24);
+            this.mspMenu.Size = new System.Drawing.Size(924, 29);
             this.mspMenu.TabIndex = 0;
             this.mspMenu.Text = "mspMenu";
             // 
@@ -148,10 +149,11 @@
             // 
             this.tbcPrincipale.Controls.Add(this.tbpTravail);
             this.tbcPrincipale.Controls.Add(this.tbpGestion);
-            this.tbcPrincipale.Location = new System.Drawing.Point(0, 28);
+            this.tbcPrincipale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.tbcPrincipale.Location = new System.Drawing.Point(0, 42);
             this.tbcPrincipale.Name = "tbcPrincipale";
             this.tbcPrincipale.SelectedIndex = 0;
-            this.tbcPrincipale.Size = new System.Drawing.Size(924, 505);
+            this.tbcPrincipale.Size = new System.Drawing.Size(924, 491);
             this.tbcPrincipale.TabIndex = 1;
             this.tbcPrincipale.TabStop = false;
             // 
@@ -163,10 +165,10 @@
             this.tbpTravail.Controls.Add(this.tbxCopie);
             this.tbpTravail.Controls.Add(this.label1);
             this.tbpTravail.Controls.Add(this.tbxExemple);
-            this.tbpTravail.Location = new System.Drawing.Point(4, 22);
+            this.tbpTravail.Location = new System.Drawing.Point(4, 29);
             this.tbpTravail.Name = "tbpTravail";
             this.tbpTravail.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpTravail.Size = new System.Drawing.Size(916, 479);
+            this.tbpTravail.Size = new System.Drawing.Size(916, 458);
             this.tbpTravail.TabIndex = 0;
             this.tbpTravail.Text = "Travail";
             this.tbpTravail.UseVisualStyleBackColor = true;
@@ -292,10 +294,10 @@
             this.tbpGestion.Controls.Add(this.button1);
             this.tbpGestion.Controls.Add(this.btnExecuter);
             this.tbpGestion.Controls.Add(this.lsbListeTravaux);
-            this.tbpGestion.Location = new System.Drawing.Point(4, 22);
+            this.tbpGestion.Location = new System.Drawing.Point(4, 29);
             this.tbpGestion.Name = "tbpGestion";
             this.tbpGestion.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpGestion.Size = new System.Drawing.Size(916, 479);
+            this.tbpGestion.Size = new System.Drawing.Size(916, 458);
             this.tbpGestion.TabIndex = 1;
             this.tbpGestion.Text = "Gestion de travaux";
             this.tbpGestion.UseVisualStyleBackColor = true;
@@ -379,15 +381,16 @@
             // lsbListeTravaux
             // 
             this.lsbListeTravaux.FormattingEnabled = true;
+            this.lsbListeTravaux.ItemHeight = 20;
             this.lsbListeTravaux.Location = new System.Drawing.Point(8, 6);
             this.lsbListeTravaux.Name = "lsbListeTravaux";
-            this.lsbListeTravaux.Size = new System.Drawing.Size(900, 394);
+            this.lsbListeTravaux.Size = new System.Drawing.Size(900, 384);
             this.lsbListeTravaux.TabIndex = 0;
             // 
             // btnExecuter
             // 
             this.btnExecuter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnExecuter.Location = new System.Drawing.Point(701, 406);
+            this.btnExecuter.Location = new System.Drawing.Point(704, 395);
             this.btnExecuter.Name = "btnExecuter";
             this.btnExecuter.Size = new System.Drawing.Size(178, 55);
             this.btnExecuter.TabIndex = 1;
@@ -397,7 +400,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.button1.Location = new System.Drawing.Point(28, 406);
+            this.button1.Location = new System.Drawing.Point(25, 395);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(178, 55);
             this.button1.TabIndex = 2;
