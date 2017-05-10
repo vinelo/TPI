@@ -8,3 +8,4 @@ C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFP
 C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
 C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.exe
 C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.pdb
+C:\Users\NAEFV_INFO\Desktop\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmCreation.resources
