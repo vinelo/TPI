@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Resources;
 
 namespace TravauxDisciplinaireCFPT
 {
@@ -11,41 +10,61 @@ namespace TravauxDisciplinaireCFPT
     public class TravailDisciplinaire
     {
         
-        //Variables..
+        //Champs..
 
-        private Eleve _eleve;
-        private Personne _professeur;
-        private DateTime _dureeEffective;
+        private string _nomProfesseur;
+        private string _prenomProfesseur;        
+        private string _nomEleve;
+        private string _prenomEleve;
+        private string _classe;
         private string _texte;
         private string _hash;
         private int _progression;
-        private Niveau _niveau;
+        private int _totalCaractere;
+        private int _tempsPris;
+        private int _niveau;
+        private double _temps;
         private bool _valide;
         
         
 
         //Propriétés...
-        internal Eleve Eleve
+
+        public double Temps
         {
-            get { return _eleve; }
-            set { _eleve = value; }
+            get { return _temps; }
+            set { _temps = value; }
         }
-        internal Personne Professeur
+        public string NomProfesseur
         {
-            get { return _professeur; }
-            set { _professeur = value; }
+            get { return _nomProfesseur; }
+            set { _nomProfesseur = value; }
         }
 
-        public DateTime DureeEffective
+        public string PrenomProfesseur
         {
-            get { return _dureeEffective; }
-            set { _dureeEffective = value; }
+            get { return _prenomProfesseur; }
+            set { _prenomProfesseur = value; }
         }
-        internal Niveau Niveau
+
+        public string NomEleve
         {
-            get { return _niveau; }
-            set { _niveau = value; }
+            get { return _nomEleve; }
+            set { _nomEleve = value; }
         }
+
+        public string PrenomEleve
+        {
+            get { return _prenomEleve; }
+            set { _prenomEleve = value; }
+        }
+
+        public string Classe
+        {
+            get { return _classe; }
+            set { _classe = value; }
+        }
+
         public string Texte
         {
             get { return _texte; }
@@ -56,6 +75,18 @@ namespace TravauxDisciplinaireCFPT
         {
             get { return _progression; }
             set { _progression = value; }
+        }
+
+        public int TotalCaractere
+        {
+            get { return _totalCaractere; }
+            set { _totalCaractere = value; }
+        }
+        
+        public int TempsPris
+        {
+            get { return _tempsPris; }
+            set { _tempsPris = value; }
         }
 
         public bool Valide
@@ -70,12 +101,18 @@ namespace TravauxDisciplinaireCFPT
             set { _hash = value; }
         }
 
+        public int Niveau
+        {
+            get { return _niveau; }
+            set { _niveau = value; }
+        }
+
         //Constructeurs...
 
         /// <summary>
         /// Créer un travail disciplinaire avec des valeurs par défaut
         /// </summary>
-        public TravailDisciplinaire() : this("NomProfesseur", "PrenomProfesseur", "NomEleve", "PrenomEleve", "ClasseEleve", 6, null) { }
+        public TravailDisciplinaire() : this("NomProfesseur", "PrenomProfesseur", "NomEleve", "PrenomEleve", "ClasseEleve", 6, "Texte Exemple") { }
 
         /// <summary>
         /// Créer un nouveau travail disciplinaire avec le texte correspondant niveau séléctionné
@@ -86,7 +123,7 @@ namespace TravauxDisciplinaireCFPT
         /// <param name="paramPrenomEleve">Prenom de l'élève</param>
         /// <param name="paramClasse">Classe de l'élève</param>
         /// <param name="paramTexte">Texte à recopier</param>
-        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau) : this(paramNomProf, paramPrenomProf, paramNomEleve, paramPrenomEleve, paramClasse, paramNiveau, null){ }
+        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau) : this(paramNomProf, paramPrenomProf, paramNomEleve, paramPrenomEleve, paramClasse, paramNiveau, ""){ }
         /// <summary>
         /// Créer un nouveau travail disciplinaire
         /// </summary>
@@ -100,17 +137,47 @@ namespace TravauxDisciplinaireCFPT
         public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau, string paramTexte)
         {
             //Initialise les données
-            this.Eleve = new Eleve(paramNomEleve, paramPrenomEleve, paramClasse);
-            this.Professeur = new Personne(paramNomProf, paramPrenomProf);
-            this.Niveau = new Niveau(paramNiveau);
+            this.NomProfesseur = paramNomProf;
+            this.PrenomProfesseur = paramPrenomProf;
+            this.NomEleve = paramNomEleve;
+            this.PrenomEleve = paramPrenomEleve;
+            this.Classe = paramClasse;
+            this.Niveau = paramNiveau;
 
-            if (paramTexte == null)
-                this.Texte = Niveau.ChoisirTexte();
-            else
-                this.Texte = paramTexte;
+            //Pour choisir le texte selon le niveau
+            switch(Niveau)
+            {
+                case 1:
+                    this.Texte = Properties.Resources.TexteExemple;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+                case 2:
+                    this.Texte = Properties.Resources.TexteExemple;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+                case 3:
+                    this.Texte = Properties.Resources.TexteExemple;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+                case 4:
+                    this.Texte = Properties.Resources.TexteExemple;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+                case 5:
+                    this.Texte = Properties.Resources.TexteExemple;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+                case 6:
+                    this.Texte = paramTexte;
+                    this.TotalCaractere = this.Texte.Length;
+                    break;
+            }
+
+            
             
             this.Progression = 0;
             this.Valide = true;
+            this.Temps = 0;
         }
 
         /// <summary>
@@ -135,29 +202,16 @@ namespace TravauxDisciplinaireCFPT
         {
             Progression += 1;
         }
-        /// <summary>
-        /// Vérifie si l'utilisateur à finit son travail disciplinaire
-        /// </summary>
-        /// <returns>Vérification</returns>
-        public bool EstFini()
+        
+        public bool VerifierFin()
         {
-            bool EstFini = false;
-            if (this.Progression == this.CompterCaractere())
+            bool Verification = false;
+            if (this.Progression == this.TotalCaractere)
             {
-                EstFini = true;
+                Verification = true;
             }
-            return EstFini;
+            return Verification;
         }
-        /// <summary>
-        /// Compte le nombre de caractères total
-        /// </summary>
-        /// <returns>Nombre de caractère total</returns>
-        public int CompterCaractere()
-        {
-            return this.Texte.Count();
-        }
-
-
 
 
     }
