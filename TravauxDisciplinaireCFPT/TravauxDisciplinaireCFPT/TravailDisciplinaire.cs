@@ -136,6 +136,7 @@ namespace TravauxDisciplinaireCFPT
         /// <param name="paramNiveau">Niveau du texte</param>
         public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau, string paramTexte)
         {
+            //Initialise les données
             this.NomProfesseur = paramNomProf;
             this.PrenomProfesseur = paramPrenomProf;
             this.NomEleve = paramNomEleve;
@@ -147,23 +148,23 @@ namespace TravauxDisciplinaireCFPT
             switch(Niveau)
             {
                 case 1:
-                    this.Texte = "Text par defaut";
+                    this.Texte = Properties.Resources.TexteExemple;
                     this.TotalCaractere = this.Texte.Length;
                     break;
                 case 2:
-                    this.Texte = "Text par defaut";
+                    this.Texte = Properties.Resources.TexteExemple;
                     this.TotalCaractere = this.Texte.Length;
                     break;
                 case 3:
-                    this.Texte = "Text par defaut";
+                    this.Texte = Properties.Resources.TexteExemple;
                     this.TotalCaractere = this.Texte.Length;
                     break;
                 case 4:
-                    this.Texte = "Text par defaut";
+                    this.Texte = Properties.Resources.TexteExemple;
                     this.TotalCaractere = this.Texte.Length;
                     break;
                 case 5:
-                    this.Texte = "Text par defaut";
+                    this.Texte = Properties.Resources.TexteExemple;
                     this.TotalCaractere = this.Texte.Length;
                     break;
                 case 6:
@@ -178,6 +179,40 @@ namespace TravauxDisciplinaireCFPT
             this.Valide = true;
             this.Temps = 0;
         }
+
+        /// <summary>
+        /// Vérifie si le caractère correspond à celui qui doit être tapé
+        /// </summary>
+        /// <param name="paramCaractere">Caractère à vérifier</param>
+        /// <returns>Si le caractère entré est le bon</returns>
+        public bool VerifierCaractere(char paramCaractere)
+        {
+            bool Verification = false;
+            char CaractereATaper = this.Texte[this.Progression];
+            if(CaractereATaper == paramCaractere)
+            {
+                Verification = true;
+            }
+            return Verification;
+        }
+        /// <summary>
+        /// Avance la progression de 1
+        /// </summary>
+        public void AvancerProgression()
+        {
+            Progression += 1;
+        }
+        
+        public bool VerifierFin()
+        {
+            bool Verification = false;
+            if (this.Progression == this.TotalCaractere)
+            {
+                Verification = true;
+            }
+            return Verification;
+        }
+
 
     }
 }

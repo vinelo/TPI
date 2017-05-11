@@ -43,7 +43,7 @@
             this.tbcPrincipale = new System.Windows.Forms.TabControl();
             this.tbpTravail = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rbxCopieTexte = new System.Windows.Forms.RichTextBox();
+            this.tbxCopieTexte = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbxTexteExemple = new System.Windows.Forms.RichTextBox();
             this.gbxDetails = new System.Windows.Forms.GroupBox();
@@ -65,7 +65,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbpGestion = new System.Windows.Forms.TabPage();
             this.btnNouveau = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnEditer = new System.Windows.Forms.Button();
             this.lsbListeTravaux = new System.Windows.Forms.ListBox();
             this.mspMenu.SuspendLayout();
@@ -193,7 +193,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rbxCopieTexte);
+            this.groupBox2.Controls.Add(this.tbxCopieTexte);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(9, 160);
             this.groupBox2.Name = "groupBox2";
@@ -202,14 +202,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Votre texte  :";
             // 
-            // rbxCopieTexte
+            // tbxCopieTexte
             // 
-            this.rbxCopieTexte.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbxCopieTexte.Location = new System.Drawing.Point(7, 24);
-            this.rbxCopieTexte.Name = "rbxCopieTexte";
-            this.rbxCopieTexte.Size = new System.Drawing.Size(885, 117);
-            this.rbxCopieTexte.TabIndex = 0;
-            this.rbxCopieTexte.Text = "";
+            this.tbxCopieTexte.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxCopieTexte.Location = new System.Drawing.Point(7, 24);
+            this.tbxCopieTexte.Multiline = true;
+            this.tbxCopieTexte.Name = "tbxCopieTexte";
+            this.tbxCopieTexte.Size = new System.Drawing.Size(885, 117);
+            this.tbxCopieTexte.TabIndex = 0;
+            this.tbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
             // 
             // groupBox1
             // 
@@ -417,7 +418,7 @@
             // tbpGestion
             // 
             this.tbpGestion.Controls.Add(this.btnNouveau);
-            this.tbpGestion.Controls.Add(this.button1);
+            this.tbpGestion.Controls.Add(this.btnSupprimer);
             this.tbpGestion.Controls.Add(this.btnEditer);
             this.tbpGestion.Controls.Add(this.lsbListeTravaux);
             this.tbpGestion.Location = new System.Drawing.Point(4, 27);
@@ -437,16 +438,18 @@
             this.btnNouveau.TabIndex = 3;
             this.btnNouveau.Text = "Nouveau";
             this.btnNouveau.UseVisualStyleBackColor = true;
+            this.btnNouveau.Click += new System.EventHandler(this.tsiNouveau_Click);
             // 
-            // button1
+            // btnSupprimer
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(25, 395);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 55);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Supprimer";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSupprimer.Location = new System.Drawing.Point(25, 395);
+            this.btnSupprimer.Name = "btnSupprimer";
+            this.btnSupprimer.Size = new System.Drawing.Size(178, 55);
+            this.btnSupprimer.TabIndex = 2;
+            this.btnSupprimer.Text = "Supprimer";
+            this.btnSupprimer.UseVisualStyleBackColor = true;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // btnEditer
             // 
@@ -470,6 +473,7 @@
             this.lsbListeTravaux.Size = new System.Drawing.Size(900, 334);
             this.lsbListeTravaux.TabIndex = 0;
             this.lsbListeTravaux.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lsbListeTravaux_DrawItem);
+            this.lsbListeTravaux.SelectedIndexChanged += new System.EventHandler(this.lsbListeTravaux_SelectedIndexChanged);
             // 
             // frmPrincipale
             // 
@@ -489,6 +493,7 @@
             this.tbcPrincipale.ResumeLayout(false);
             this.tbpTravail.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.gbxDetails.ResumeLayout(false);
             this.gbxDetails.PerformLayout();
@@ -531,17 +536,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTravailAccompli;
         private System.Windows.Forms.Label lblTemps;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnEditer;
         private System.Windows.Forms.ListBox lsbListeTravaux;
         private System.Windows.Forms.ToolStripMenuItem tsiNouveau;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RichTextBox rbxCopieTexte;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox rbxTexteExemple;
         private System.Windows.Forms.Button btnNouveau;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.TextBox tbxCopieTexte;
     }
 }
 

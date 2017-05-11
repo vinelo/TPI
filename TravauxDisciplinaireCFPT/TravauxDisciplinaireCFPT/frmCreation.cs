@@ -16,6 +16,7 @@ namespace TravauxDisciplinaireCFPT
         public frmCreation()
         {
             InitializeComponent();
+            UpdateVue();
         }
 
         private string _texte;
@@ -85,6 +86,8 @@ namespace TravauxDisciplinaireCFPT
 
             return Td;
         }
+
+        // A REFAIRE POUR SUPPRIMER LES ENTER EN TROP
         public string FiltrerTexte(string paramFichier)
         {
             string[] lireText = File.ReadAllLines(paramFichier, Encoding.Default);
@@ -96,19 +99,37 @@ namespace TravauxDisciplinaireCFPT
             }
             return Texte;
         }
-
-        // A Refaire au propre pour filtrer les caractères et mettre dans une fonction
-        private void btnPersonnaliser_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Raffraichit la vue
+        /// </summary>
+        public void UpdateVue()
         {
-            if (DialogResult.OK == ofdOuvrir.ShowDialog())
+            //Raffrachit la vue
+            if (rbnPersonnaliser.Checked == true)
+                tbxApercu.Text = Texte;
+            if (rbnNiveau1.Checked == true)
+                tbxApercu.Text = Properties.Resources.TexteExemple;
+            if (rbnNiveau2.Checked == true)
+                tbxApercu.Text = Properties.Resources.TexteExemple;
+            if (rbnNiveau3.Checked == true)
+                tbxApercu.Text = Properties.Resources.TexteExemple;
+            if (rbnNiveau4.Checked == true)
+                tbxApercu.Text = Properties.Resources.TexteExemple;
+            if (rbnNiveau5.Checked == true)
+                tbxApercu.Text = Properties.Resources.TexteExemple;
+
+            //Determine si le bouton "Creer" est grisé ou pas
+            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
             {
-                this.Texte = FiltrerTexte(ofdOuvrir.FileName);
+                btnCreer.Enabled = true;
             }
-        }
+            else
+            {
+                btnCreer.Enabled = false;
+            }
 
-        private void rbnPersonnaliser_CheckedChanged(object sender, EventArgs e)
-        {
-            if(rbnPersonnaliser.Checked == true)
+            //Determine si le bouton "Personnaliser (...)" est grisé ou pas
+            if (rbnPersonnaliser.Checked == true)
             {
                 btnPersonnaliser.Enabled = true;
             }
@@ -118,17 +139,31 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
-        private void tbx_TextChanged(object sender, EventArgs e)
+        // A Refaire au propre pour filtrer les caractères et mettre dans une fonction
+        private void btnPersonnaliser_Click(object sender, EventArgs e)
         {
-            if(this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
+            if (DialogResult.OK == ofdOuvrir.ShowDialog())
             {
-                btnCreer.Enabled = true;
-            }
-            else
-            {
-                btnCreer.Enabled = false;
+                this.Texte = FiltrerTexte(ofdOuvrir.FileName);
+                tbxApercu.Text = Texte;
             }
         }
+
+        private void rbnPersonnaliser_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateVue();
+        }
+
+        private void tbx_TextChanged(object sender, EventArgs e)
+        {
+            UpdateVue();
+        }
+
+        private void rbnNiveau_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateVue();
+        }
+
 
     }
 }

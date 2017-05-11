@@ -51,9 +51,12 @@
             this.btnCreer = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.ofdOuvrir = new System.Windows.Forms.OpenFileDialog();
+            this.tbxApercu = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.gbxProfesseur.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxProfesseur
@@ -231,6 +234,7 @@
             this.rbnNiveau5.TabIndex = 9;
             this.rbnNiveau5.Text = "5 (environ 150 min.)";
             this.rbnNiveau5.UseVisualStyleBackColor = true;
+            this.rbnNiveau5.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau4
             // 
@@ -242,6 +246,7 @@
             this.rbnNiveau4.TabIndex = 8;
             this.rbnNiveau4.Text = "4 (environ 120 min.)";
             this.rbnNiveau4.UseVisualStyleBackColor = true;
+            this.rbnNiveau4.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau3
             // 
@@ -255,6 +260,7 @@
             this.rbnNiveau3.TabStop = true;
             this.rbnNiveau3.Text = "3 (environ 60 min.)";
             this.rbnNiveau3.UseVisualStyleBackColor = true;
+            this.rbnNiveau3.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau2
             // 
@@ -266,6 +272,7 @@
             this.rbnNiveau2.TabIndex = 6;
             this.rbnNiveau2.Text = "2 (environ 40 min.)";
             this.rbnNiveau2.UseVisualStyleBackColor = true;
+            this.rbnNiveau2.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau1
             // 
@@ -277,6 +284,7 @@
             this.rbnNiveau1.TabIndex = 5;
             this.rbnNiveau1.Text = "1 (environ 20 min.)";
             this.rbnNiveau1.UseVisualStyleBackColor = true;
+            this.rbnNiveau1.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // btnCreer
             // 
@@ -301,12 +309,34 @@
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
             // 
+            // tbxApercu
+            // 
+            this.tbxApercu.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxApercu.Location = new System.Drawing.Point(9, 19);
+            this.tbxApercu.Multiline = true;
+            this.tbxApercu.Name = "tbxApercu";
+            this.tbxApercu.ReadOnly = true;
+            this.tbxApercu.Size = new System.Drawing.Size(471, 98);
+            this.tbxApercu.TabIndex = 14;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tbxApercu);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(12, 275);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(486, 123);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Aperçu du texte";
+            // 
             // frmCreation
             // 
             this.AcceptButton = this.btnCreer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 468);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnCreer);
             this.Controls.Add(this.groupBox2);
@@ -325,6 +355,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -354,5 +386,7 @@
         private System.Windows.Forms.Button btnCreer;
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.OpenFileDialog ofdOuvrir;
+        private System.Windows.Forms.TextBox tbxApercu;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
