@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,43 +14,24 @@ namespace TravauxDisciplinaireCFPT
 {
     public partial class frmCreation : Form
     {
-        public frmCreation()
-        {
-            InitializeComponent();
-            UpdateVue();
-        }
-
+       
+        //Champs...
         private string _texte;
 
+        //Propriétés...
         public string Texte
         {
             get { return _texte; }
             set { _texte = value; }
         }
 
-        /// <summary>
-        /// Vérifie si les champs sont remplis
-        /// </summary>
-        /// <returns>Renvoie vrai si les champs sont remplis</returns>
-        public bool VerifierChamps()
+        //Constructeurs...
+        public frmCreation()
         {
-            bool Validation = true;
-
-            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
-            {
-                Validation = true;
-                if (rbnPersonnaliser.Checked == true)
-                {
-                    Validation = false;
-                    if (Texte != "")
-                    {
-                        Validation = true;
-                    }
-                }
-            }
-
-            return Validation;
+            InitializeComponent();
+            UpdateVue();
         }
+        //Méthodes...
 
         /// <summary>
         /// Créer un travail avec les données saisies
@@ -78,14 +60,39 @@ namespace TravauxDisciplinaireCFPT
                 Niveau = 5;
 
             TravailDisciplinaire Td;
- 
-            if(Niveau == 6)
+
+            if (Niveau == 6)
                 Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, Niveau, Texte);
             else
                 Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, Niveau);
 
             return Td;
         }
+
+        /// <summary>
+        /// Vérifie si les champs sont remplis
+        /// </summary>
+        /// <returns>Renvoie vrai si les champs sont remplis</returns>
+        public bool VerifierChamps()
+        {
+            bool Validation = true;
+
+            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
+            {
+                Validation = true;
+                if (rbnPersonnaliser.Checked == true)
+                {
+                    Validation = false;
+                    if (Texte != "")
+                    {
+                        Validation = true;
+                    }
+                }
+            }
+            return Validation;
+        }
+
+
 
         // A REFAIRE POUR SUPPRIMER LES ENTER EN TROP
         public string FiltrerTexte(string paramFichier)
@@ -99,44 +106,56 @@ namespace TravauxDisciplinaireCFPT
             }
             return Texte;
         }
+
         /// <summary>
         /// Raffraichit la vue
         /// </summary>
         public void UpdateVue()
         {
-            //Raffrachit la vue
-            if (rbnPersonnaliser.Checked == true)
+            //Choisi le texte à afficher en fonction du niveau
+            if (ChoisirNiveau() == 6)
                 tbxApercu.Text = Texte;
-            if (rbnNiveau1.Checked == true)
-                tbxApercu.Text = Properties.Resources.TexteExemple;
-            if (rbnNiveau2.Checked == true)
-                tbxApercu.Text = Properties.Resources.TexteExemple;
-            if (rbnNiveau3.Checked == true)
-                tbxApercu.Text = Properties.Resources.TexteExemple;
-            if (rbnNiveau4.Checked == true)
-                tbxApercu.Text = Properties.Resources.TexteExemple;
-            if (rbnNiveau5.Checked == true)
-                tbxApercu.Text = Properties.Resources.TexteExemple;
-
-            //Determine si le bouton "Creer" est grisé ou pas
-            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
-            {
-                btnCreer.Enabled = true;
-            }
             else
             {
-                btnCreer.Enabled = false;
+                Niveau Niveau = new Niveau(ChoisirNiveau());
+                tbxApercu.Text = Niveau.ChoisirTexte();
             }
+                
+            //Determine si le bouton "Creer" est grisé ou pas
+            if (VerifierChamps())
+                btnCreer.Enabled = true;
+            else
+                btnCreer.Enabled = false;
 
             //Determine si le bouton "Personnaliser (...)" est grisé ou pas
-            if (rbnPersonnaliser.Checked == true)
-            {
+            if (rbnPersonnaliser.Checked)
                 btnPersonnaliser.Enabled = true;
-            }
             else
-            {
                 btnPersonnaliser.Enabled = false;
-            }
+        }
+
+        //A REVOIR
+        /// <summary>
+        /// Choisi le niveau correspondant à la "case" coché
+        /// </summary>
+        /// <returns>Niveau du texte</returns>
+        public int ChoisirNiveau()
+        {
+            int NiveauARetourner = 0;
+            if (rbnPersonnaliser.Checked == true)
+                NiveauARetourner = 6;
+            if (rbnNiveau1.Checked == true)
+                NiveauARetourner = 1;
+            if (rbnNiveau2.Checked == true)
+                NiveauARetourner = 2;
+            if (rbnNiveau3.Checked == true)
+                NiveauARetourner = 3;
+            if (rbnNiveau4.Checked == true)
+                NiveauARetourner = 4;
+            if (rbnNiveau5.Checked == true)
+                NiveauARetourner = 5;
+
+            return NiveauARetourner;
         }
 
         // A Refaire au propre pour filtrer les caractères et mettre dans une fonction

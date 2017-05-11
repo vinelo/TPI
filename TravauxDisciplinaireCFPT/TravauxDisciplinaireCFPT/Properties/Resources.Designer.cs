@@ -61,11 +61,47 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ceci n&apos;est utilisé qu&apos;à titre d&apos;exemple.
+        ///   Recherche une chaîne localisée semblable à Texte de niveau 1.
         /// </summary>
-        internal static string TexteExemple {
+        internal static string TexteNiveau1 {
             get {
-                return ResourceManager.GetString("TexteExemple", resourceCulture);
+                return ResourceManager.GetString("TexteNiveau1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Texte de niveau 2.
+        /// </summary>
+        internal static string TexteNiveau2 {
+            get {
+                return ResourceManager.GetString("TexteNiveau2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Texte de niveau 3.
+        /// </summary>
+        internal static string TexteNiveau3 {
+            get {
+                return ResourceManager.GetString("TexteNiveau3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Texte de niveau 4.
+        /// </summary>
+        internal static string TexteNiveau4 {
+            get {
+                return ResourceManager.GetString("TexteNiveau4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Texte de niveau 5.
+        /// </summary>
+        internal static string TexteNiveau5 {
+            get {
+                return ResourceManager.GetString("TexteNiveau5", resourceCulture);
             }
         }
     }

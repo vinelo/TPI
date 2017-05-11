@@ -12,7 +12,7 @@ namespace TravauxDisciplinaireCFPT
 {
     public partial class frmPrincipale : Form
     {
-        //Variables...
+        //Champs...
         private List<TravailDisciplinaire> _listeTravauxDisciplinaires;
         private int _indexTravailSelectionne;
 
@@ -38,29 +38,11 @@ namespace TravauxDisciplinaireCFPT
         {
             InitializeComponent();
             ListeTravauxDisciplinaires = new List<TravailDisciplinaire>();
-            UpdateVueList(false);
+            UpdateVueBouton();
+            tbcPrincipale.SelectTab(1);
         }
-        //Méthodes...
-        /// <summary>
-        /// Raffraichit la liste si la valeur en paramètre est true et determine si les boutons doivent être grisé
-        /// </summary>
-        /// <param name="RaffraichirListe">Determine si la liste se raffraichit</param>
-        public void UpdateVueList(bool RaffraichirListe)
+        public void UpdateVueBouton()
         {
-            if (RaffraichirListe == true)
-            {
-                //Liste
-                if (ListeTravauxDisciplinaires != null)
-                {
-                    lsbListeTravaux.Items.Clear();
-                    foreach (TravailDisciplinaire travail in this.ListeTravauxDisciplinaires)
-                    {
-                        lsbListeTravaux.Items.Add(travail);
-                    }
-                }
-            }
-
-            //Bouton Editer et Supprimer
             if (lsbListeTravaux.SelectedIndex != -1)
             {
                 this.btnSupprimer.Enabled = true;
@@ -71,65 +53,88 @@ namespace TravauxDisciplinaireCFPT
                 this.btnSupprimer.Enabled = false;
                 this.btnEditer.Enabled = false;
             }
+        }
 
+        //Méthodes...
+        /// <summary>
+        /// Raffraichit la liste si la valeur en paramètre est true et determine si les boutons doivent être grisé
+        /// </summary>
+        /// <param name="RaffraichirListe">Determine si la liste se raffraichit</param>
+        public void UpdateVueList()
+        {
+
+            //Liste
+            if (ListeTravauxDisciplinaires != null)
+            {
+                lsbListeTravaux.Items.Clear();
+                foreach (TravailDisciplinaire travail in this.ListeTravauxDisciplinaires)
+                {
+                    lsbListeTravaux.Items.Add(travail);
+                }
+            }
+
+        }
+        public void UpdateVueTexteUtilisateur()
+        {
+            string TexteDejaCopie = "";
+            for (int i = 0; i < this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression; i++)
+            {
+                TexteDejaCopie += this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Texte[i];
+            }
+            this.tbxCopieTexte.Text = TexteDejaCopie;
         }
         /// <summary>
         /// Affiche le travail sélectionné dans l'onglet "travail"
         /// </summary>
-        /// <param name="paramUpdateVueText">Indique si on veut update le text ou pas</param>
-        public void UpdateVueSelection(bool paramUpdateVueText)
+        public void UpdateVueSelection()
         {
 
             if (ListeTravauxDisciplinaires != null)
             {
-                //Stocke le text déjà copié dans la variable -> "TexteDejaCopie"
-                string TexteDejaCopie = "";
-                for (int i = 0; i < this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression; i++)
-                {
-                    TexteDejaCopie += this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Texte[i];
-                }
-
-                ////string TexteResteACopier = "";
-                ////for (int i = 0; i < this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression; i++)
-                ////{
-                ////    TexteDejaCopie += this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Texte[i];
-                ////}
-
-                //Si le paramètre "UpdateVueText" est true, alors fait le nécessaire pour update le texte
-                if (paramUpdateVueText == true)
-                {
-                    this.tbxCopieTexte.Text = "";
-                    this.tbxCopieTexte.Text = TexteDejaCopie;
-                }
-                for (int i = 0; i < this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression; i++)
-                {
-                    TexteDejaCopie += this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Texte[i];
-                }
-                //Update du Texte Exemple
+                //Affichage du Texte Exemple
                 this.rbxTexteExemple.Text = "";
                 this.rbxTexteExemple.AppendText(this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Texte);
                 this.rbxTexteExemple.SelectionStart = 0;
                 this.rbxTexteExemple.SelectionLength = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression;
                 this.rbxTexteExemple.SelectionBackColor = Color.LightGray;
-                //this.rbxTexteExemple.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Texte;
+
+                //Affichage du reste
+                this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Classe;
+                this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Professeur.ToString();
+                this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
+                this.lblTravailAccompli.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression) + " caractère(s) sur " + Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere());
+
+
+                //Choisi le nombre de minutes à affiché
+
+                // ___________________________________________ /!\ A REFAIRE
+
+                //switch (ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau)
+                //{
+                //    case 1:
+                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "20" + " minutes)";
+                //        break;
+                //    case 2:
+                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "40" + " minutes)";
+                //        break;
+                //    case 3:
+                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "60" + " minutes)";
+                //        break;
+                //    case 4:
+                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "120" + " minutes)";
+                //        break;
+                //    case 5:
+                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "150" + " minutes)";
+                //        break;
+                //    case 6:
+                //        this.lblNiveau.Text = "Texte personnalisé";
+                //        break;
+                //}
+
                 //Update de tout le reste
-                this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Classe;
-                this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].NomProfesseur + " " + ListeTravauxDisciplinaires[IndexTravailSelectionne].PrenomProfesseur;
-                this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].NomEleve + " " + ListeTravauxDisciplinaires[IndexTravailSelectionne].PrenomEleve;
-                this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "AMettre" + " minutes)";
-                this.lblTravailAccompli.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression) + " caractère(s) sur " + Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].TotalCaractere);
-                this.lblTemps.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Temps);
+
 
             }
-        }
-        private void tbxCopie_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDuree_Click(object sender, EventArgs e)
-        {
-
         }
         //Affiche le formulaire de création et nous renvoie le résultat de celui-ci
         private void tsiNouveau_Click(object sender, EventArgs e)
@@ -142,7 +147,7 @@ namespace TravauxDisciplinaireCFPT
                 {
                     bool Verification = Creation.VerifierChamps();
                     ListeTravauxDisciplinaires.Add(Creation.CreerTravail());
-                    UpdateVueList(true);
+                    UpdateVueList();
                     tbcPrincipale.SelectTab(1);
                 }
             }
@@ -162,19 +167,18 @@ namespace TravauxDisciplinaireCFPT
             else
                 e.Graphics.FillRectangle(fond, e.Bounds);
 
-
             //Pour chaque item de la liste dessine l'intérieur
             if (e.Index >= 0)
             {
                 //Affichage professeur
                 e.Graphics.DrawString("Professeur :",
                    e.Font, stylo, e.Bounds.X, e.Bounds.Y + 10);
-                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NomProfesseur + " " + ListeTravauxDisciplinaires[e.Index].PrenomProfesseur,
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
                    e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
                 //Affichage élève
                 e.Graphics.DrawString("Élève :",
                    e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
-                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NomEleve + " " + ListeTravauxDisciplinaires[e.Index].PrenomEleve,
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
                    e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
 
 
@@ -190,45 +194,30 @@ namespace TravauxDisciplinaireCFPT
             this.IndexTravailSelectionne = lsbListeTravaux.SelectedIndex;
             tbcPrincipale.SelectTab(0);
 
-            UpdateVueList(false);
-            UpdateVueSelection(true); // "true" car on veut que le text déjà écrit s'affiche
+            UpdateVueBouton();
+            UpdateVueTexteUtilisateur();
+            UpdateVueSelection(); // "true" car on veut que le texte déjà écrit s'affiche
         }
 
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Si l'index est hors du tableau alors ne fait rien
-            if (IndexTravailSelectionne + 1 > ListeTravauxDisciplinaires.Count)
+            if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
             {
                 e.Handled = true;
             }
-            //Si le travail est fini alors affiche une boîte de dialogue disant que l'utilisateur a terminé
-            else if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].VerifierFin())
-            {
-                MessageBox.Show("Vous avez terminé !");
-                e.Handled = true;
-            }
+            //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
             else
             {
-                //Si le caractère tapé n'est pas le bon ne fait rien
-                if (this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
-                {
-                    e.Handled = true;
-                }
-                //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
-                else
-                {
-                    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
-                    UpdateVueSelection(false); //false car on ne veut pas qu'il réaffiche le texte car il vient directement de l'utilisateur
-                }
+                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
+                UpdateVueSelection(); //false car on ne veut pas qu'il réaffiche le texte car il vient directement de l'utilisateur
             }
+
             //Reverifie si le travail est fini
-            if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].VerifierFin())
+            if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
             {
                 MessageBox.Show("Vous avez terminé !");
-                e.Handled = true;
             }
-
-
         }
 
         private void btnSupprimer_Click(object sender, EventArgs e)
@@ -237,16 +226,13 @@ namespace TravauxDisciplinaireCFPT
             if (lsbListeTravaux.SelectedIndex != -1)
             {
                 ListeTravauxDisciplinaires.RemoveAt(lsbListeTravaux.SelectedIndex);
-                this.UpdateVueList(false); // false car on ne veut pas raffraîchir la liste juste grisé / dégriser les boutons
+                this.UpdateVueBouton();
             }
         }
 
         private void lsbListeTravaux_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateVueList(false); // false car on ne veut pas raffraîchir la liste juste grisé / dégriser les boutons
+            this.UpdateVueBouton();
         }
-
-
-
     }
 }

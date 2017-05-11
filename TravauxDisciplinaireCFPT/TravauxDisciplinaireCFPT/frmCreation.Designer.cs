@@ -277,12 +277,12 @@
             // rbnNiveau1
             // 
             this.rbnNiveau1.AutoSize = true;
-            this.rbnNiveau1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnNiveau1.Font = new System.Drawing.Font("Arial", 8.25F);
             this.rbnNiveau1.Location = new System.Drawing.Point(6, 25);
             this.rbnNiveau1.Name = "rbnNiveau1";
-            this.rbnNiveau1.Size = new System.Drawing.Size(148, 22);
+            this.rbnNiveau1.Size = new System.Drawing.Size(85, 18);
             this.rbnNiveau1.TabIndex = 5;
-            this.rbnNiveau1.Text = "1 (environ 20 min.)";
+            this.rbnNiveau1.Text = "1 (~ 20 min.)";
             this.rbnNiveau1.UseVisualStyleBackColor = true;
             this.rbnNiveau1.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 

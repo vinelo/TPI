@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Eleve.cs" />
     <Compile Include="frmCreation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +57,8 @@
     <Compile Include="frmPrincipale.Designer.cs">
       <DependentUpon>frmPrincipale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Niveau.cs" />
+    <Compile Include="Personne.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TravailDisciplinaire.cs" />
@@ -90,6 +93,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TexteExemple.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TexteNiveau1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TexteNiveau2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TexteNiveau3.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TexteNiveau4.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TexteNiveau5.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

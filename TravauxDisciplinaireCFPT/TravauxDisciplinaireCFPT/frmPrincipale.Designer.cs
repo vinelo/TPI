@@ -229,8 +229,10 @@
             this.rbxTexteExemple.Location = new System.Drawing.Point(7, 24);
             this.rbxTexteExemple.Name = "rbxTexteExemple";
             this.rbxTexteExemple.ReadOnly = true;
+            this.rbxTexteExemple.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.rbxTexteExemple.Size = new System.Drawing.Size(885, 117);
             this.rbxTexteExemple.TabIndex = 0;
+            this.rbxTexteExemple.TabStop = false;
             this.rbxTexteExemple.Text = "";
             // 
             // gbxDetails
@@ -413,7 +415,6 @@
             this.label6.Size = new System.Drawing.Size(180, 18);
             this.label6.TabIndex = 0;
             this.label6.Text = "Durée effective du travail : ";
-            this.label6.Click += new System.EventHandler(this.lblDuree_Click);
             // 
             // tbpGestion
             // 

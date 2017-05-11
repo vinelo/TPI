@@ -118,7 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TexteExemple" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TexteExemple.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="TexteNiveau1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TexteNiveau1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TexteNiveau2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TexteNiveau2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TexteNiveau3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TexteNiveau3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TexteNiveau4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TexteNiveau4.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TexteNiveau5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TexteNiveau5.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>
