@@ -65,12 +65,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbpGestion = new System.Windows.Forms.TabPage();
+            this.btnOuvrir = new System.Windows.Forms.Button();
             this.btnNouveau = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnEditer = new System.Windows.Forms.Button();
             this.lsbListeTravaux = new System.Windows.Forms.ListBox();
             this.tmrTempsEffectif = new System.Windows.Forms.Timer(this.components);
-            this.btnOuvrir = new System.Windows.Forms.Button();
+            this.sfdSauvegarder = new System.Windows.Forms.SaveFileDialog();
+            this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
             this.mspMenu.SuspendLayout();
             this.tbcPrincipale.SuspendLayout();
             this.tbpTravail.SuspendLayout();
@@ -123,6 +125,7 @@
             this.tsiOuvrir.Name = "tsiOuvrir";
             this.tsiOuvrir.Size = new System.Drawing.Size(191, 24);
             this.tsiOuvrir.Text = "Ouvrir";
+            this.tsiOuvrir.Click += new System.EventHandler(this.tsiOuvrir_Click);
             // 
             // toolStripSeparator1
             // 
@@ -134,12 +137,14 @@
             this.tsiEnregistrer.Name = "tsiEnregistrer";
             this.tsiEnregistrer.Size = new System.Drawing.Size(191, 24);
             this.tsiEnregistrer.Text = "Enregistrer";
+            this.tsiEnregistrer.Click += new System.EventHandler(this.tsiEnregistrer_Click);
             // 
             // tsiEnregistrerSous
             // 
             this.tsiEnregistrerSous.Name = "tsiEnregistrerSous";
             this.tsiEnregistrerSous.Size = new System.Drawing.Size(191, 24);
             this.tsiEnregistrerSous.Text = "Enregistrer sous...";
+            this.tsiEnregistrerSous.Click += new System.EventHandler(this.tsiEnregistrerSous_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -438,6 +443,16 @@
             this.tbpGestion.Text = "Gestion de travaux";
             this.tbpGestion.UseVisualStyleBackColor = true;
             // 
+            // btnOuvrir
+            // 
+            this.btnOuvrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOuvrir.Location = new System.Drawing.Point(277, 395);
+            this.btnOuvrir.Name = "btnOuvrir";
+            this.btnOuvrir.Size = new System.Drawing.Size(178, 55);
+            this.btnOuvrir.TabIndex = 4;
+            this.btnOuvrir.Text = "Ouvrir";
+            this.btnOuvrir.UseVisualStyleBackColor = true;
+            // 
             // btnNouveau
             // 
             this.btnNouveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -489,15 +504,16 @@
             this.tmrTempsEffectif.Interval = 1000;
             this.tmrTempsEffectif.Tick += new System.EventHandler(this.tmrTempsEffectif_Tick);
             // 
-            // btnOuvrir
+            // sfdSauvegarder
             // 
-            this.btnOuvrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOuvrir.Location = new System.Drawing.Point(277, 395);
-            this.btnOuvrir.Name = "btnOuvrir";
-            this.btnOuvrir.Size = new System.Drawing.Size(178, 55);
-            this.btnOuvrir.TabIndex = 4;
-            this.btnOuvrir.Text = "Ouvrir";
-            this.btnOuvrir.UseVisualStyleBackColor = true;
+            this.sfdSauvegarder.DefaultExt = "td";
+            this.sfdSauvegarder.FileName = "travail.td";
+            this.sfdSauvegarder.Filter = "Fichier Travaux Disciplinaire au CFPT|*.td";
+            // 
+            // ofdOuvrirFichier
+            // 
+            this.ofdOuvrirFichier.FileName = "travail.td";
+            this.ofdOuvrirFichier.Filter = "Travaux Disciplinaire au CFPT|*.td";
             // 
             // frmPrincipale
             // 
@@ -573,6 +589,8 @@
         private System.Windows.Forms.TextBox tbxCopieTexte;
         private System.Windows.Forms.Timer tmrTempsEffectif;
         private System.Windows.Forms.Button btnOuvrir;
+        private System.Windows.Forms.SaveFileDialog sfdSauvegarder;
+        private System.Windows.Forms.OpenFileDialog ofdOuvrirFichier;
     }
 }
 

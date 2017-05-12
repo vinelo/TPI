@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CleDeValidation.cs" />
     <Compile Include="Eleve.cs" />
     <Compile Include="frmCreation.cs">
       <SubType>Form</SubType>

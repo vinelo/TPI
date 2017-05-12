@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,6 +57,7 @@ namespace TravauxDisciplinaireCFPT
 
         //Méthodes...
 
+        #region UpdateVue
         /// <summary>
         /// Grise ou dégrise les bouton supprimer et editer
         /// </summary>
@@ -63,20 +66,6 @@ namespace TravauxDisciplinaireCFPT
             this.btnSupprimer.Enabled = EstIndexSelectionne();
             this.btnEditer.Enabled = EstIndexSelectionne();
         }
-
-        /// <summary>
-        /// Détermine si un travail est sélectionné dans la liste
-        /// </summary>
-        /// <returns>Travail sélectionné dans la liste -> vrai ou faux</returns>
-        public bool EstIndexSelectionne()
-        {
-            bool EstIndexSelectionne = false;
-            if (lsbListeTravaux.SelectedIndex != -1)
-                EstIndexSelectionne = true;
-            return EstIndexSelectionne;
-        }
-
-
         /// <summary>
         /// Raffraichit la liste
         /// </summary>
@@ -91,14 +80,6 @@ namespace TravauxDisciplinaireCFPT
                     lsbListeTravaux.Items.Add(travail);
                 }
             }
-
-        }
-        /// <summary>
-        /// Afficher le texte déjà tapé par l'utilisateur
-        /// </summary>
-        public void UpdateVueTexteUtilisateur()
-        {
-            tbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
         }
         /// <summary>
         /// Affiche le travail sélectionné dans l'onglet "travail"
@@ -124,9 +105,37 @@ namespace TravauxDisciplinaireCFPT
 
                 //Affichage du niveau sélectionné
                 lblNiveau.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].NiveauToString();
-              
+
             }
         }
+
+        /// <summary>
+        /// Afficher le texte déjà tapé par l'utilisateur
+        /// </summary>
+        public void UpdateVueTexteUtilisateur()
+        {
+            tbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
+        }
+
+        #endregion
+
+
+        /// <summary>
+        /// Détermine si un travail est sélectionné dans la liste
+        /// </summary>
+        /// <returns>Travail sélectionné dans la liste -> vrai ou faux</returns>
+        public bool EstIndexSelectionne()
+        {
+            bool EstIndexSelectionne = false;
+            if (lsbListeTravaux.SelectedIndex != -1)
+                EstIndexSelectionne = true;
+            return EstIndexSelectionne;
+        }
+
+
+
+
+
 
         //Événements...
 
@@ -160,17 +169,28 @@ namespace TravauxDisciplinaireCFPT
             //Pour chaque item de la liste dessine l'intérieur
             if (e.Index >= 0)
             {
-                //Affichage professeur
-                e.Graphics.DrawString("Professeur :",
-                   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 10);
-                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
-                   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
-                //Affichage élève
-                e.Graphics.DrawString("Élève :",
-                   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
-                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
-                   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
-
+                if (ListeTravauxDisciplinaires[e.Index].Valide == true)
+                {
+                    //Affichage professeur
+                    e.Graphics.DrawString("Professeur :",
+                       e.Font, stylo, e.Bounds.X, e.Bounds.Y + 10);
+                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
+                       e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
+                    //Affichage élève
+                    e.Graphics.DrawString("Élève :",
+                       e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
+                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
+                       e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
+                    //Temps passé sur le travail
+                    //e.Graphics.DrawString("Élève :",
+                    //   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
+                    //e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
+                    //   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
+                }
+                else
+                {
+                    e.Graphics.DrawString("Fichier corrompu !", e.Font, stylo, (e.Bounds.X / 2) + 10, (e.Bounds.Y / 2) + 2);
+                }
 
                 e.DrawFocusRectangle();
                 //Contour
@@ -211,8 +231,6 @@ namespace TravauxDisciplinaireCFPT
                 tmrTempsEffectif.Enabled = false;
             }
 
-
-
             //Timer activer
             tmrTempsEffectif.Enabled = true;
         }
@@ -244,5 +262,38 @@ namespace TravauxDisciplinaireCFPT
             }
 
         }
+
+        private void tsiEnregistrer_Click(object sender, EventArgs e)
+        {
+            if (sfdSauvegarder.ShowDialog() == DialogResult.OK)
+            {
+                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Serialiser(sfdSauvegarder.FileName);
+            }
+        }
+
+        private void tsiEnregistrerSous_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsiOuvrir_Click(object sender, EventArgs e)
+        {
+            if (ofdOuvrirFichier.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    TravailDisciplinaire td = new TravailDisciplinaire();
+                    ListeTravauxDisciplinaires.Add(td.Deserialiser(ofdOuvrirFichier.FileName));
+                    UpdateVueList();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ce fichier est corrompu");
+                }
+                
+            }
+        }
+
+
     }
 }
