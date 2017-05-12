@@ -75,39 +75,39 @@
             // 
             // tbxPrenomProf
             // 
-            this.tbxPrenomProf.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPrenomProf.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPrenomProf.Location = new System.Drawing.Point(84, 67);
             this.tbxPrenomProf.Name = "tbxPrenomProf";
-            this.tbxPrenomProf.Size = new System.Drawing.Size(166, 24);
+            this.tbxPrenomProf.Size = new System.Drawing.Size(166, 27);
             this.tbxPrenomProf.TabIndex = 1;
             this.tbxPrenomProf.TextChanged += new System.EventHandler(this.tbx_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(6, 70);
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 18);
+            this.label1.Size = new System.Drawing.Size(64, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Prénom :";
             // 
             // tbxNomProf
             // 
-            this.tbxNomProf.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxNomProf.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxNomProf.Location = new System.Drawing.Point(84, 35);
             this.tbxNomProf.Name = "tbxNomProf";
-            this.tbxNomProf.Size = new System.Drawing.Size(166, 24);
+            this.tbxNomProf.Size = new System.Drawing.Size(166, 27);
             this.tbxNomProf.TabIndex = 0;
             this.tbxNomProf.TextChanged += new System.EventHandler(this.tbx_TextChanged);
             // 
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblNom.Location = new System.Drawing.Point(28, 38);
+            this.lblNom.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNom.Location = new System.Drawing.Point(25, 37);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(49, 18);
+            this.lblNom.Size = new System.Drawing.Size(45, 20);
             this.lblNom.TabIndex = 0;
             this.lblNom.Text = "Nom :";
             // 
@@ -129,58 +129,58 @@
             // 
             // tbxClasseEleve
             // 
-            this.tbxClasseEleve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxClasseEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxClasseEleve.Location = new System.Drawing.Point(84, 99);
             this.tbxClasseEleve.Name = "tbxClasseEleve";
-            this.tbxClasseEleve.Size = new System.Drawing.Size(166, 24);
+            this.tbxClasseEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxClasseEleve.TabIndex = 4;
             this.tbxClasseEleve.TextChanged += new System.EventHandler(this.tbx_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label4.Location = new System.Drawing.Point(20, 102);
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 98);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 18);
+            this.label4.Size = new System.Drawing.Size(58, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "Classe :";
             // 
             // tbxPrenomEleve
             // 
-            this.tbxPrenomEleve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPrenomEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPrenomEleve.Location = new System.Drawing.Point(84, 67);
             this.tbxPrenomEleve.Name = "tbxPrenomEleve";
-            this.tbxPrenomEleve.Size = new System.Drawing.Size(166, 24);
+            this.tbxPrenomEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxPrenomEleve.TabIndex = 3;
             this.tbxPrenomEleve.TextChanged += new System.EventHandler(this.tbx_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.Location = new System.Drawing.Point(13, 70);
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 18);
+            this.label2.Size = new System.Drawing.Size(64, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Prénom :";
             // 
             // tbxNomEleve
             // 
-            this.tbxNomEleve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxNomEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxNomEleve.Location = new System.Drawing.Point(84, 35);
             this.tbxNomEleve.Name = "tbxNomEleve";
-            this.tbxNomEleve.Size = new System.Drawing.Size(166, 24);
+            this.tbxNomEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxNomEleve.TabIndex = 2;
             this.tbxNomEleve.TextChanged += new System.EventHandler(this.tbx_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.Location = new System.Drawing.Point(35, 38);
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(25, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 18);
+            this.label3.Size = new System.Drawing.Size(45, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "Nom :";
             // 
@@ -199,7 +199,7 @@
             this.groupBox2.Size = new System.Drawing.Size(224, 257);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Durée du travail";
+            this.groupBox2.Text = "Difficulté du travail";
             // 
             // btnPersonnaliser
             // 
@@ -215,10 +215,10 @@
             // rbnPersonnaliser
             // 
             this.rbnPersonnaliser.AutoSize = true;
-            this.rbnPersonnaliser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnPersonnaliser.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnPersonnaliser.Location = new System.Drawing.Point(6, 212);
             this.rbnPersonnaliser.Name = "rbnPersonnaliser";
-            this.rbnPersonnaliser.Size = new System.Drawing.Size(150, 22);
+            this.rbnPersonnaliser.Size = new System.Drawing.Size(141, 24);
             this.rbnPersonnaliser.TabIndex = 10;
             this.rbnPersonnaliser.Text = "Texte personnalisé";
             this.rbnPersonnaliser.UseVisualStyleBackColor = true;
@@ -227,24 +227,24 @@
             // rbnNiveau5
             // 
             this.rbnNiveau5.AutoSize = true;
-            this.rbnNiveau5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnNiveau5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau5.Location = new System.Drawing.Point(6, 144);
             this.rbnNiveau5.Name = "rbnNiveau5";
-            this.rbnNiveau5.Size = new System.Drawing.Size(156, 22);
+            this.rbnNiveau5.Size = new System.Drawing.Size(108, 24);
             this.rbnNiveau5.TabIndex = 9;
-            this.rbnNiveau5.Text = "5 (environ 150 min.)";
+            this.rbnNiveau5.Text = "5 (~ 150 min.)";
             this.rbnNiveau5.UseVisualStyleBackColor = true;
             this.rbnNiveau5.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau4
             // 
             this.rbnNiveau4.AutoSize = true;
-            this.rbnNiveau4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnNiveau4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau4.Location = new System.Drawing.Point(6, 114);
             this.rbnNiveau4.Name = "rbnNiveau4";
-            this.rbnNiveau4.Size = new System.Drawing.Size(156, 22);
+            this.rbnNiveau4.Size = new System.Drawing.Size(108, 24);
             this.rbnNiveau4.TabIndex = 8;
-            this.rbnNiveau4.Text = "4 (environ 120 min.)";
+            this.rbnNiveau4.Text = "4 (~ 120 min.)";
             this.rbnNiveau4.UseVisualStyleBackColor = true;
             this.rbnNiveau4.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
@@ -252,35 +252,35 @@
             // 
             this.rbnNiveau3.AutoSize = true;
             this.rbnNiveau3.Checked = true;
-            this.rbnNiveau3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnNiveau3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau3.Location = new System.Drawing.Point(6, 85);
             this.rbnNiveau3.Name = "rbnNiveau3";
-            this.rbnNiveau3.Size = new System.Drawing.Size(148, 22);
+            this.rbnNiveau3.Size = new System.Drawing.Size(101, 24);
             this.rbnNiveau3.TabIndex = 7;
             this.rbnNiveau3.TabStop = true;
-            this.rbnNiveau3.Text = "3 (environ 60 min.)";
+            this.rbnNiveau3.Text = "3 (~ 60 min.)";
             this.rbnNiveau3.UseVisualStyleBackColor = true;
             this.rbnNiveau3.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau2
             // 
             this.rbnNiveau2.AutoSize = true;
-            this.rbnNiveau2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.rbnNiveau2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau2.Location = new System.Drawing.Point(6, 55);
             this.rbnNiveau2.Name = "rbnNiveau2";
-            this.rbnNiveau2.Size = new System.Drawing.Size(148, 22);
+            this.rbnNiveau2.Size = new System.Drawing.Size(101, 24);
             this.rbnNiveau2.TabIndex = 6;
-            this.rbnNiveau2.Text = "2 (environ 40 min.)";
+            this.rbnNiveau2.Text = "2 (~ 40 min.)";
             this.rbnNiveau2.UseVisualStyleBackColor = true;
             this.rbnNiveau2.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau1
             // 
             this.rbnNiveau1.AutoSize = true;
-            this.rbnNiveau1.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.rbnNiveau1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau1.Location = new System.Drawing.Point(6, 25);
             this.rbnNiveau1.Name = "rbnNiveau1";
-            this.rbnNiveau1.Size = new System.Drawing.Size(85, 18);
+            this.rbnNiveau1.Size = new System.Drawing.Size(101, 24);
             this.rbnNiveau1.TabIndex = 5;
             this.rbnNiveau1.Text = "1 (~ 20 min.)";
             this.rbnNiveau1.UseVisualStyleBackColor = true;
@@ -311,11 +311,12 @@
             // 
             // tbxApercu
             // 
-            this.tbxApercu.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxApercu.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxApercu.Location = new System.Drawing.Point(9, 19);
             this.tbxApercu.Multiline = true;
             this.tbxApercu.Name = "tbxApercu";
             this.tbxApercu.ReadOnly = true;
+            this.tbxApercu.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbxApercu.Size = new System.Drawing.Size(471, 98);
             this.tbxApercu.TabIndex = 14;
             // 

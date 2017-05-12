@@ -13,8 +13,11 @@ namespace TravauxDisciplinaireCFPT
     public partial class frmPrincipale : Form
     {
         //Champs...
+
+
         private List<TravailDisciplinaire> _listeTravauxDisciplinaires;
         private int _indexTravailSelectionne;
+        private int _secondesInactif;
 
         //Propriétés...
 
@@ -32,8 +35,15 @@ namespace TravauxDisciplinaireCFPT
                 _listeTravauxDisciplinaires = value;
             }
         }
+        public int SecondesInactif
+        {
+            get { return _secondesInactif; }
+            set { _secondesInactif = value; }
+        }
 
         //Constructeurs...
+
+
         public frmPrincipale()
         {
             InitializeComponent();
@@ -41,28 +51,37 @@ namespace TravauxDisciplinaireCFPT
             UpdateVueBouton();
             tbcPrincipale.SelectTab(1);
         }
-        public void UpdateVueBouton()
-        {
-            if (lsbListeTravaux.SelectedIndex != -1)
-            {
-                this.btnSupprimer.Enabled = true;
-                this.btnEditer.Enabled = true;
-            }
-            else
-            {
-                this.btnSupprimer.Enabled = false;
-                this.btnEditer.Enabled = false;
-            }
-        }
+
 
         //Méthodes...
+
         /// <summary>
-        /// Raffraichit la liste si la valeur en paramètre est true et determine si les boutons doivent être grisé
+        /// Grise ou dégrise les bouton supprimer et editer
         /// </summary>
-        /// <param name="RaffraichirListe">Determine si la liste se raffraichit</param>
+        public void UpdateVueBouton()
+        {
+            this.btnSupprimer.Enabled = EstIndexSelectionne();
+            this.btnEditer.Enabled = EstIndexSelectionne();
+        }
+
+        /// <summary>
+        /// Détermine si un travail est sélectionné dans la liste
+        /// </summary>
+        /// <returns>Travail sélectionné dans la liste -> vrai ou faux</returns>
+        public bool EstIndexSelectionne()
+        {
+            bool EstIndexSelectionne = false;
+            if (lsbListeTravaux.SelectedIndex != -1)
+                EstIndexSelectionne = true;
+            return EstIndexSelectionne;
+        }
+
+
+        /// <summary>
+        /// Raffraichit la liste
+        /// </summary>
         public void UpdateVueList()
         {
-
             //Liste
             if (ListeTravauxDisciplinaires != null)
             {
@@ -74,14 +93,12 @@ namespace TravauxDisciplinaireCFPT
             }
 
         }
+        /// <summary>
+        /// Afficher le texte déjà tapé par l'utilisateur
+        /// </summary>
         public void UpdateVueTexteUtilisateur()
         {
-            string TexteDejaCopie = "";
-            for (int i = 0; i < this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression; i++)
-            {
-                TexteDejaCopie += this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Texte[i];
-            }
-            this.tbxCopieTexte.Text = TexteDejaCopie;
+            tbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
         }
         /// <summary>
         /// Affiche le travail sélectionné dans l'onglet "travail"
@@ -93,49 +110,26 @@ namespace TravauxDisciplinaireCFPT
             {
                 //Affichage du Texte Exemple
                 this.rbxTexteExemple.Text = "";
-                this.rbxTexteExemple.AppendText(this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Texte);
+                this.rbxTexteExemple.AppendText(this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau.TexteARecopier);
                 this.rbxTexteExemple.SelectionStart = 0;
                 this.rbxTexteExemple.SelectionLength = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression;
                 this.rbxTexteExemple.SelectionBackColor = Color.LightGray;
-
+                //Temps
+                lblTemps.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].MinutesEtSecondesToString();
                 //Affichage du reste
                 this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Classe;
                 this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Professeur.ToString();
                 this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
                 this.lblTravailAccompli.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression) + " caractère(s) sur " + Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere());
 
-
-                //Choisi le nombre de minutes à affiché
-
-                // ___________________________________________ /!\ A REFAIRE
-
-                //switch (ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau)
-                //{
-                //    case 1:
-                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "20" + " minutes)";
-                //        break;
-                //    case 2:
-                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "40" + " minutes)";
-                //        break;
-                //    case 3:
-                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "60" + " minutes)";
-                //        break;
-                //    case 4:
-                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "120" + " minutes)";
-                //        break;
-                //    case 5:
-                //        this.lblNiveau.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau) + " (environ " + "150" + " minutes)";
-                //        break;
-                //    case 6:
-                //        this.lblNiveau.Text = "Texte personnalisé";
-                //        break;
-                //}
-
-                //Update de tout le reste
-
-
+                //Affichage du niveau sélectionné
+                lblNiveau.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].NiveauToString();
+              
             }
         }
+
+        //Événements...
+
         //Affiche le formulaire de création et nous renvoie le résultat de celui-ci
         private void tsiNouveau_Click(object sender, EventArgs e)
         {
@@ -143,13 +137,9 @@ namespace TravauxDisciplinaireCFPT
             //Si l'utilisateur a cliqué sur "OK", Récupère le travail créer dans le formulaire de création et l'ajoute dans la liste
             if (Creation.ShowDialog() == DialogResult.OK)
             {
-                if (Creation.VerifierChamps() == true)
-                {
-                    bool Verification = Creation.VerifierChamps();
-                    ListeTravauxDisciplinaires.Add(Creation.CreerTravail());
-                    UpdateVueList();
-                    tbcPrincipale.SelectTab(1);
-                }
+                ListeTravauxDisciplinaires.Add(Creation.CreerTravail());
+                UpdateVueList();
+                tbcPrincipale.SelectTab(1);
             }
         }
 
@@ -210,14 +200,21 @@ namespace TravauxDisciplinaireCFPT
             else
             {
                 this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
-                UpdateVueSelection(); //false car on ne veut pas qu'il réaffiche le texte car il vient directement de l'utilisateur
+                UpdateVueSelection();
+                SecondesInactif = 0;
             }
 
-            //Reverifie si le travail est fini
+            //verifie si le travail est fini
             if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
             {
                 MessageBox.Show("Vous avez terminé !");
+                tmrTempsEffectif.Enabled = false;
             }
+
+
+
+            //Timer activer
+            tmrTempsEffectif.Enabled = true;
         }
 
         private void btnSupprimer_Click(object sender, EventArgs e)
@@ -233,6 +230,19 @@ namespace TravauxDisciplinaireCFPT
         private void lsbListeTravaux_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.UpdateVueBouton();
+        }
+
+        private void tmrTempsEffectif_Tick(object sender, EventArgs e)
+        {
+            if (SecondesInactif >= 3)
+                tmrTempsEffectif.Enabled = false;
+            else
+            {
+                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerTemps();
+                UpdateVueSelection();
+                SecondesInactif += 1;
+            }
+
         }
     }
 }

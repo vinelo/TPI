@@ -14,7 +14,7 @@ namespace TravauxDisciplinaireCFPT
 {
     public partial class frmCreation : Form
     {
-       
+
         //Champs...
         private string _texte;
 
@@ -75,7 +75,7 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Renvoie vrai si les champs sont remplis</returns>
         public bool VerifierChamps()
         {
-            bool Validation = true;
+            bool Validation = false;
 
             if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
             {
@@ -107,12 +107,16 @@ namespace TravauxDisciplinaireCFPT
             return Texte;
         }
 
+
         /// <summary>
         /// Raffraichit la vue
         /// </summary>
         public void UpdateVue()
         {
             //Choisi le texte à afficher en fonction du niveau
+
+            //A REVOIR
+            //----------------------------------------------------------------
             if (ChoisirNiveau() == 6)
                 tbxApercu.Text = Texte;
             else
@@ -120,18 +124,13 @@ namespace TravauxDisciplinaireCFPT
                 Niveau Niveau = new Niveau(ChoisirNiveau());
                 tbxApercu.Text = Niveau.ChoisirTexte();
             }
-                
+            //-------------------------------------------------------------------
+
             //Determine si le bouton "Creer" est grisé ou pas
-            if (VerifierChamps())
-                btnCreer.Enabled = true;
-            else
-                btnCreer.Enabled = false;
+            btnCreer.Enabled = VerifierChamps();
 
             //Determine si le bouton "Personnaliser (...)" est grisé ou pas
-            if (rbnPersonnaliser.Checked)
-                btnPersonnaliser.Enabled = true;
-            else
-                btnPersonnaliser.Enabled = false;
+            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
         }
 
         //A REVOIR
@@ -164,8 +163,8 @@ namespace TravauxDisciplinaireCFPT
             if (DialogResult.OK == ofdOuvrir.ShowDialog())
             {
                 this.Texte = FiltrerTexte(ofdOuvrir.FileName);
-                tbxApercu.Text = Texte;
             }
+            UpdateVue();
         }
 
         private void rbnPersonnaliser_CheckedChanged(object sender, EventArgs e)
