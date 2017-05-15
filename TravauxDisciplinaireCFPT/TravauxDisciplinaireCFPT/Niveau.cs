@@ -80,7 +80,10 @@ namespace TravauxDisciplinaireCFPT
             nbMinutes = Math.Round(nbMinutes);
             nbMinutes *= 10;
             return (int)nbMinutes;
+            
         }
+
+        
         /// <summary>
         /// Retourne en string les paramètres de la classe "Niveau"
         /// </summary>
@@ -89,7 +92,7 @@ namespace TravauxDisciplinaireCFPT
         {
             string NiveauToString = "";
             if (this.NumeroNiveau == 6)
-                NiveauToString = "Texte personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " minutes )";
+                NiveauToString = "Personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " minutes )";
             else
                 NiveauToString = this.NumeroNiveau + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " minutes )";
             return NiveauToString;

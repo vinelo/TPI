@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace TravauxDisciplinaireCFPT
     public class TravailDisciplinaire
     {
 
-        const string AVERTISSEMENT = @"/!\ ATTENTION /!\ Ce fichier est protégé, en cas de modifications, ce fichier sera affiché comme illisible ou corrompu lors qu'il sera recharger par le programme Travaux Disciplinaire au CFPT /!\ ATTENTION /!\";
+        const string AVERTISSEMENT = @"/!\ ATTENTION /!\ Ce fichier est protégé, en cas de modifications, ce fichier sera affiché comme illisible ou corrompu lorsqu'il sera rechargé par le programme Travaux Disciplinaire au CFPT /!\ ATTENTION /!\";
         //Champs..
 
         private DateTime _dateDeDebut;
@@ -23,6 +24,7 @@ namespace TravauxDisciplinaireCFPT
         private int _progression;
         private Niveau _niveau;
         private DateTime _temps;
+        private DateTime _dateDerniereModification;
         private bool _valide;
 
 
@@ -79,6 +81,12 @@ namespace TravauxDisciplinaireCFPT
             set { _cleValidation = value; }
         }
 
+        public DateTime DateDerniereModification
+        {
+            get { return _dateDerniereModification; }
+            set { _dateDerniereModification = value; }
+        }
+
 
         //Constructeurs...
 
@@ -120,7 +128,7 @@ namespace TravauxDisciplinaireCFPT
             this.Valide = true;
             this.Temps = new DateTime(0);
             this.DateDeDebut = DateTime.Now;
-            
+
         }
 
         /// <summary>
@@ -165,6 +173,18 @@ namespace TravauxDisciplinaireCFPT
             return this.Niveau.CompterCaractere();
         }
 
+
+        /// <summary>
+        /// Calclul et renvoie le pourcentage effectué du travail
+        /// </summary>
+        /// <returns>Pourcentage effectué</returns>
+        public int CalculerPoucentageEffectue()
+        {
+            double a = Convert.ToDouble(this.Niveau.CompterCaractere());
+            double Pourcentage = Convert.ToDouble(this.Progression) / Convert.ToDouble(this.Niveau.CompterCaractere()) * 100;
+            return (int)Pourcentage;
+        }
+
         /// <summary>
         /// Calcul le texte déjà tapé par l'utilisateur
         /// </summary>
@@ -201,35 +221,53 @@ namespace TravauxDisciplinaireCFPT
             if (ticks / 600000000 >= 1)
             {
                 minute = (Convert.ToInt32(Math.Round((double)ticks / UneSecondeEnTicks * 60)));
-                minutesEtSecondes = Convert.ToString(minute) + " minute(s) et ";
+                minutesEtSecondes = Convert.ToString(minute) + " min et ";
             }
 
             ticks = ticks - (minute * (UneSecondeEnTicks * 60));
             seconde = (int)Math.Round((double)ticks / UneSecondeEnTicks);
 
-            minutesEtSecondes += Convert.ToString(seconde) + " seconde(s)";
+            minutesEtSecondes += Convert.ToString(seconde) + " sec";
             return minutesEtSecondes;
         }
 
-
+        /// <summary>
+        /// Retourne  l'objet "Niveau" sous forme de texte
+        /// </summary>
+        /// <returns>Objet "Niveau" sous forme de texte</returns>
         public string NiveauToString()
         {
             return Niveau.ToString();
         }
 
+        /// <summary>
+        /// Retourne l'objet "TravailDisciplinaire" sous forme de texte
+        /// </summary>
+        /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
         public override string ToString()
         {
             string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.Temps) + Niveau.ToString() + this.DateDeDebut;
             return Travail;
         }
 
+        /// <summary>
+        /// Sauvegarde le travail dans le répértoire passé en paramètre
+        /// </summary>
+        /// <param name="paramChemin">Chemin du répértoire</param>
         public void Serialiser(string paramChemin)
         {
+            this.DateDerniereModification = DateTime.Now;
+            this.CryptageTravail();
             FileStream stream = File.Create(paramChemin);
             var formatter = new BinaryFormatter();
             formatter.Serialize(stream, this);
             stream.Close();
         }
+        /// <summary>
+        /// Ouvre le fichier correspondant au chemin passé en paramètre
+        /// </summary>
+        /// <param name="paramFichier">Chemin du fichier</param>
+        /// <returns></returns>
         public TravailDisciplinaire Deserialiser(string paramFichier)
         {
             var formatter = new BinaryFormatter();
@@ -252,6 +290,39 @@ namespace TravauxDisciplinaireCFPT
                 stream.Close();
             }
 
+
         }
+        /// <summary>
+        /// Crypte le travail et stocke les données cryptées dans "CleValidation"
+        /// </summary>
+        public void CryptageTravail()
+        {
+
+            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
+            byte[] Donnees = Encoding.Default.GetBytes(this.ToString());
+            Donnees = MD5.ComputeHash(Donnees);
+            this.CleValidation = Convert.ToBase64String(Donnees);
+
+        }
+        /// <summary>
+        /// Vérifie si le travail a été modifié 
+        /// </summary>
+        /// <returns></returns>
+        public bool VerifierDonneeTravail()
+        {
+            bool Verification = false;
+            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
+            byte[] DonneesAVerifier = Encoding.Default.GetBytes(this.ToString());
+            DonneesAVerifier = Encoding.Default.GetBytes(this.ToString());
+            DonneesAVerifier = MD5.ComputeHash(DonneesAVerifier);
+            string DonneesEncodeesAVerifier = Convert.ToBase64String(DonneesAVerifier);
+
+            if (DonneesEncodeesAVerifier == this.CleValidation)
+                Verification = true;
+
+            return Verification;
+        }
+
+        
     }
 }

@@ -144,7 +144,6 @@
             this.tsiEnregistrerSous.Name = "tsiEnregistrerSous";
             this.tsiEnregistrerSous.Size = new System.Drawing.Size(191, 24);
             this.tsiEnregistrerSous.Text = "Enregistrer sous...";
-            this.tsiEnregistrerSous.Click += new System.EventHandler(this.tsiEnregistrerSous_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -159,19 +158,19 @@
             // tsiAide
             // 
             this.tsiAide.Name = "tsiAide";
-            this.tsiAide.Size = new System.Drawing.Size(204, 24);
+            this.tsiAide.Size = new System.Drawing.Size(363, 24);
             this.tsiAide.Text = "Aide";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(201, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(360, 6);
             // 
             // tsiAPropos
             // 
             this.tsiAPropos.Name = "tsiAPropos";
-            this.tsiAPropos.Size = new System.Drawing.Size(204, 24);
-            this.tsiAPropos.Text = "À propos de nous...";
+            this.tsiAPropos.Size = new System.Drawing.Size(363, 24);
+            this.tsiAPropos.Text = "À propos de Travaux Disciplinaires au CFPT";
             // 
             // tbcPrincipale
             // 
@@ -218,6 +217,7 @@
             this.tbxCopieTexte.Name = "tbxCopieTexte";
             this.tbxCopieTexte.Size = new System.Drawing.Size(885, 117);
             this.tbxCopieTexte.TabIndex = 0;
+            this.tbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
             this.tbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
             // 
             // groupBox1
@@ -233,11 +233,12 @@
             // 
             // rbxTexteExemple
             // 
+            this.rbxTexteExemple.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rbxTexteExemple.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbxTexteExemple.Location = new System.Drawing.Point(7, 24);
             this.rbxTexteExemple.Name = "rbxTexteExemple";
             this.rbxTexteExemple.ReadOnly = true;
-            this.rbxTexteExemple.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rbxTexteExemple.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.rbxTexteExemple.Size = new System.Drawing.Size(885, 117);
             this.rbxTexteExemple.TabIndex = 0;
             this.rbxTexteExemple.TabStop = false;
@@ -264,71 +265,67 @@
             // 
             // lblNiveau
             // 
-            this.lblNiveau.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNiveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNiveau.ForeColor = System.Drawing.Color.Blue;
-            this.lblNiveau.Location = new System.Drawing.Point(156, 97);
+            this.lblNiveau.Location = new System.Drawing.Point(150, 98);
             this.lblNiveau.Name = "lblNiveau";
             this.lblNiveau.Size = new System.Drawing.Size(225, 20);
             this.lblNiveau.TabIndex = 9;
-            this.lblNiveau.Text = "Niveau 1 ( environ 20 minutes)";
             // 
             // lblClasse
             // 
-            this.lblClasse.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClasse.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClasse.ForeColor = System.Drawing.Color.Blue;
-            this.lblClasse.Location = new System.Drawing.Point(156, 77);
+            this.lblClasse.Location = new System.Drawing.Point(153, 78);
             this.lblClasse.Name = "lblClasse";
             this.lblClasse.Size = new System.Drawing.Size(228, 20);
             this.lblClasse.TabIndex = 8;
-            this.lblClasse.Text = "I.IN-P4B";
             // 
             // lblProfesseur
             // 
-            this.lblProfesseur.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfesseur.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfesseur.ForeColor = System.Drawing.Color.Blue;
-            this.lblProfesseur.Location = new System.Drawing.Point(156, 56);
+            this.lblProfesseur.Location = new System.Drawing.Point(153, 56);
             this.lblProfesseur.Name = "lblProfesseur";
             this.lblProfesseur.Size = new System.Drawing.Size(222, 20);
             this.lblProfesseur.TabIndex = 7;
-            this.lblProfesseur.Text = "Alec Beney";
             // 
             // lblEleve
             // 
-            this.lblEleve.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEleve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEleve.ForeColor = System.Drawing.Color.Blue;
-            this.lblEleve.Location = new System.Drawing.Point(156, 34);
+            this.lblEleve.Location = new System.Drawing.Point(153, 36);
             this.lblEleve.Name = "lblEleve";
             this.lblEleve.Size = new System.Drawing.Size(225, 20);
             this.lblEleve.TabIndex = 6;
-            this.lblEleve.Text = "Maxence Menier";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(25, 96);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(14, 97);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(119, 20);
+            this.label9.Size = new System.Drawing.Size(136, 20);
             this.label9.TabIndex = 5;
             this.label9.Text = "Niveau du travail : ";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(82, 76);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(81, 77);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 20);
+            this.label8.Size = new System.Drawing.Size(69, 20);
             this.label8.TabIndex = 4;
             this.label8.Text = "Classe : ";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(58, 56);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(52, 55);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 20);
+            this.label5.Size = new System.Drawing.Size(98, 20);
             this.label5.TabIndex = 3;
             this.label5.Text = "Professeur : ";
             // 
@@ -343,10 +340,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(88, 36);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(90, 36);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 20);
+            this.label4.Size = new System.Drawing.Size(60, 20);
             this.label4.TabIndex = 0;
             this.label4.Text = "Élève : ";
             // 
@@ -370,61 +367,62 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(97, 110);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(105, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Progression : ";
             // 
             // lblTravailAccompli
             // 
-            this.lblTravailAccompli.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTravailAccompli.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTravailAccompli.ForeColor = System.Drawing.Color.Blue;
             this.lblTravailAccompli.Location = new System.Drawing.Point(199, 72);
             this.lblTravailAccompli.Name = "lblTravailAccompli";
             this.lblTravailAccompli.Size = new System.Drawing.Size(272, 20);
             this.lblTravailAccompli.TabIndex = 4;
-            this.lblTravailAccompli.Text = "20000 caractères sur 20000";
             // 
             // lblTemps
             // 
             this.lblTemps.AutoSize = true;
-            this.lblTemps.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemps.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTemps.ForeColor = System.Drawing.Color.Blue;
             this.lblTemps.Location = new System.Drawing.Point(199, 36);
             this.lblTemps.Name = "lblTemps";
-            this.lblTemps.Size = new System.Drawing.Size(63, 20);
+            this.lblTemps.Size = new System.Drawing.Size(0, 18);
             this.lblTemps.TabIndex = 3;
-            this.lblTemps.Text = "0 minute";
             // 
             // pgbBarreProgression
             // 
-            this.pgbBarreProgression.Location = new System.Drawing.Point(203, 110);
+            this.pgbBarreProgression.Location = new System.Drawing.Point(202, 110);
+            this.pgbBarreProgression.MarqueeAnimationSpeed = 1;
+            this.pgbBarreProgression.Maximum = 1000;
             this.pgbBarreProgression.Name = "pgbBarreProgression";
             this.pgbBarreProgression.Size = new System.Drawing.Size(268, 23);
+            this.pgbBarreProgression.Step = 1;
             this.pgbBarreProgression.TabIndex = 2;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(71, 72);
+            this.label7.Location = new System.Drawing.Point(70, 72);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 20);
+            this.label7.Size = new System.Drawing.Size(132, 20);
             this.label7.TabIndex = 1;
             this.label7.Text = "Travail accompli : ";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(18, 34);
+            this.label6.Location = new System.Drawing.Point(6, 36);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(168, 20);
+            this.label6.Size = new System.Drawing.Size(196, 20);
             this.label6.TabIndex = 0;
             this.label6.Text = "Durée effective du travail : ";
             // 
@@ -491,10 +489,10 @@
             this.lsbListeTravaux.AllowDrop = true;
             this.lsbListeTravaux.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lsbListeTravaux.FormattingEnabled = true;
-            this.lsbListeTravaux.ItemHeight = 55;
+            this.lsbListeTravaux.ItemHeight = 80;
             this.lsbListeTravaux.Location = new System.Drawing.Point(8, 6);
             this.lsbListeTravaux.Name = "lsbListeTravaux";
-            this.lsbListeTravaux.Size = new System.Drawing.Size(900, 334);
+            this.lsbListeTravaux.Size = new System.Drawing.Size(900, 324);
             this.lsbListeTravaux.TabIndex = 0;
             this.lsbListeTravaux.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lsbListeTravaux_DrawItem);
             this.lsbListeTravaux.SelectedIndexChanged += new System.EventHandler(this.lsbListeTravaux_SelectedIndexChanged);
