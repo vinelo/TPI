@@ -270,14 +270,33 @@ namespace TravauxDisciplinaireCFPT
 
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //if (e.KeyChar == (char)13)
+            //{
+            //    // Enter key pressed
+            //    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
+            //    UpdateVueSelection();
+            //    SecondesInactif = 0;
+            //}
+            //else
+            //{
+            //    e.Handled = true;
+            //}
+
+
+
+
+
             //Si l'index est hors du tableau alors ne fait rien
-            if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == true)
+            if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
             {
                 e.Handled = true;
             }
             //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
             else
             {
+                if (e.KeyChar == (char)Keys.Enter)
+                    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
+                
                 this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                 UpdateVueSelection();
                 SecondesInactif = 0;
@@ -373,6 +392,11 @@ namespace TravauxDisciplinaireCFPT
                 rbxTexteExemple.ScrollToCaret();
                 NbCaractereTapeDepuisDernierScroll = 0;
             }
+        }
+
+        private void tbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

@@ -93,18 +93,9 @@ namespace TravauxDisciplinaireCFPT
         /// <summary>
         /// Créer un travail disciplinaire avec des valeurs par défaut
         /// </summary>
-        public TravailDisciplinaire() : this("NomProfesseur", "PrenomProfesseur", "NomEleve", "PrenomEleve", "ClasseEleve", 3) { }
+        public TravailDisciplinaire() : this("NomProfesseur", "PrenomProfesseur", "NomEleve", "PrenomEleve", "ClasseEleve", new Niveau()) { }
 
-        /// <summary>
-        /// Créer un nouveau travail disciplinaire avec le texte correspondant niveau séléctionné
-        /// </summary>
-        /// <param name="paramNomProf">Nom du professeur</param>
-        /// <param name="paramPrenomProf">Prenom du professeur</param>
-        /// <param name="paramNomEleve">Nom de l'élève</param>
-        /// <param name="paramPrenomEleve">Prenom de l'élève</param>
-        /// <param name="paramClasse">Classe de l'élève</param>
-        /// <param name="paramTexte">Texte à recopier</param>
-        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau) : this(paramNomProf, paramPrenomProf, paramNomEleve, paramPrenomEleve, paramClasse, paramNiveau, null) { }
+
         /// <summary>
         /// Créer un nouveau travail disciplinaire
         /// </summary>
@@ -113,14 +104,13 @@ namespace TravauxDisciplinaireCFPT
         /// <param name="paramNomEleve">Nom de l'élève</param>
         /// <param name="paramPrenomEleve">Prenom de l'élève</param>
         /// <param name="paramClasse">Classe de l'élève</param>
-        /// <param name="paramTexte">Texte à recopier</param>
-        /// <param name="paramNiveau">Niveau du texte</param>
-        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, int paramNiveau, string paramTexte)
+        /// <param name="paramNiveau">Niveau du travail</param>
+        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, Niveau paramNiveau)
         {
             //Initialise les données
             this.Eleve = new Eleve(paramNomEleve, paramPrenomEleve, paramClasse);
             this.Professeur = new Personne(paramNomProf, paramPrenomProf);
-            this.Niveau = new Niveau(paramNiveau, paramTexte);
+            this.Niveau = paramNiveau;
 
             //Pour choisir le texte selon le niveau
 

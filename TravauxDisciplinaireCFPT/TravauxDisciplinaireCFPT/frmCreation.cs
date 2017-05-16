@@ -44,27 +44,23 @@ namespace TravauxDisciplinaireCFPT
             string NomEleve = tbxNomEleve.Text;
             string PrenomEleve = tbxPrenomEleve.Text;
             string ClasseEleve = tbxClasseEleve.Text;
-            int Niveau = 0;
+            Niveau NiveauTravail = new Niveau();
 
             if (rbnPersonnaliser.Checked == true)
-                Niveau = 6;
+                NiveauTravail = new Niveau(6, this.Texte);
             if (rbnNiveau1.Checked == true)
-                Niveau = 1;
+                NiveauTravail = new Niveau(1);
             if (rbnNiveau2.Checked == true)
-                Niveau = 2;
+                NiveauTravail = new Niveau(2);
             if (rbnNiveau3.Checked == true)
-                Niveau = 3;
+                NiveauTravail = new Niveau(3);
             if (rbnNiveau4.Checked == true)
-                Niveau = 4;
+                NiveauTravail = new Niveau(4);
             if (rbnNiveau5.Checked == true)
-                Niveau = 5;
+                NiveauTravail = new Niveau(5);
 
             TravailDisciplinaire Td;
-
-            if (Niveau == 6)
-                Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, Niveau, Texte);
-            else
-                Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, Niveau);
+            Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, NiveauTravail);
 
             return Td;
         }
@@ -181,7 +177,6 @@ namespace TravauxDisciplinaireCFPT
         {
             UpdateVue();
         }
-
 
     }
 }

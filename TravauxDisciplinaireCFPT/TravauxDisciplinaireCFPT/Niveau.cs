@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TravauxDisciplinaireCFPT
 {
     [Serializable]
-    class Niveau
+    public class Niveau
     {
         //Champs
         private int _numeroNiveau;
@@ -74,7 +74,7 @@ namespace TravauxDisciplinaireCFPT
             int nbCaracteres = CompterCaractere();
 
             double nbMots = nbCaracteres / 5;
-            double nbMinutes = nbMots / 30;
+            double nbMinutes = nbMots / 33;
             //Arrondie de la minutes à 10
             nbMinutes /= 10;
             nbMinutes = Math.Round(nbMinutes);
@@ -92,9 +92,9 @@ namespace TravauxDisciplinaireCFPT
         {
             string NiveauToString = "";
             if (this.NumeroNiveau == 6)
-                NiveauToString = "Personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " minutes )";
+                NiveauToString = "Personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
             else
-                NiveauToString = this.NumeroNiveau + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " minutes )";
+                NiveauToString = this.NumeroNiveau + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
             return NiveauToString;
         }
     }

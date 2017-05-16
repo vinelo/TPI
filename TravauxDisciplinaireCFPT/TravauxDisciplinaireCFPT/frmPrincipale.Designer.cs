@@ -218,6 +218,7 @@
             this.tbxCopieTexte.Size = new System.Drawing.Size(885, 117);
             this.tbxCopieTexte.TabIndex = 0;
             this.tbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
+            this.tbxCopieTexte.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxCopieTexte_KeyDown);
             this.tbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
             // 
             // groupBox1
@@ -515,7 +516,6 @@
             // 
             // frmPrincipale
             // 
-            this.AcceptButton = this.btnEditer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 533);
