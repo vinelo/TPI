@@ -46,18 +46,11 @@ namespace TravauxDisciplinaireCFPT
             string ClasseEleve = tbxClasseEleve.Text;
             Niveau NiveauTravail = new Niveau();
 
-            if (rbnPersonnaliser.Checked == true)
-                NiveauTravail = new Niveau(6, this.Texte);
-            if (rbnNiveau1.Checked == true)
-                NiveauTravail = new Niveau(1);
-            if (rbnNiveau2.Checked == true)
-                NiveauTravail = new Niveau(2);
-            if (rbnNiveau3.Checked == true)
-                NiveauTravail = new Niveau(3);
-            if (rbnNiveau4.Checked == true)
-                NiveauTravail = new Niveau(4);
-            if (rbnNiveau5.Checked == true)
-                NiveauTravail = new Niveau(5);
+            if (ChoisirNiveau() == 6)
+                NiveauTravail = new Niveau(ChoisirNiveau(), this.Texte);
+            else
+                NiveauTravail = new Niveau(ChoisirNiveau());
+
 
             TravailDisciplinaire Td;
             Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, NiveauTravail);
@@ -79,7 +72,7 @@ namespace TravauxDisciplinaireCFPT
                 if (rbnPersonnaliser.Checked == true)
                 {
                     Validation = false;
-                    if (Texte != "")
+                    if (Texte != "" &&Texte != null)
                     {
                         Validation = true;
                     }
@@ -113,12 +106,15 @@ namespace TravauxDisciplinaireCFPT
 
             //A REVOIR
             //----------------------------------------------------------------
-            if (ChoisirNiveau() == 6)
-                tbxApercu.Text = Texte;
+            if (ChoisirNiveau() == 6 && this.Texte != "")
+            {
+                Niveau Niveau = new Niveau(ChoisirNiveau(), this.Texte);
+                rbxApercu.Text = Niveau.TexteARecopier;
+            }
             else
             {
                 Niveau Niveau = new Niveau(ChoisirNiveau());
-                tbxApercu.Text = Niveau.ChoisirTexte();
+                rbxApercu.Text = Niveau.ChoisirTexte();
             }
             //-------------------------------------------------------------------
 
@@ -163,11 +159,6 @@ namespace TravauxDisciplinaireCFPT
             UpdateVue();
         }
 
-        private void rbnPersonnaliser_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateVue();
-        }
-
         private void tbx_TextChanged(object sender, EventArgs e)
         {
             UpdateVue();
@@ -175,6 +166,8 @@ namespace TravauxDisciplinaireCFPT
 
         private void rbnNiveau_CheckedChanged(object sender, EventArgs e)
         {
+            if (ChoisirNiveau() != 6)
+                this.Texte = null;
             UpdateVue();
         }
 

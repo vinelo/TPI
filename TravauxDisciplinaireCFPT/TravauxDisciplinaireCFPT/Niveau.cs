@@ -24,7 +24,12 @@ namespace TravauxDisciplinaireCFPT
         public string TexteARecopier
         {
             get { return _texteARecopier; }
-            set { _texteARecopier = value; }
+            set 
+            {
+                if (value != "" && value !=null)
+                    value = FiltrerCaracteres(value);
+                _texteARecopier = value;
+            }
         }
 
         //Constructeur
@@ -96,6 +101,23 @@ namespace TravauxDisciplinaireCFPT
             else
                 NiveauToString = this.NumeroNiveau + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
             return NiveauToString;
+        }
+        
+        /// <summary>
+        /// Filtre les caractère (suppression des caractère 'LF' (Line feed) et des retours à la ligne à la suite)
+        /// </summary>
+        /// <param name="paramTexteAFiltrer"></param>
+        /// <returns></returns>
+        public string FiltrerCaracteres(string paramTexteAFiltrer)
+        {
+
+            while (paramTexteAFiltrer.Contains(Environment.NewLine + Environment.NewLine))
+            {
+                paramTexteAFiltrer = paramTexteAFiltrer.Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine);
+            }
+            paramTexteAFiltrer = paramTexteAFiltrer.Replace(Convert.ToString((char)10), "");
+
+            return paramTexteAFiltrer;
         }
     }
 }

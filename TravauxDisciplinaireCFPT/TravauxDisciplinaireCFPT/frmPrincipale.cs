@@ -108,7 +108,7 @@ namespace TravauxDisciplinaireCFPT
             {
                 //Surlignage du texte tapé
                 this.rbxTexteExemple.SelectionStart = 0;
-                this.rbxTexteExemple.SelectionLength = rbxTexteExemple.Text.Length;
+                this.rbxTexteExemple.SelectionLength = rbxTexteExemple.TextLength;
                 this.rbxTexteExemple.SelectionBackColor = Color.WhiteSmoke;
 
                 this.rbxTexteExemple.SelectionStart = 0;
@@ -121,7 +121,7 @@ namespace TravauxDisciplinaireCFPT
                 this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Classe;
                 this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Professeur.ToString();
                 this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
-                this.lblTravailAccompli.Text = Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression) + " caractère(s) sur " + Convert.ToString(ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere());
+                this.lblTravailAccompli.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
 
                 //Affichage du niveau sélectionné
                 lblNiveau.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].NiveauToString();
@@ -135,14 +135,14 @@ namespace TravauxDisciplinaireCFPT
         public void UpdateVueTexteUtilisateur()
         {
             this.rbxTexteExemple.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau.TexteARecopier;
-            tbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
+            rbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
 
 
             //Scroll
-            tbxCopieTexte.SelectionStart = tbxCopieTexte.Text.Length;
+            rbxCopieTexte.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
             // scroll it automatically
-            tbxCopieTexte.ScrollToCaret();
-            rbxTexteExemple.SelectionStart = tbxCopieTexte.Text.Length;
+            rbxCopieTexte.ScrollToCaret();
+            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
             rbxTexteExemple.ScrollToCaret();
             NbCaractereTapeDepuisDernierScroll = 0;
         }
@@ -163,8 +163,29 @@ namespace TravauxDisciplinaireCFPT
         }
 
 
+        public void SerialiserListeTravaux(string paramChemin)
+        {
+            FileStream stream = File.Create(paramChemin);
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(stream, this.ListeTravauxDisciplinaires);
+            stream.Close();
+        }
 
-
+        /// <summary>
+        /// Créer un fichier log
+        /// </summary>
+        /// <param name="paramChemin"></param>
+        public void JournalisationListeTravaux(string paramChemin)
+        {
+            // Write the string array to a new file named "WriteLines.txt".
+            using (StreamWriter outputFile = new StreamWriter(paramChemin))
+            {
+                foreach (TravailDisciplinaire travail in ListeTravauxDisciplinaires)
+                {
+                    outputFile.WriteLine("Professeur : " + travail.Professeur.ToString() + " | Élève : " + travail.Eleve.ToString() + " | Date de début : " + travail.DateDeDebut + " | Temps effectif du travail : " + travail.MinutesEtSecondesToString() + " | Progression : " + travail.ProgressionToString() + " | Niveau du travail : " + travail.NiveauToString() + " | Fini : " + travail.EstFini());
+                }
+            }
+        }
 
 
         //Événements...
@@ -201,53 +222,46 @@ namespace TravauxDisciplinaireCFPT
             //Pour chaque item de la liste dessine l'intérieur
             if (e.Index >= 0)
             {
-                if (ListeTravauxDisciplinaires[e.Index].Valide == true)
-                {
-                    //Affichage professeur
-                    e.Graphics.DrawString("Professeur :",
-                       e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 10);
-                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
-                       e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
-                    //Affichage élève
-                    e.Graphics.DrawString("Élève :",
-                       e.Font, Stylo, e.Bounds.X + 35, e.Bounds.Y + 30);
-                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
-                       e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
-                    //Affichage du temps passé sur le travail
-                    e.Graphics.DrawString("Temps effectif du travail :",
-                       e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 50);
-                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].MinutesEtSecondesToString(),
-                       e.Font, Stylo, e.Bounds.X + 180, e.Bounds.Y + 50);
-                    //Date de début
-                    e.Graphics.DrawString("Date de début :",
-                       e.Font, Stylo, e.Bounds.X + 300, e.Bounds.Y + 50);
-                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].DateDeDebut.ToString("dd/MM/yyyy"),
-                       e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 50);
-                    //Affichage Niveau
-                    e.Graphics.DrawString("Niveau :",
-                       e.Font, Stylo, e.Bounds.X + 345, e.Bounds.Y + 10);
-                    e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NiveauToString(),
-                       e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 10);
+                //Affichage professeur
+                e.Graphics.DrawString("Professeur :",
+                   e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 10);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
+                   e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
+                //Affichage élève
+                e.Graphics.DrawString("Élève :",
+                   e.Font, Stylo, e.Bounds.X + 35, e.Bounds.Y + 30);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
+                   e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
+                //Affichage du temps passé sur le travail
+                e.Graphics.DrawString("Temps effectif du travail :",
+                   e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 50);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].MinutesEtSecondesToString(),
+                   e.Font, Stylo, e.Bounds.X + 180, e.Bounds.Y + 50);
+                //Date de début
+                e.Graphics.DrawString("Date de début :",
+                   e.Font, Stylo, e.Bounds.X + 300, e.Bounds.Y + 50);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].DateDeDebut.ToString("dd/MM/yyyy"),
+                   e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 50);
+                //Affichage Niveau
+                e.Graphics.DrawString("Niveau :",
+                   e.Font, Stylo, e.Bounds.X + 345, e.Bounds.Y + 10);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NiveauToString(),
+                   e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 10);
 
-                    //Barre de progression
+                //Barre de progression
 
-                    e.Graphics.DrawString("Progression :",
-                       e.Font, Stylo, e.Bounds.X + 312, e.Bounds.Y + 30);
-                    Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 418, e.Bounds.Y + 30, 304, 16);
-                    e.Graphics.FillRectangle(Gris, BarreProgressionGris);
+                e.Graphics.DrawString("Progression :",
+                   e.Font, Stylo, e.Bounds.X + 310, e.Bounds.Y + 30);
+                Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 418, e.Bounds.Y + 30, 304, 16);
+                e.Graphics.FillRectangle(Gris, BarreProgressionGris);
 
-                    Rectangle BarreProgressionVert = new Rectangle(e.Bounds.X + 420, e.Bounds.Y + 34, this.ListeTravauxDisciplinaires[e.Index].CalculerPoucentageEffectue() * 3, 10);
-                    e.Graphics.FillRectangle(Vert, BarreProgressionVert);
-                    //Temps passé sur le travail
-                    //e.Graphics.DrawString("Élève :",
-                    //   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
-                    //e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
-                    //   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
-                }
-                else
-                {
-                    e.Graphics.DrawString("Fichier corrompu !", e.Font, Stylo, (e.Bounds.X / 2) + 10, (e.Bounds.Y / 2) + 2);
-                }
+                Rectangle BarreProgressionVert = new Rectangle(e.Bounds.X + 420, e.Bounds.Y + 34, this.ListeTravauxDisciplinaires[e.Index].CalculerPoucentageEffectue() * 3, 10);
+                e.Graphics.FillRectangle(Vert, BarreProgressionVert);
+                //Temps passé sur le travail
+                //e.Graphics.DrawString("Élève :",
+                //   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
+                //e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
+                //   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
 
                 e.DrawFocusRectangle();
                 //Contour
@@ -270,21 +284,12 @@ namespace TravauxDisciplinaireCFPT
 
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (e.KeyChar == (char)13)
-            //{
-            //    // Enter key pressed
-            //    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
-            //    UpdateVueSelection();
-            //    SecondesInactif = 0;
-            //}
-            //else
-            //{
-            //    e.Handled = true;
-            //}
-
-
-
-
+            //Si c'est effacer
+            if (e.KeyChar == (char)8)
+            {
+                UpdateVueTexteUtilisateur();
+                UpdateVueSelection();
+            }
 
             //Si l'index est hors du tableau alors ne fait rien
             if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaractere() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
@@ -294,9 +299,7 @@ namespace TravauxDisciplinaireCFPT
             //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
             else
             {
-                if (e.KeyChar == (char)Keys.Enter)
-                    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
-                
+
                 this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                 UpdateVueSelection();
                 SecondesInactif = 0;
@@ -309,6 +312,7 @@ namespace TravauxDisciplinaireCFPT
                 tmrTempsEffectif.Enabled = false;
             }
 
+
             //Timer activer
             tmrTempsEffectif.Enabled = true;
         }
@@ -320,6 +324,7 @@ namespace TravauxDisciplinaireCFPT
             {
                 ListeTravauxDisciplinaires.RemoveAt(lsbListeTravaux.SelectedIndex);
                 this.UpdateVueBouton();
+                this.UpdateVueList();
             }
         }
 
@@ -344,9 +349,9 @@ namespace TravauxDisciplinaireCFPT
         private void tsiEnregistrer_Click(object sender, EventArgs e)
         {
             //Ouvre l'onglet d'enregistrement et enregistre le travail à l'emplacement demandé par l'utilisateur
-            if (sfdSauvegarder.ShowDialog() == DialogResult.OK)
+            if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
             {
-                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Serialiser(sfdSauvegarder.FileName);
+                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
             }
         }
 
@@ -359,10 +364,10 @@ namespace TravauxDisciplinaireCFPT
                 try
                 {
                     TravailDisciplinaire td = new TravailDisciplinaire();
-                    td = td.Deserialiser(ofdOuvrirFichier.FileName);
+                    td = td.DeserialiserTravail(ofdOuvrirFichier.FileName);
                     if (td.VerifierDonneeTravail())
                     {
-                        ListeTravauxDisciplinaires.Add(td.Deserialiser(ofdOuvrirFichier.FileName));
+                        ListeTravauxDisciplinaires.Add(td);
                         UpdateVueList();
                         MessageBox.Show("Votre travail à bien été ajouté.");
                     }
@@ -385,18 +390,43 @@ namespace TravauxDisciplinaireCFPT
             this.NbCaractereTapeDepuisDernierScroll += 1;
             if (NbCaractereTapeDepuisDernierScroll == 100)
             {
-                tbxCopieTexte.SelectionStart = tbxCopieTexte.Text.Length;
+                rbxCopieTexte.SelectionStart = rbxCopieTexte.Text.Length;
                 // scroll it automatically
-                tbxCopieTexte.ScrollToCaret();
-                rbxTexteExemple.SelectionStart = tbxCopieTexte.Text.Length - 100;
+                rbxCopieTexte.ScrollToCaret();
+                rbxTexteExemple.SelectionStart = rbxCopieTexte.Text.Length - 100;
                 rbxTexteExemple.ScrollToCaret();
                 NbCaractereTapeDepuisDernierScroll = 0;
             }
+
         }
 
-        private void tbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
+        private void rbxTexteExemple_Leave(object sender, EventArgs e)
+        {
+            //UpdateVueTexteUtilisateur();
+            UpdateVueSelection();
+
+        }
+
+        private void tsiExporter_Click(object sender, EventArgs e)
+        {
+            if (sfdSauvegarderListe.ShowDialog() == DialogResult.OK)
+            {
+                this.SerialiserListeTravaux(sfdSauvegarderListe.FileName);
+            }
+        }
+
+        private void tsiImporter_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void btnSauvegarderLog_Click(object sender, EventArgs e)
+        {
+            if(sfdSauvegarderLog.ShowDialog() == DialogResult.OK)
+            {
+                this.JournalisationListeTravaux(sfdSauvegarderLog.FileName);
+            }
+        }
+
     }
 }

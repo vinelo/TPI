@@ -37,6 +37,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsiEnregistrer = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiEnregistrerSous = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsiExporter = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsiImporter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiAide = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -44,7 +47,7 @@
             this.tbcPrincipale = new System.Windows.Forms.TabControl();
             this.tbpTravail = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tbxCopieTexte = new System.Windows.Forms.TextBox();
+            this.rbxCopieTexte = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbxTexteExemple = new System.Windows.Forms.RichTextBox();
             this.gbxDetails = new System.Windows.Forms.GroupBox();
@@ -71,8 +74,11 @@
             this.btnEditer = new System.Windows.Forms.Button();
             this.lsbListeTravaux = new System.Windows.Forms.ListBox();
             this.tmrTempsEffectif = new System.Windows.Forms.Timer(this.components);
-            this.sfdSauvegarder = new System.Windows.Forms.SaveFileDialog();
+            this.sfdSauvegarderTravail = new System.Windows.Forms.SaveFileDialog();
             this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
+            this.sfdSauvegarderListe = new System.Windows.Forms.SaveFileDialog();
+            this.sfdSauvegarderLog = new System.Windows.Forms.SaveFileDialog();
+            this.btnSauvegarderLog = new System.Windows.Forms.Button();
             this.mspMenu.SuspendLayout();
             this.tbcPrincipale.SuspendLayout();
             this.tbpTravail.SuspendLayout();
@@ -103,7 +109,10 @@
             this.tsiOuvrir,
             this.toolStripSeparator1,
             this.tsiEnregistrer,
-            this.tsiEnregistrerSous});
+            this.tsiEnregistrerSous,
+            this.toolStripSeparator4,
+            this.tsiExporter,
+            this.tsiImporter});
             this.tsmFichier.Name = "tsmFichier";
             this.tsmFichier.Size = new System.Drawing.Size(64, 24);
             this.tsmFichier.Text = "Fichier";
@@ -144,6 +153,25 @@
             this.tsiEnregistrerSous.Name = "tsiEnregistrerSous";
             this.tsiEnregistrerSous.Size = new System.Drawing.Size(191, 24);
             this.tsiEnregistrerSous.Text = "Enregistrer sous...";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(188, 6);
+            // 
+            // tsiExporter
+            // 
+            this.tsiExporter.Name = "tsiExporter";
+            this.tsiExporter.Size = new System.Drawing.Size(191, 24);
+            this.tsiExporter.Text = "Exporter la liste";
+            this.tsiExporter.Click += new System.EventHandler(this.tsiExporter_Click);
+            // 
+            // tsiImporter
+            // 
+            this.tsiImporter.Name = "tsiImporter";
+            this.tsiImporter.Size = new System.Drawing.Size(191, 24);
+            this.tsiImporter.Text = "Importer la liste";
+            this.tsiImporter.Click += new System.EventHandler(this.tsiImporter_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -200,7 +228,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tbxCopieTexte);
+            this.groupBox2.Controls.Add(this.rbxCopieTexte);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(9, 160);
             this.groupBox2.Name = "groupBox2";
@@ -209,17 +237,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Votre saisie  :";
             // 
-            // tbxCopieTexte
+            // rbxCopieTexte
             // 
-            this.tbxCopieTexte.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxCopieTexte.Location = new System.Drawing.Point(7, 24);
-            this.tbxCopieTexte.Multiline = true;
-            this.tbxCopieTexte.Name = "tbxCopieTexte";
-            this.tbxCopieTexte.Size = new System.Drawing.Size(885, 117);
-            this.tbxCopieTexte.TabIndex = 0;
-            this.tbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
-            this.tbxCopieTexte.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxCopieTexte_KeyDown);
-            this.tbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
+            this.rbxCopieTexte.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbxCopieTexte.Location = new System.Drawing.Point(7, 24);
+            this.rbxCopieTexte.Name = "rbxCopieTexte";
+            this.rbxCopieTexte.ShortcutsEnabled = false;
+            this.rbxCopieTexte.Size = new System.Drawing.Size(885, 117);
+            this.rbxCopieTexte.TabIndex = 0;
+            this.rbxCopieTexte.Text = "";
+            this.rbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
+            this.rbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
             // 
             // groupBox1
             // 
@@ -239,11 +267,13 @@
             this.rbxTexteExemple.Location = new System.Drawing.Point(7, 24);
             this.rbxTexteExemple.Name = "rbxTexteExemple";
             this.rbxTexteExemple.ReadOnly = true;
-            this.rbxTexteExemple.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.rbxTexteExemple.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rbxTexteExemple.ShortcutsEnabled = false;
             this.rbxTexteExemple.Size = new System.Drawing.Size(885, 117);
             this.rbxTexteExemple.TabIndex = 0;
             this.rbxTexteExemple.TabStop = false;
             this.rbxTexteExemple.Text = "";
+            this.rbxTexteExemple.Leave += new System.EventHandler(this.rbxTexteExemple_Leave);
             // 
             // gbxDetails
             // 
@@ -268,7 +298,7 @@
             // 
             this.lblNiveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNiveau.ForeColor = System.Drawing.Color.Blue;
-            this.lblNiveau.Location = new System.Drawing.Point(150, 98);
+            this.lblNiveau.Location = new System.Drawing.Point(150, 111);
             this.lblNiveau.Name = "lblNiveau";
             this.lblNiveau.Size = new System.Drawing.Size(225, 20);
             this.lblNiveau.TabIndex = 9;
@@ -277,7 +307,7 @@
             // 
             this.lblClasse.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClasse.ForeColor = System.Drawing.Color.Blue;
-            this.lblClasse.Location = new System.Drawing.Point(153, 78);
+            this.lblClasse.Location = new System.Drawing.Point(150, 79);
             this.lblClasse.Name = "lblClasse";
             this.lblClasse.Size = new System.Drawing.Size(228, 20);
             this.lblClasse.TabIndex = 8;
@@ -286,7 +316,7 @@
             // 
             this.lblProfesseur.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfesseur.ForeColor = System.Drawing.Color.Blue;
-            this.lblProfesseur.Location = new System.Drawing.Point(153, 56);
+            this.lblProfesseur.Location = new System.Drawing.Point(150, 50);
             this.lblProfesseur.Name = "lblProfesseur";
             this.lblProfesseur.Size = new System.Drawing.Size(222, 20);
             this.lblProfesseur.TabIndex = 7;
@@ -295,7 +325,7 @@
             // 
             this.lblEleve.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEleve.ForeColor = System.Drawing.Color.Blue;
-            this.lblEleve.Location = new System.Drawing.Point(153, 36);
+            this.lblEleve.Location = new System.Drawing.Point(150, 21);
             this.lblEleve.Name = "lblEleve";
             this.lblEleve.Size = new System.Drawing.Size(225, 20);
             this.lblEleve.TabIndex = 6;
@@ -304,7 +334,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(14, 97);
+            this.label9.Location = new System.Drawing.Point(14, 110);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(136, 20);
             this.label9.TabIndex = 5;
@@ -314,7 +344,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(81, 77);
+            this.label8.Location = new System.Drawing.Point(81, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 20);
             this.label8.TabIndex = 4;
@@ -324,7 +354,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(52, 55);
+            this.label5.Location = new System.Drawing.Point(52, 49);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 20);
             this.label5.TabIndex = 3;
@@ -342,7 +372,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(90, 36);
+            this.label4.Location = new System.Drawing.Point(90, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 20);
             this.label4.TabIndex = 0;
@@ -429,6 +459,7 @@
             // 
             // tbpGestion
             // 
+            this.tbpGestion.Controls.Add(this.btnSauvegarderLog);
             this.tbpGestion.Controls.Add(this.btnOuvrir);
             this.tbpGestion.Controls.Add(this.btnNouveau);
             this.tbpGestion.Controls.Add(this.btnSupprimer);
@@ -445,9 +476,9 @@
             // btnOuvrir
             // 
             this.btnOuvrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOuvrir.Location = new System.Drawing.Point(277, 395);
+            this.btnOuvrir.Location = new System.Drawing.Point(192, 397);
             this.btnOuvrir.Name = "btnOuvrir";
-            this.btnOuvrir.Size = new System.Drawing.Size(178, 55);
+            this.btnOuvrir.Size = new System.Drawing.Size(160, 55);
             this.btnOuvrir.TabIndex = 4;
             this.btnOuvrir.Text = "Ouvrir";
             this.btnOuvrir.UseVisualStyleBackColor = true;
@@ -455,9 +486,9 @@
             // btnNouveau
             // 
             this.btnNouveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNouveau.Location = new System.Drawing.Point(93, 395);
+            this.btnNouveau.Location = new System.Drawing.Point(8, 397);
             this.btnNouveau.Name = "btnNouveau";
-            this.btnNouveau.Size = new System.Drawing.Size(178, 55);
+            this.btnNouveau.Size = new System.Drawing.Size(160, 55);
             this.btnNouveau.TabIndex = 3;
             this.btnNouveau.Text = "Nouveau";
             this.btnNouveau.UseVisualStyleBackColor = true;
@@ -466,9 +497,9 @@
             // btnSupprimer
             // 
             this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSupprimer.Location = new System.Drawing.Point(461, 395);
+            this.btnSupprimer.Location = new System.Drawing.Point(376, 397);
             this.btnSupprimer.Name = "btnSupprimer";
-            this.btnSupprimer.Size = new System.Drawing.Size(178, 55);
+            this.btnSupprimer.Size = new System.Drawing.Size(160, 55);
             this.btnSupprimer.TabIndex = 2;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = true;
@@ -477,9 +508,9 @@
             // btnEditer
             // 
             this.btnEditer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditer.Location = new System.Drawing.Point(645, 395);
+            this.btnEditer.Location = new System.Drawing.Point(560, 397);
             this.btnEditer.Name = "btnEditer";
-            this.btnEditer.Size = new System.Drawing.Size(178, 55);
+            this.btnEditer.Size = new System.Drawing.Size(160, 55);
             this.btnEditer.TabIndex = 1;
             this.btnEditer.Text = "Continuer";
             this.btnEditer.UseVisualStyleBackColor = true;
@@ -503,16 +534,39 @@
             this.tmrTempsEffectif.Interval = 1000;
             this.tmrTempsEffectif.Tick += new System.EventHandler(this.tmrTempsEffectif_Tick);
             // 
-            // sfdSauvegarder
+            // sfdSauvegarderTravail
             // 
-            this.sfdSauvegarder.DefaultExt = "td";
-            this.sfdSauvegarder.FileName = "travail.td";
-            this.sfdSauvegarder.Filter = "Fichier Travaux Disciplinaire au CFPT|*.td";
+            this.sfdSauvegarderTravail.DefaultExt = "td";
+            this.sfdSauvegarderTravail.FileName = "travail.td";
+            this.sfdSauvegarderTravail.Filter = "Travaux Disciplinaire au CFPT|*.td";
+            this.sfdSauvegarderTravail.Title = "Enregistrer le travail";
             // 
             // ofdOuvrirFichier
             // 
             this.ofdOuvrirFichier.FileName = "travail.td";
             this.ofdOuvrirFichier.Filter = "Travaux Disciplinaire au CFPT|*.td";
+            // 
+            // sfdSauvegarderListe
+            // 
+            this.sfdSauvegarderListe.FileName = "ListeTravaux.ltd";
+            this.sfdSauvegarderListe.Filter = "Liste de Travaux Disciplinaire au CFPT|*.ltd";
+            this.sfdSauvegarderListe.Title = "Exporter la liste de travaux";
+            // 
+            // sfdSauvegarderLog
+            // 
+            this.sfdSauvegarderLog.FileName = "Log";
+            this.sfdSauvegarderLog.Filter = "Fichier Texte |*.txt";
+            // 
+            // btnSauvegarderLog
+            // 
+            this.btnSauvegarderLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSauvegarderLog.Location = new System.Drawing.Point(744, 397);
+            this.btnSauvegarderLog.Name = "btnSauvegarderLog";
+            this.btnSauvegarderLog.Size = new System.Drawing.Size(160, 55);
+            this.btnSauvegarderLog.TabIndex = 5;
+            this.btnSauvegarderLog.Text = "Journalisation";
+            this.btnSauvegarderLog.UseVisualStyleBackColor = true;
+            this.btnSauvegarderLog.Click += new System.EventHandler(this.btnSauvegarderLog_Click);
             // 
             // frmPrincipale
             // 
@@ -531,7 +585,6 @@
             this.tbcPrincipale.ResumeLayout(false);
             this.tbpTravail.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.gbxDetails.ResumeLayout(false);
             this.gbxDetails.PerformLayout();
@@ -550,7 +603,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsiOuvrir;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsiEnregistrer;
-        private System.Windows.Forms.ToolStripMenuItem tsiEnregistrerSous;
         private System.Windows.Forms.TabControl tbcPrincipale;
         private System.Windows.Forms.TabPage tbpTravail;
         private System.Windows.Forms.TabPage tbpGestion;
@@ -584,11 +636,18 @@
         private System.Windows.Forms.RichTextBox rbxTexteExemple;
         private System.Windows.Forms.Button btnNouveau;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.TextBox tbxCopieTexte;
         private System.Windows.Forms.Timer tmrTempsEffectif;
         private System.Windows.Forms.Button btnOuvrir;
-        private System.Windows.Forms.SaveFileDialog sfdSauvegarder;
+        private System.Windows.Forms.SaveFileDialog sfdSauvegarderTravail;
         private System.Windows.Forms.OpenFileDialog ofdOuvrirFichier;
+        private System.Windows.Forms.RichTextBox rbxCopieTexte;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem tsiExporter;
+        private System.Windows.Forms.ToolStripMenuItem tsiImporter;
+        private System.Windows.Forms.SaveFileDialog sfdSauvegarderListe;
+        private System.Windows.Forms.ToolStripMenuItem tsiEnregistrerSous;
+        private System.Windows.Forms.SaveFileDialog sfdSauvegarderLog;
+        private System.Windows.Forms.Button btnSauvegarderLog;
     }
 }
 

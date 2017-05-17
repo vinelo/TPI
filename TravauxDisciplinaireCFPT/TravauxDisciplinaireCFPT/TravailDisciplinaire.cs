@@ -121,6 +121,10 @@ namespace TravauxDisciplinaireCFPT
 
         }
 
+        public string ProgressionToString()
+        {
+            return Convert.ToString(this.Progression) + " caractère(s) sur " + Convert.ToString(this.CompterCaractere());
+        }
         /// <summary>
         /// Vérifie si le caractère corresponds à celui qui doit être tapé
         /// </summary>
@@ -208,13 +212,16 @@ namespace TravauxDisciplinaireCFPT
             int minute = 0;
             int seconde = 0;
             string minutesEtSecondes = "";
-            if (ticks / 600000000 >= 1)
-            {
-                minute = (Convert.ToInt32(Math.Round((double)ticks / UneSecondeEnTicks * 60)));
-                minutesEtSecondes = Convert.ToString(minute) + " min et ";
-            }
 
-            ticks = ticks - (minute * (UneSecondeEnTicks * 60));
+            if((double)ticks / (UneSecondeEnTicks * 60) >= 1)
+                minute = (Convert.ToInt32(Math.Floor((double)ticks / (UneSecondeEnTicks * 60))));
+
+
+            minutesEtSecondes = Convert.ToString(minute) + " min et ";
+
+            if (ticks >= UneSecondeEnTicks * 60)
+                ticks = ticks - (minute * (UneSecondeEnTicks * 60));
+            
             seconde = (int)Math.Round((double)ticks / UneSecondeEnTicks);
 
             minutesEtSecondes += Convert.ToString(seconde) + " sec";
@@ -236,7 +243,7 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
         public override string ToString()
         {
-            string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.Temps) + Niveau.ToString() + this.DateDeDebut;
+            string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.Temps) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier;
             return Travail;
         }
 
@@ -244,7 +251,7 @@ namespace TravauxDisciplinaireCFPT
         /// Sauvegarde le travail dans le répértoire passé en paramètre
         /// </summary>
         /// <param name="paramChemin">Chemin du répértoire</param>
-        public void Serialiser(string paramChemin)
+        public void SerialiserTravail(string paramChemin)
         {
             this.DateDerniereModification = DateTime.Now;
             this.CryptageTravail();
@@ -258,7 +265,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         /// <param name="paramFichier">Chemin du fichier</param>
         /// <returns></returns>
-        public TravailDisciplinaire Deserialiser(string paramFichier)
+        public TravailDisciplinaire DeserialiserTravail(string paramFichier)
         {
             var formatter = new BinaryFormatter();
             FileStream stream = File.OpenRead(paramFichier);
@@ -313,6 +320,6 @@ namespace TravauxDisciplinaireCFPT
             return Verification;
         }
 
-        
+
     }
 }

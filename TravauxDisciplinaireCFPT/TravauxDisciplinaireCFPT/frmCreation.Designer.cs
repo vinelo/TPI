@@ -51,8 +51,8 @@
             this.btnCreer = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.ofdOuvrir = new System.Windows.Forms.OpenFileDialog();
-            this.tbxApercu = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rbxApercu = new System.Windows.Forms.RichTextBox();
             this.gbxProfesseur.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -222,7 +222,7 @@
             this.rbnPersonnaliser.TabIndex = 10;
             this.rbnPersonnaliser.Text = "Texte personnalisé";
             this.rbnPersonnaliser.UseVisualStyleBackColor = true;
-            this.rbnPersonnaliser.CheckedChanged += new System.EventHandler(this.rbnPersonnaliser_CheckedChanged);
+            this.rbnPersonnaliser.CheckedChanged += new System.EventHandler(this.rbnNiveau_CheckedChanged);
             // 
             // rbnNiveau5
             // 
@@ -297,7 +297,7 @@
             this.btnCreer.TabIndex = 12;
             this.btnCreer.Text = "Créer";
             this.btnCreer.UseVisualStyleBackColor = true;
-            //
+            // 
             // btnAnnuler
             // 
             this.btnAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -309,20 +309,9 @@
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
             // 
-            // tbxApercu
-            // 
-            this.tbxApercu.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxApercu.Location = new System.Drawing.Point(9, 19);
-            this.tbxApercu.Multiline = true;
-            this.tbxApercu.Name = "tbxApercu";
-            this.tbxApercu.ReadOnly = true;
-            this.tbxApercu.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbxApercu.Size = new System.Drawing.Size(471, 98);
-            this.tbxApercu.TabIndex = 14;
-            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.tbxApercu);
+            this.groupBox3.Controls.Add(this.rbxApercu);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 275);
             this.groupBox3.Name = "groupBox3";
@@ -330,6 +319,15 @@
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Aperçu du texte";
+            // 
+            // rbxApercu
+            // 
+            this.rbxApercu.Font = new System.Drawing.Font("Consolas", 12.75F);
+            this.rbxApercu.Location = new System.Drawing.Point(6, 23);
+            this.rbxApercu.Name = "rbxApercu";
+            this.rbxApercu.Size = new System.Drawing.Size(474, 94);
+            this.rbxApercu.TabIndex = 16;
+            this.rbxApercu.Text = "";
             // 
             // frmCreation
             // 
@@ -357,7 +355,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -387,7 +384,7 @@
         private System.Windows.Forms.Button btnCreer;
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.OpenFileDialog ofdOuvrir;
-        private System.Windows.Forms.TextBox tbxApercu;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox rbxApercu;
     }
 }
