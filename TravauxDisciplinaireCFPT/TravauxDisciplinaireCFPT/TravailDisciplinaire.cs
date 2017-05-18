@@ -99,10 +99,10 @@ namespace TravauxDisciplinaireCFPT
 
         }
 
-        public string ProgressionToString()
-        {
-            return Convert.ToString(this.Progression) + " caractère(s) sur " + Convert.ToString(this.CompterCaracteres());
-        }
+        //Méthodes...
+
+        //__________________________Méthodes concernant la progression du travail__________________________\\
+
         /// <summary>
         /// Vérifie si le caractère corresponds à celui qui doit être tapé
         /// </summary>
@@ -126,6 +126,10 @@ namespace TravauxDisciplinaireCFPT
             Progression += 1;
         }
 
+        /// <summary>
+        /// Vérifie si le travail est fini
+        /// </summary>
+        /// <returns>Verification de si le travail est fini</returns>
         public bool EstFini()
         {
             bool Verification = false;
@@ -163,11 +167,11 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Texte déjà tapé par l'utilisateur</returns>
         public string GetTexteTapeParUtilisateur()
         {
-            string TexteDejaCopie = "";
-            for (int i = 0; i < this.Progression; i++)
-            {
-                TexteDejaCopie += this.Niveau.TexteARecopier[i];
-            }
+            string TexteDejaCopie = this.Niveau.TexteARecopier.Substring(0,Progression);
+            //for (int i = 0; i < this.Progression; i++)
+            //{
+            //    TexteDejaCopie += this.Niveau.TexteARecopier[i];
+            //}
             return TexteDejaCopie;
         }
 
@@ -178,9 +182,33 @@ namespace TravauxDisciplinaireCFPT
         {
             this.DureeEffective = this.DureeEffective.AddSeconds(1);
         }
+        //__________________________Méthodes renvoyant du texte__________________________\\
 
-
-        //Fonction à voir ou mettre avec Mr.Beney
+        /// <summary>
+        /// Retourne l'objet "TravailDisciplinaire" sous forme de texte
+        /// </summary>
+        /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
+        public override string ToString()
+        {
+            string Travail = AVERTISSEMENT + this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.DureeEffective) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier + AVERTISSEMENT;
+            return Travail;
+        }
+        /// <summary>
+        /// Retourne  l'objet "Niveau" sous forme de texte
+        /// </summary>
+        /// <returns>Objet "Niveau" sous forme de texte</returns>
+        public string NiveauToString()
+        {
+            return Niveau.ToString();
+        }
+        /// <summary>
+        /// Créer un texte montrant la progression du travail
+        /// </summary>
+        /// <returns>Texte montrant la progression du travail</returns>
+        public string ProgressionToString()
+        {
+            return Convert.ToString(this.Progression) + " caractère(s) sur " + Convert.ToString(this.CompterCaracteres());
+        }
 
         /// <summary>
         /// Retourne le temps passé par l'élève sur le projet
@@ -194,7 +222,7 @@ namespace TravauxDisciplinaireCFPT
             int seconde = 0;
             string minutesEtSecondes = "";
 
-            if((double)ticks / (UneSecondeEnTicks * 60) >= 1)
+            if ((double)ticks / (UneSecondeEnTicks * 60) >= 1)
                 minute = (Convert.ToInt32(Math.Floor((double)ticks / (UneSecondeEnTicks * 60))));
 
 
@@ -202,32 +230,18 @@ namespace TravauxDisciplinaireCFPT
 
             if (ticks >= UneSecondeEnTicks * 60)
                 ticks = ticks - (minute * (UneSecondeEnTicks * 60));
-            
+
             seconde = (int)Math.Round((double)ticks / UneSecondeEnTicks);
 
             minutesEtSecondes += Convert.ToString(seconde) + " sec";
             return minutesEtSecondes;
         }
 
-        /// <summary>
-        /// Retourne  l'objet "Niveau" sous forme de texte
-        /// </summary>
-        /// <returns>Objet "Niveau" sous forme de texte</returns>
-        public string NiveauToString()
-        {
-            return Niveau.ToString();
-        }
 
-        /// <summary>
-        /// Retourne l'objet "TravailDisciplinaire" sous forme de texte
-        /// </summary>
-        /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
-        public override string ToString()
-        {
-            string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.DureeEffective) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier;
-            return Travail;
-        }
 
+
+
+        //__________________________Methodes traitant avec la sauvegarde des données__________________________\\
         /// <summary>
         /// Sauvegarde le travail dans le répértoire passé en paramètre
         /// </summary>

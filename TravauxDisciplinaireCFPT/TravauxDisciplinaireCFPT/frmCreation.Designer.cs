@@ -85,10 +85,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(6, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.Size = new System.Drawing.Size(72, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Prénom :";
             // 
@@ -104,10 +104,10 @@
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNom.Location = new System.Drawing.Point(25, 37);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(45, 20);
+            this.lblNom.Size = new System.Drawing.Size(50, 20);
             this.lblNom.TabIndex = 0;
             this.lblNom.Text = "Nom :";
             // 
@@ -139,10 +139,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 98);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 20);
+            this.label4.Size = new System.Drawing.Size(65, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "Classe :";
             // 
@@ -158,10 +158,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 20);
+            this.label2.Size = new System.Drawing.Size(72, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Prénom :";
             // 
@@ -177,10 +177,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(25, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 20);
+            this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "Nom :";
             // 
@@ -215,10 +215,10 @@
             // rbnPersonnaliser
             // 
             this.rbnPersonnaliser.AutoSize = true;
-            this.rbnPersonnaliser.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnPersonnaliser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnPersonnaliser.Location = new System.Drawing.Point(6, 212);
             this.rbnPersonnaliser.Name = "rbnPersonnaliser";
-            this.rbnPersonnaliser.Size = new System.Drawing.Size(141, 24);
+            this.rbnPersonnaliser.Size = new System.Drawing.Size(160, 24);
             this.rbnPersonnaliser.TabIndex = 10;
             this.rbnPersonnaliser.Text = "Texte personnalisé";
             this.rbnPersonnaliser.UseVisualStyleBackColor = true;
@@ -227,10 +227,10 @@
             // rbnNiveau5
             // 
             this.rbnNiveau5.AutoSize = true;
-            this.rbnNiveau5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnNiveau5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau5.Location = new System.Drawing.Point(6, 144);
             this.rbnNiveau5.Name = "rbnNiveau5";
-            this.rbnNiveau5.Size = new System.Drawing.Size(108, 24);
+            this.rbnNiveau5.Size = new System.Drawing.Size(123, 24);
             this.rbnNiveau5.TabIndex = 9;
             this.rbnNiveau5.Text = "5 (~ 150 min.)";
             this.rbnNiveau5.UseVisualStyleBackColor = true;
@@ -239,10 +239,10 @@
             // rbnNiveau4
             // 
             this.rbnNiveau4.AutoSize = true;
-            this.rbnNiveau4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnNiveau4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau4.Location = new System.Drawing.Point(6, 114);
             this.rbnNiveau4.Name = "rbnNiveau4";
-            this.rbnNiveau4.Size = new System.Drawing.Size(108, 24);
+            this.rbnNiveau4.Size = new System.Drawing.Size(123, 24);
             this.rbnNiveau4.TabIndex = 8;
             this.rbnNiveau4.Text = "4 (~ 120 min.)";
             this.rbnNiveau4.UseVisualStyleBackColor = true;
@@ -252,10 +252,10 @@
             // 
             this.rbnNiveau3.AutoSize = true;
             this.rbnNiveau3.Checked = true;
-            this.rbnNiveau3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnNiveau3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau3.Location = new System.Drawing.Point(6, 85);
             this.rbnNiveau3.Name = "rbnNiveau3";
-            this.rbnNiveau3.Size = new System.Drawing.Size(101, 24);
+            this.rbnNiveau3.Size = new System.Drawing.Size(114, 24);
             this.rbnNiveau3.TabIndex = 7;
             this.rbnNiveau3.TabStop = true;
             this.rbnNiveau3.Text = "3 (~ 60 min.)";
@@ -265,10 +265,10 @@
             // rbnNiveau2
             // 
             this.rbnNiveau2.AutoSize = true;
-            this.rbnNiveau2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnNiveau2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau2.Location = new System.Drawing.Point(6, 55);
             this.rbnNiveau2.Name = "rbnNiveau2";
-            this.rbnNiveau2.Size = new System.Drawing.Size(101, 24);
+            this.rbnNiveau2.Size = new System.Drawing.Size(114, 24);
             this.rbnNiveau2.TabIndex = 6;
             this.rbnNiveau2.Text = "2 (~ 40 min.)";
             this.rbnNiveau2.UseVisualStyleBackColor = true;
@@ -277,10 +277,10 @@
             // rbnNiveau1
             // 
             this.rbnNiveau1.AutoSize = true;
-            this.rbnNiveau1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbnNiveau1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbnNiveau1.Location = new System.Drawing.Point(6, 25);
             this.rbnNiveau1.Name = "rbnNiveau1";
-            this.rbnNiveau1.Size = new System.Drawing.Size(101, 24);
+            this.rbnNiveau1.Size = new System.Drawing.Size(114, 24);
             this.rbnNiveau1.TabIndex = 5;
             this.rbnNiveau1.Text = "1 (~ 20 min.)";
             this.rbnNiveau1.UseVisualStyleBackColor = true;

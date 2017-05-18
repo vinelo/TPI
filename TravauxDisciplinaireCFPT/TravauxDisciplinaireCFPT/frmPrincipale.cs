@@ -24,19 +24,29 @@ namespace TravauxDisciplinaireCFPT
         private int _nbCaractereTapeDepuisDernierScroll;
         private bool _estTravailSelectionne;
 
+        private ToolTip _tlpInfoTexteExemple;
 
 
         //Propriétés...
 
         public int IndexTravailSelectionne
         {
-            get { return _indexTravailSelectionne; }
-            set { _indexTravailSelectionne = value; }
+            get
+            {
+                return _indexTravailSelectionne;
+            }
+            set
+            {
+                _indexTravailSelectionne = value;
+            }
         }
 
         internal List<TravailDisciplinaire> ListeTravauxDisciplinaires
         {
-            get { return _listeTravauxDisciplinaires; }
+            get
+            {
+                return _listeTravauxDisciplinaires;
+            }
             set
             {
                 _listeTravauxDisciplinaires = value;
@@ -44,8 +54,14 @@ namespace TravauxDisciplinaireCFPT
         }
         public int SecondesInactif
         {
-            get { return _secondesInactif; }
-            set { _secondesInactif = value; }
+            get
+            {
+                return _secondesInactif;
+            }
+            set
+            {
+                _secondesInactif = value;
+            }
         }
 
         private int NbCaractereTapeDepuisDernierScroll
@@ -65,11 +81,22 @@ namespace TravauxDisciplinaireCFPT
             get { return _estTravailSelectionne; }
             set
             {
-                if(value==false)
-                {
+                if (value == false)
                     this.UpdateVueAucunTravail();
-                }
                 _estTravailSelectionne = value;
+            }
+        }
+
+        private ToolTip TlpInfoTexteExemple
+        {
+            get
+            {
+                return _tlpInfoTexteExemple;
+            }
+
+            set
+            {
+                _tlpInfoTexteExemple = value;
             }
         }
 
@@ -81,15 +108,13 @@ namespace TravauxDisciplinaireCFPT
         {
             InitializeComponent();
             ListeTravauxDisciplinaires = new List<TravailDisciplinaire>();
-            UpdateVueBouton();
-            tbcPrincipale.SelectTab(1);
             EstTravailSelectionne = false;
         }
 
 
         //Méthodes...
 
-        #region UpdateVue
+        //__________________________UpdateVue__________________________\\
         public void UpdateVueAucunTravail()
         {
             rbxTexteExemple.Text = "";
@@ -115,66 +140,63 @@ namespace TravauxDisciplinaireCFPT
         public void UpdateVueList()
         {
             //Liste
-            if (ListeTravauxDisciplinaires != null)
+
+            lsbListeTravaux.Items.Clear();
+            foreach (TravailDisciplinaire travail in this.ListeTravauxDisciplinaires)
             {
-                lsbListeTravaux.Items.Clear();
-                foreach (TravailDisciplinaire travail in this.ListeTravauxDisciplinaires)
-                {
-                    lsbListeTravaux.Items.Add(travail);
-                }
+                lsbListeTravaux.Items.Add(travail);
             }
         }
 
         /// <summary>
         /// Affiche le travail sélectionné dans l'onglet "travail"
         /// </summary>
-        public void UpdateVueSelection()
+        public void UpdateVueProgression()
         {
+            //Surlignage du texte tapé
+            this.rbxTexteExemple.SelectionStart = 0;
+            this.rbxTexteExemple.SelectionLength = rbxTexteExemple.TextLength;
+            this.rbxTexteExemple.SelectionBackColor = Color.WhiteSmoke;
 
-            if (this.EstTravailSelectionne)
-            {
-                //Surlignage du texte tapé
-                this.rbxTexteExemple.SelectionStart = 0;
-                this.rbxTexteExemple.SelectionLength = rbxTexteExemple.TextLength;
-                this.rbxTexteExemple.SelectionBackColor = Color.WhiteSmoke;
+            this.rbxTexteExemple.SelectionStart = 0;
+            this.rbxTexteExemple.SelectionLength = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression;
+            this.rbxTexteExemple.SelectionBackColor = Color.LightGray;
+            //Temps
+            lblTemps.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].MinutesEtSecondesToString();
+            this.pgbBarreProgression.Value = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].CalculerPoucentageEffectue() * 10;
+            //Affichage du reste
+            this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Classe;
+            this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Professeur.ToString();
+            this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
+            this.lblTravailAccompli.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].ProgressionToString();
 
-                this.rbxTexteExemple.SelectionStart = 0;
-                this.rbxTexteExemple.SelectionLength = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression;
-                this.rbxTexteExemple.SelectionBackColor = Color.LightGray;
-                //Temps
-                lblTemps.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].MinutesEtSecondesToString();
-                this.pgbBarreProgression.Value = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].CalculerPoucentageEffectue() * 10;
-                //Affichage du reste
-                this.lblClasse.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Classe;
-                this.lblProfesseur.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Professeur.ToString();
-                this.lblEleve.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.ToString();
-                this.lblTravailAccompli.Text = ListeTravauxDisciplinaires[IndexTravailSelectionne].ProgressionToString();
-
-                //Affichage du niveau sélectionné
-                lblNiveau.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].NiveauToString();
-
-            }
+            //Affichage du niveau sélectionné
+            lblNiveau.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].NiveauToString();
         }
-
         /// <summary>
-        /// Afficher le texte déjà tapé par l'utilisateur
+        /// Scroll jusqu'au bon endroit la zone de saisie du texte exemple
+        /// </summary>
+        public void UpdateVueTexteExemple()
+        {
+            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
+            rbxTexteExemple.ScrollToCaret();
+        }
+        /// <summary>
+        /// Scroll jusqu'au bon endroit la zone de saisie du texte à recopier
         /// </summary>
         public void UpdateVueTexteUtilisateur()
         {
-            this.rbxTexteExemple.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau.TexteARecopier;
-            rbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
-
-
-            //Scroll
             rbxCopieTexte.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
-            // scroll it automatically
             rbxCopieTexte.ScrollToCaret();
-            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
-            rbxTexteExemple.ScrollToCaret();
-            NbCaractereTapeDepuisDernierScroll = 0;
         }
 
-        #endregion
+        //Affiche les texte dans les zone de saisie
+        public void UpdateVueAfficherTextes()
+        {
+            rbxCopieTexte.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur();
+            this.rbxTexteExemple.Text = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau.TexteARecopier;
+        }
+
 
 
         /// <summary>
@@ -194,8 +216,45 @@ namespace TravauxDisciplinaireCFPT
         {
             FileStream stream = File.Create(paramChemin);
             var formatter = new BinaryFormatter();
+            foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
+            {
+                td.CryptageTravail();
+            }
             formatter.Serialize(stream, this.ListeTravauxDisciplinaires);
             stream.Close();
+        }
+
+        public void DeserialiserListeTravaux(string paramFichier)
+        {
+            var formatter = new BinaryFormatter();
+            FileStream stream = File.OpenRead(paramFichier);
+
+            try
+            {
+                List<TravailDisciplinaire> listeTravaux = (List<TravailDisciplinaire>)formatter.Deserialize(stream);
+                bool Verification = true;
+                foreach (TravailDisciplinaire td in listeTravaux)
+                {
+                    if (!td.VerifierDonneeTravail())
+                    {
+                        Verification = false;
+                    }
+                }
+                if (Verification)
+                    this.ListeTravauxDisciplinaires = listeTravaux;
+                else
+                    MessageBox.Show("Ce fichier est incompatible ou corrompu");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ce fichier est incompatible ou corrompu");
+
+            }
+            finally
+            {
+                stream.Close();
+            }
+
         }
 
         /// <summary>
@@ -205,12 +264,30 @@ namespace TravauxDisciplinaireCFPT
         public void JournalisationListeTravaux(string paramChemin)
         {
             // Write the string array to a new file named "WriteLines.txt".
-            using (StreamWriter outputFile = new StreamWriter(paramChemin))
+            using (StreamWriter FichierLog = new StreamWriter(paramChemin))
             {
+                string TravailToLog = "Liste de travaux disciplinaires  :";
+                TravailToLog += "\r\n____________________________________________________________________ \r\n";
                 foreach (TravailDisciplinaire travail in ListeTravauxDisciplinaires)
                 {
-                    outputFile.WriteLine("Professeur : " + travail.Professeur.ToString() + " | Élève : " + travail.Eleve.ToString() + " | Date de début : " + travail.DateDeDebut + " | Temps effectif du travail : " + travail.MinutesEtSecondesToString() + " | Progression : " + travail.ProgressionToString() + " | Niveau du travail : " + travail.NiveauToString() + " | Fini : " + travail.EstFini());
+
+                    TravailToLog += "\r\n  Travail de " + travail.Eleve.ToString();
+                    TravailToLog += "\r\n  Infligé par " + travail.Professeur.ToString();
+                    TravailToLog += "\r\n  Créé le " + travail.DateDeDebut.ToString("dd / MM / yyyy");
+                    TravailToLog += "\r\n  Temps effectif du travail : " + travail.MinutesEtSecondesToString();
+                    TravailToLog += "\r\n  Progression : " + travail.ProgressionToString();
+                    TravailToLog += "\r\n  Niveau du travail : " + travail.NiveauToString();
+                    TravailToLog += "\r\n  Fini : " + travail.EstFini();
+                    string TexteCoupe = travail.Niveau.TexteARecopier.Replace(Environment.NewLine, "     ");
+                    TexteCoupe = TexteCoupe.Substring(0, 100);
+                    TravailToLog += "\r\n  Aperçu du texte : " + TexteCoupe + "...";
+
+                    TravailToLog += "\r\n____________________________________________________________________ \r\n";
+
+                    //FichierLog.WriteLine("Professeur : " + travail.Professeur.ToString() + " | Élève : " + travail.Eleve.ToString() + " | Date de début : " + travail.DateDeDebut + " | Temps effectif du travail : " + travail.MinutesEtSecondesToString() + " | Progression : " + travail.ProgressionToString() + " | Niveau du travail : " + travail.NiveauToString() + " | Fini : " + travail.EstFini());
+
                 }
+                FichierLog.Write(TravailToLog);
             }
         }
 
@@ -225,7 +302,8 @@ namespace TravauxDisciplinaireCFPT
             if (Creation.ShowDialog() == DialogResult.OK)
             {
                 ListeTravauxDisciplinaires.Add(Creation.CreerTravail());
-                UpdateVueList();
+                if (ListeTravauxDisciplinaires != null)
+                    UpdateVueList();
                 tbcPrincipale.SelectTab(1);
             }
         }
@@ -304,10 +382,12 @@ namespace TravauxDisciplinaireCFPT
             this.IndexTravailSelectionne = lsbListeTravaux.SelectedIndex;
             tbcPrincipale.SelectTab(0);
 
-            //Update la vue de la page travail
+            UpdateVueAfficherTextes();
             UpdateVueBouton();
             UpdateVueTexteUtilisateur();
-            UpdateVueSelection(); // "true" car on veut que le texte déjà écrit s'affiche
+            UpdateVueTexteExemple();
+            UpdateVueProgression();
+
         }
 
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
@@ -318,7 +398,7 @@ namespace TravauxDisciplinaireCFPT
                 if (e.KeyChar == (char)8)
                 {
                     UpdateVueTexteUtilisateur();
-                    UpdateVueSelection();
+                    UpdateVueProgression();
                 }
 
                 //Si l'index est hors du tableau alors ne fait rien
@@ -329,10 +409,12 @@ namespace TravauxDisciplinaireCFPT
                 //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
                 else
                 {
-
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
-                    UpdateVueSelection();
+                    UpdateVueProgression();
                     SecondesInactif = 0;
+                    if (NbCaractereTapeDepuisDernierScroll < 100)
+                        NbCaractereTapeDepuisDernierScroll += 1;
+                    NbCaractereTapeDepuisDernierScroll = 0;
                 }
 
                 //verifie si le travail est fini
@@ -357,13 +439,14 @@ namespace TravauxDisciplinaireCFPT
             //Vérifie si un travail est sélectionné
             if (lsbListeTravaux.SelectedIndex != -1)
             {
+                //Verifie si le travail supprimer correspond au travail dans l'onglet travail
                 if (lsbListeTravaux.SelectedIndex == this.IndexTravailSelectionne)
                     EstTravailSelectionne = false;
                 ListeTravauxDisciplinaires.RemoveAt(lsbListeTravaux.SelectedIndex);
-                this.UpdateVueBouton();
-                this.UpdateVueList();
-
             }
+
+            this.UpdateVueList();
+            this.UpdateVueBouton();
         }
 
         private void lsbListeTravaux_SelectedIndexChanged(object sender, EventArgs e)
@@ -381,7 +464,7 @@ namespace TravauxDisciplinaireCFPT
                 else
                 {
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerTemps();
-                    UpdateVueSelection();
+                    UpdateVueProgression();
                     SecondesInactif += 1;
                 }
             }
@@ -400,30 +483,33 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
-        private void tsiOuvrir_Click(object sender, EventArgs e)
+        private void Ouvrir_Click(object sender, EventArgs e)
         {
             //Ajoute à la liste le fichier ouvert si celui-ci n'est pas incompatible ou corrompu
             if (ofdOuvrirFichier.ShowDialog() == DialogResult.OK)
             {
-                //Si il y a une erreur au niveau de la lecture du fichier alors celui-ci est incompatible ou corrompu
-                try
+                foreach (string fichier in ofdOuvrirFichier.FileNames)
                 {
-                    TravailDisciplinaire td = new TravailDisciplinaire();
-                    td = td.DeserialiserTravail(ofdOuvrirFichier.FileName);
-                    if (td.VerifierDonneeTravail())
+                    //Si il y a une erreur au niveau de la lecture du fichier alors celui-ci est incompatible ou corrompu
+                    try
                     {
-                        ListeTravauxDisciplinaires.Add(td);
-                        UpdateVueList();
-                        MessageBox.Show("Votre travail à bien été ajouté.");
+                        TravailDisciplinaire td = new TravailDisciplinaire();
+                        td = td.DeserialiserTravail(fichier);
+                        if (td.VerifierDonneeTravail())
+                        {
+                            ListeTravauxDisciplinaires.Add(td);
+                            UpdateVueList();
+                            MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        MessageBox.Show("Ce fichier est incompatible ou corrompu");
+                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
                     }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Ce fichier est incompatible ou corrompu");
                 }
 
             }
@@ -445,13 +531,6 @@ namespace TravauxDisciplinaireCFPT
 
         }
 
-        private void rbxTexteExemple_Leave(object sender, EventArgs e)
-        {
-            //UpdateVueTexteUtilisateur();
-            UpdateVueSelection();
-
-        }
-
         private void tsiExporter_Click(object sender, EventArgs e)
         {
             if (sfdSauvegarderListe.ShowDialog() == DialogResult.OK)
@@ -462,7 +541,9 @@ namespace TravauxDisciplinaireCFPT
 
         private void tsiImporter_Click(object sender, EventArgs e)
         {
-
+            if (ofdOuvrirListe.ShowDialog() == DialogResult.OK)
+                this.DeserialiserListeTravaux(ofdOuvrirListe.FileName);
+            UpdateVueList();
         }
 
         private void btnSauvegarderLog_Click(object sender, EventArgs e)
@@ -477,10 +558,9 @@ namespace TravauxDisciplinaireCFPT
         {
             if (EstTravailSelectionne)
             {
-
-                rbxCopieTexte.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
-                // scroll it automatically
-                rbxCopieTexte.ScrollToCaret();
+                UpdateVueTexteUtilisateur();
+                //rbxCopieTexte.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
+                //rbxCopieTexte.ScrollToCaret();
             }
         }
 
@@ -492,5 +572,58 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        private void lsbListeTravaux_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fichiers = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string fichier in fichiers)
+            {
+                try
+                {
+                    TravailDisciplinaire td = new TravailDisciplinaire();
+                    td = td.DeserialiserTravail(fichier);
+                    if (td.VerifierDonneeTravail())
+                    {
+                        ListeTravauxDisciplinaires.Add(td);
+                        UpdateVueList();
+                        MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                }
+            }
+            UpdateVueList();
+        }
+
+        private void lsbListeTravaux_DragEnter(object sender, DragEventArgs e)
+        {
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void lsbListeTravaux_DragOver(object sender, DragEventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            //if (e.Data.GetDataPresent(DataFormats.Text))
+            //    e.Effect = DragDropEffects.Copy;
+            //else
+            //    e.Effect = DragDropEffects.None;
+        }
+
+        private void frmPrincipale_Load(object sender, EventArgs e)
+        {
+            UpdateVueBouton();
+            tbcPrincipale.SelectTab(1);
+
+            TlpInfoTexteExemple = new ToolTip();
+            TlpInfoTexteExemple.ReshowDelay = 1;
+            TlpInfoTexteExemple.SetToolTip(rbxTexteExemple,"Ceci est le texte à recopier. Le texte grisé est celui que vous avez déjà tapé.");
+            TlpInfoTexteExemple.Active = true;
+        }
     }
 }
