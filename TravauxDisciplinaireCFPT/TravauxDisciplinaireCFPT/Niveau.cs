@@ -64,7 +64,7 @@ namespace TravauxDisciplinaireCFPT
         /// Compte le nombre de caratères dans le texte à recopier
         /// </summary>
         /// <returns>Nombre de caratères dans le texte à recopier</returns>
-        public int CompterCaractere()
+        public int CompterCaracteres()
         {
             int nbCaractere = this.TexteARecopier.Count();
             return nbCaractere;
@@ -76,7 +76,7 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Temps du texte</returns>
         public int CalculerMinutesDuTexte()
         {
-            int nbCaracteres = CompterCaractere();
+            int nbCaracteres = CompterCaracteres();
 
             double nbMots = nbCaracteres / 5;
             double nbMinutes = nbMots / 33;

@@ -20,12 +20,9 @@ namespace TravauxDisciplinaireCFPT
         private Personne _professeur;
         private Eleve _eleve;
         private string _cleValidation;
-        private string _hash;
         private int _progression;
         private Niveau _niveau;
-        private DateTime _temps;
-        private DateTime _dateDerniereModification;
-        private bool _valide;
+        private DateTime _dureeEffective;
 
 
 
@@ -58,33 +55,15 @@ namespace TravauxDisciplinaireCFPT
             set { _progression = value; }
         }
 
-        public bool Valide
+        public DateTime DureeEffective
         {
-            get { return _valide; }
-            set { _valide = value; }
-        }
-
-        public string Hash
-        {
-            get { return _hash; }
-            set { _hash = value; }
-        }
-
-        public DateTime Temps
-        {
-            get { return _temps; }
-            set { _temps = value; }
+            get { return _dureeEffective; }
+            set { _dureeEffective = value; }
         }
         public string CleValidation
         {
             get { return _cleValidation; }
             set { _cleValidation = value; }
-        }
-
-        public DateTime DateDerniereModification
-        {
-            get { return _dateDerniereModification; }
-            set { _dateDerniereModification = value; }
         }
 
 
@@ -115,15 +94,14 @@ namespace TravauxDisciplinaireCFPT
             //Pour choisir le texte selon le niveau
 
             this.Progression = 0;
-            this.Valide = true;
-            this.Temps = new DateTime(0);
+            this.DureeEffective = new DateTime(0);
             this.DateDeDebut = DateTime.Now;
 
         }
 
         public string ProgressionToString()
         {
-            return Convert.ToString(this.Progression) + " caractère(s) sur " + Convert.ToString(this.CompterCaractere());
+            return Convert.ToString(this.Progression) + " caractère(s) sur " + Convert.ToString(this.CompterCaracteres());
         }
         /// <summary>
         /// Vérifie si le caractère corresponds à celui qui doit être tapé
@@ -151,7 +129,7 @@ namespace TravauxDisciplinaireCFPT
         public bool EstFini()
         {
             bool Verification = false;
-            if (this.Progression == this.CompterCaractere())
+            if (this.Progression == this.CompterCaracteres())
             {
                 Verification = true;
             }
@@ -162,9 +140,9 @@ namespace TravauxDisciplinaireCFPT
         /// Compte le nombre de caractère du texte
         /// </summary>
         /// <returns>Nombre de caractères</returns>
-        public int CompterCaractere()
+        public int CompterCaracteres()
         {
-            return this.Niveau.CompterCaractere();
+            return this.Niveau.CompterCaracteres();
         }
 
 
@@ -174,8 +152,8 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Pourcentage effectué</returns>
         public int CalculerPoucentageEffectue()
         {
-            double a = Convert.ToDouble(this.Niveau.CompterCaractere());
-            double Pourcentage = Convert.ToDouble(this.Progression) / Convert.ToDouble(this.Niveau.CompterCaractere()) * 100;
+            double a = Convert.ToDouble(this.Niveau.CompterCaracteres());
+            double Pourcentage = Convert.ToDouble(this.Progression) / Convert.ToDouble(this.Niveau.CompterCaracteres()) * 100;
             return (int)Pourcentage;
         }
 
@@ -193,9 +171,12 @@ namespace TravauxDisciplinaireCFPT
             return TexteDejaCopie;
         }
 
+        /// <summary>
+        /// Ajoute une seconde à la durée effective
+        /// </summary>
         public void AvancerTemps()
         {
-            this.Temps = this.Temps.AddSeconds(1);
+            this.DureeEffective = this.DureeEffective.AddSeconds(1);
         }
 
 
@@ -208,7 +189,7 @@ namespace TravauxDisciplinaireCFPT
         public string MinutesEtSecondesToString()
         {
             long UneSecondeEnTicks = 10000000;
-            long ticks = this.Temps.Ticks;
+            long ticks = this.DureeEffective.Ticks;
             int minute = 0;
             int seconde = 0;
             string minutesEtSecondes = "";
@@ -243,7 +224,7 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
         public override string ToString()
         {
-            string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.Temps) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier;
+            string Travail = this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.DureeEffective) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier;
             return Travail;
         }
 
@@ -253,7 +234,6 @@ namespace TravauxDisciplinaireCFPT
         /// <param name="paramChemin">Chemin du répértoire</param>
         public void SerialiserTravail(string paramChemin)
         {
-            this.DateDerniereModification = DateTime.Now;
             this.CryptageTravail();
             FileStream stream = File.Create(paramChemin);
             var formatter = new BinaryFormatter();

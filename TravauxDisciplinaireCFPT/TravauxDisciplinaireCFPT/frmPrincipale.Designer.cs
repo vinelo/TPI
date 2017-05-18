@@ -68,6 +68,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbpGestion = new System.Windows.Forms.TabPage();
+            this.btnSauvegarderLog = new System.Windows.Forms.Button();
             this.btnOuvrir = new System.Windows.Forms.Button();
             this.btnNouveau = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
@@ -78,7 +79,6 @@
             this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
             this.sfdSauvegarderListe = new System.Windows.Forms.SaveFileDialog();
             this.sfdSauvegarderLog = new System.Windows.Forms.SaveFileDialog();
-            this.btnSauvegarderLog = new System.Windows.Forms.Button();
             this.mspMenu.SuspendLayout();
             this.tbcPrincipale.SuspendLayout();
             this.tbpTravail.SuspendLayout();
@@ -239,6 +239,7 @@
             // 
             // rbxCopieTexte
             // 
+            this.rbxCopieTexte.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rbxCopieTexte.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbxCopieTexte.Location = new System.Drawing.Point(7, 24);
             this.rbxCopieTexte.Name = "rbxCopieTexte";
@@ -246,7 +247,9 @@
             this.rbxCopieTexte.Size = new System.Drawing.Size(885, 117);
             this.rbxCopieTexte.TabIndex = 0;
             this.rbxCopieTexte.Text = "";
+            this.rbxCopieTexte.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbxCopieTexte_MouseClick);
             this.rbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
+            this.rbxCopieTexte.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbxCopieTexte_KeyDown);
             this.rbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
             // 
             // groupBox1
@@ -263,6 +266,7 @@
             // rbxTexteExemple
             // 
             this.rbxTexteExemple.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rbxTexteExemple.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rbxTexteExemple.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbxTexteExemple.Location = new System.Drawing.Point(7, 24);
             this.rbxTexteExemple.Name = "rbxTexteExemple";
@@ -473,6 +477,17 @@
             this.tbpGestion.Text = "Gestion de travaux";
             this.tbpGestion.UseVisualStyleBackColor = true;
             // 
+            // btnSauvegarderLog
+            // 
+            this.btnSauvegarderLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSauvegarderLog.Location = new System.Drawing.Point(744, 397);
+            this.btnSauvegarderLog.Name = "btnSauvegarderLog";
+            this.btnSauvegarderLog.Size = new System.Drawing.Size(160, 55);
+            this.btnSauvegarderLog.TabIndex = 5;
+            this.btnSauvegarderLog.Text = "Journalisation";
+            this.btnSauvegarderLog.UseVisualStyleBackColor = true;
+            this.btnSauvegarderLog.Click += new System.EventHandler(this.btnSauvegarderLog_Click);
+            // 
             // btnOuvrir
             // 
             this.btnOuvrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -556,17 +571,6 @@
             // 
             this.sfdSauvegarderLog.FileName = "Log";
             this.sfdSauvegarderLog.Filter = "Fichier Texte |*.txt";
-            // 
-            // btnSauvegarderLog
-            // 
-            this.btnSauvegarderLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSauvegarderLog.Location = new System.Drawing.Point(744, 397);
-            this.btnSauvegarderLog.Name = "btnSauvegarderLog";
-            this.btnSauvegarderLog.Size = new System.Drawing.Size(160, 55);
-            this.btnSauvegarderLog.TabIndex = 5;
-            this.btnSauvegarderLog.Text = "Journalisation";
-            this.btnSauvegarderLog.UseVisualStyleBackColor = true;
-            this.btnSauvegarderLog.Click += new System.EventHandler(this.btnSauvegarderLog_Click);
             // 
             // frmPrincipale
             // 
