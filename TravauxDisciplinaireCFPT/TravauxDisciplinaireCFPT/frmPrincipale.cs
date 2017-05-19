@@ -25,7 +25,11 @@ namespace TravauxDisciplinaireCFPT
         private bool _estTravailSelectionne;
 
         private ToolTip _tlpInfoTexteExemple;
-
+        private ToolTip _tlpInfoTexteUtilisateur;
+        private ToolTip _tlpInfoProgression;
+        private ToolTip _tlpInfoTravail;
+        private ToolTip _tlpInfoListe;
+        
 
         //Propriétés...
 
@@ -100,6 +104,27 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        public ToolTip TlpInfoTexteUtilisateur
+        {
+            get { return _tlpInfoTexteUtilisateur; }
+            set { _tlpInfoTexteUtilisateur = value; }
+        }
+        public ToolTip TlpInfoProgression
+        {
+            get { return _tlpInfoProgression; }
+            set { _tlpInfoProgression = value; }
+        }
+        public ToolTip TlpInfoTravail
+        {
+            get { return _tlpInfoTravail; }
+            set { _tlpInfoTravail = value; }
+        }
+        public ToolTip TlpInfoListe
+        {
+            get { return _tlpInfoListe; }
+            set { _tlpInfoListe = value; }
+        }
+
 
         //Constructeurs...
 
@@ -115,6 +140,15 @@ namespace TravauxDisciplinaireCFPT
         //Méthodes...
 
         //__________________________UpdateVue__________________________\\
+        public void UpdateVueInfosBulles()
+        {
+            TlpInfoListe.Active = !TlpInfoListe.Active;
+            TlpInfoProgression.Active = !TlpInfoProgression.Active;
+            TlpInfoTexteExemple.Active = !TlpInfoTexteExemple.Active;
+            TlpInfoTexteUtilisateur.Active = !TlpInfoTexteUtilisateur.Active;
+            TlpInfoTravail.Active = !TlpInfoTravail.Active;
+
+        }
         public void UpdateVueAucunTravail()
         {
             rbxTexteExemple.Text = "";
@@ -211,7 +245,10 @@ namespace TravauxDisciplinaireCFPT
             return EstIndexSelectionne;
         }
 
-
+        /// <summary>
+        /// Sauvegarde la liste de travaux sur le chemin spécifier
+        /// </summary>
+        /// <param name="paramChemin">Chemin ou l'on veut enregistrer la liste</param>
         public void SerialiserListeTravaux(string paramChemin)
         {
             FileStream stream = File.Create(paramChemin);
@@ -541,6 +578,7 @@ namespace TravauxDisciplinaireCFPT
 
         private void tsiImporter_Click(object sender, EventArgs e)
         {
+            //Importe la liste choisie
             if (ofdOuvrirListe.ShowDialog() == DialogResult.OK)
                 this.DeserialiserListeTravaux(ofdOuvrirListe.FileName);
             UpdateVueList();
@@ -548,32 +586,36 @@ namespace TravauxDisciplinaireCFPT
 
         private void btnSauvegarderLog_Click(object sender, EventArgs e)
         {
+            //Créer un fichier Log
             if (sfdSauvegarderLog.ShowDialog() == DialogResult.OK)
             {
                 this.JournalisationListeTravaux(sfdSauvegarderLog.FileName);
             }
+            MessageBox.Show("Zer");
         }
 
         private void rbxCopieTexte_MouseClick(object sender, MouseEventArgs e)
         {
+            //
             if (EstTravailSelectionne)
             {
                 UpdateVueTexteUtilisateur();
-                //rbxCopieTexte.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
-                //rbxCopieTexte.ScrollToCaret();
             }
         }
 
         private void rbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
         {
+            //Empêche l'utilisateur de se déplacer dans la forme
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
             {
                 e.Handled = true;
             }
         }
 
+        //Événement Drop
         private void lsbListeTravaux_DragDrop(object sender, DragEventArgs e)
         {
+            //Ajoute un à un les fichier si ceux-ci sont compatible
             string[] fichiers = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string fichier in fichiers)
             {
@@ -606,24 +648,97 @@ namespace TravauxDisciplinaireCFPT
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
-        private void lsbListeTravaux_DragOver(object sender, DragEventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            //if (e.Data.GetDataPresent(DataFormats.Text))
-            //    e.Effect = DragDropEffects.Copy;
-            //else
-            //    e.Effect = DragDropEffects.None;
-        }
-
         private void frmPrincipale_Load(object sender, EventArgs e)
         {
-            UpdateVueBouton();
             tbcPrincipale.SelectTab(1);
+            try
+            {
+                //si le chemin du fichier est passé en argument
+                if (Environment.GetCommandLineArgs().Length == 2)
+                {
+                    MessageBox.Show("Chargement du fichier: " + Environment.GetCommandLineArgs()[1]);
+                    string fileContents;
+                    //lecture du contenu du fichier
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(Environment.GetCommandLineArgs()[1]))
+                    {
+                        fileContents = sr.ReadToEnd();
+                    }
+                    //on met le contenu du fichier dans la textbox
+                    rbxCopieTexte.Text = fileContents;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement: " + ex.Message);
+            }
+            MessageBox.Show("zer");
+            rbxCopieTexte.Text = "Zer";
+            //}
+            //rbxCopieTexte.Text = Environment.GetCommandLineArgs()[1];
 
+
+            string contenu;
             TlpInfoTexteExemple = new ToolTip();
+            TlpInfoTexteExemple.IsBalloon = true;
             TlpInfoTexteExemple.ReshowDelay = 1;
-            TlpInfoTexteExemple.SetToolTip(rbxTexteExemple,"Ceci est le texte à recopier. Le texte grisé est celui que vous avez déjà tapé.");
+            TlpInfoTexteExemple.SetToolTip(rbxTexteExemple, "C'est ici que s'affiche le texte à recopier.");
+            TlpInfoTexteExemple.ToolTipIcon = ToolTipIcon.Info;
+            TlpInfoTexteExemple.ToolTipTitle = "Texte à recopier";
             TlpInfoTexteExemple.Active = true;
+
+            TlpInfoTexteUtilisateur = new ToolTip();
+            TlpInfoTexteUtilisateur.IsBalloon = true;
+            TlpInfoTexteUtilisateur.ReshowDelay = 1;
+            TlpInfoTexteUtilisateur.SetToolTip(rbxCopieTexte, "C'est ici que vous devez recopier le texte.");
+            TlpInfoTexteUtilisateur.ToolTipIcon = ToolTipIcon.Info;
+            TlpInfoTexteUtilisateur.ToolTipTitle = "Texte tapé par l'utilisateur";
+            TlpInfoTexteUtilisateur.Active = true;
+
+            TlpInfoTravail = new ToolTip();
+            TlpInfoTravail.IsBalloon = true;
+            TlpInfoTravail.ReshowDelay = 1;
+            TlpInfoTravail.SetToolTip(gbxDetails, "C'est ici que s'affichera les informations dit \"statiques\"sur le travail.\r\nOn peut y voir les informations sur l'élève, le professeur et le texte ");
+            TlpInfoTravail.ToolTipIcon = ToolTipIcon.Info;
+            TlpInfoTravail.ToolTipTitle = "Informations concernant le travail";
+            TlpInfoTravail.Active = true;
+
+            TlpInfoProgression = new ToolTip();
+            TlpInfoProgression.IsBalloon = true;
+            TlpInfoProgression.ReshowDelay = 1;
+            TlpInfoProgression.SetToolTip(gbxProgression, "C'est ici que s'affichera le \"suivi\" de la progression de votre travail. \r\nOn peut y voir la durée effective ou l'avancé du travail.");
+            TlpInfoProgression.ToolTipIcon = ToolTipIcon.Info;
+            TlpInfoProgression.ToolTipTitle = "Informations concernant la progression du travail";
+            TlpInfoProgression.Active = true;
+
+            TlpInfoListe = new ToolTip();
+            TlpInfoListe.IsBalloon = true;
+            TlpInfoListe.ReshowDelay = 1;
+            contenu = "C'est ici que les travaux que vous créez ou que vous ajoutez s'affiche. Sur cette liste vous pouvez :\r\n";
+            contenu += " - Créer un nouveau travail en appuyant sur le bouton \"Nouveau\" \r\n";
+            contenu += " - Ajouter un travail en appuyant sur le bouton \"Ajouter\" ou en glissant le fichier dans la liste \r\n";
+            contenu += " - Enlever un travail de la liste en le sélectionnant avant de cliquer sur le bouton \"Supprimer\" \r\n";
+            contenu += " - Reprendre le travail la où il a été laissé la dernière fois en le sélectionnant avant de cliquer sur le bouton \"Reprendre\" \r\n";
+            contenu += " - Créer un fichier contenant la journalisation de la liste en cliquant sur le bouton \"Journaliser\" \r\n";
+            TlpInfoListe.SetToolTip(lsbListeTravaux, contenu);
+            TlpInfoListe.ToolTipIcon = ToolTipIcon.Info;
+            TlpInfoListe.ToolTipTitle = "Liste des travaux ajoutés ou créés";
+            TlpInfoListe.AutomaticDelay = 1500;
+            TlpInfoListe.Active = true;
+        }
+
+        private void tsiDesactiverInfosBulles_Click(object sender, EventArgs e)
+        {
+            UpdateVueInfosBulles();
+            if (TlpInfoTravail.Active == true)
+                tsiDesactiverInfosBulles.Text = "Désactiver les infosbulles";
+            else
+                tsiDesactiverInfosBulles.Text = "Activer les infosbulles";
+        }
+
+        private void tsiAPropos_Click(object sender, EventArgs e)
+        {
+            frmAPropos APropos = new frmAPropos();
+            APropos.ShowDialog();
         }
     }
 }

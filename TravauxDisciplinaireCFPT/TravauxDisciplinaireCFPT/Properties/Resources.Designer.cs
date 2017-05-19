@@ -61,7 +61,18 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Texte de niveau 1.
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon icon_project_management {
+            get {
+                object obj = ResourceManager.GetObject("icon_project_management", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le petit poucet
+        ///Un bûcheron et sa femme n&apos;ont plus de quoi nourrir leurs sept garçons. Un soir, alors que les enfants dorment, les parents se résignent, la mort dans l&apos;âme, à les perdre dans la forêt. Heureusement, le plus petit de la fratrie, âgé de sept ans, surnommé Petit Poucet en raison de sa petite taille, espionne la conversation. Prévoyant, il se munit de petits cailloux blancs qu&apos;il laissera tomber un à un derrière afin que lui et ses frères puissent retrouver leur chemin. Le lendemain, le père me [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string TexteNiveau1 {
             get {
@@ -70,7 +81,9 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Texte de niveau 2.
+        ///   Recherche une chaîne localisée semblable à Guillaume Tell
+        ///Le récit traditionnel
+        ///Selon le Livre blanc de Sarnen (1474), « le Tall »1 est un homme honnête qui avait juré avec Stauffacher et d&apos;autres partisans de résister aux seigneurs. À cette époque, sous l&apos;empereur Albert Ier de Habsbourg, les baillis établis par son prédécesseur Rodolphe Ier de Habsbourg se livrent à des exactions. Le 25 juillet 13072, l&apos;un de ces baillis, Hermann Gessler, fait ériger un poteau sur la place des Tilleuls à Altdorf et y accroche son chapeau, obligeant tous les habi [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string TexteNiveau2 {
             get {
@@ -79,7 +92,10 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Texte de niveau 3.
+        ///   Recherche une chaîne localisée semblable à Histoire de la suisse
+        ///Période glacière et âge de pierre
+        ///Glacier de Morteratsch, Grisons, Suisse.
+        ///Il y a à peu près deux millions d&apos;années, les températures ont coulé et l&apos;Europe a été couverte par des glaciers presque completément. A Lucerne, en Suisse centrale, l&apos;épaisseur de la glace a atteint autant qu&apos;à peu près 1000 m. Quand la glace a fondu et s&apos;est retirée lentement il y a à peu près 30&apos;000 années, les animaux et les hommes sont arrivés en Europe. Mais le centre de développement culturel est resté [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string TexteNiveau3 {
             get {
@@ -88,7 +104,9 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Texte de niveau 4.
+        ///   Recherche une chaîne localisée semblable à Charlemagne
+        ///Introduction
+        ///Avec la bénédiction du pape, les maires du palais ont usurpé le trône aux derniers Mérovingiens, « les rois fainéants ». Pépin le Bref devenu roi des Francs en 751, parvient à restaurer l&apos;unité du royaume. Avec la reine Bertrade « Berthe au grand pied », la fille du comte de Laon, un puissant seigneur de l&apos;époque, Pépin a deux fils : Charles et Carloman. Très vite l&apos;aîné Charles s&apos;impose et annonce son style, il se fera appeler « le Grand », et deviendra l&apos;un des plus grand souver [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string TexteNiveau4 {
             get {
@@ -97,7 +115,9 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Texte de niveau 5.
+        ///   Recherche une chaîne localisée semblable à Histoire de Genève
+        ///Introduction
+        ///L&apos;histoire de Genève se déroule sur une période de deux mille ans. Mentionnée pour la première fois dans les Commentaires sur la Guerre des Gaules de Jules César, la cité estpassée sous la domination romaine, puis des Burgondes et des Francs avant de devenir un évêché indépendant pendant le Moyen Âge. Avec l&apos;arrivée de Jean Calvin, la ville adopte la Réforme protestante et devient un important centre de diffusion du calvinisme à l&apos;échelle européenne. Son tissu économique se [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string TexteNiveau5 {
             get {

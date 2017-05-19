@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("TravauxDisciplinaireCFPT")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Travaux Disciplinaire au CFPT")]
+[assembly: AssemblyDescription("Application servant à infliger un travail disciplinaire dans le cadre du CFPT")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TravauxDisciplinaireCFPT")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("CFPT")]
+[assembly: AssemblyProduct("Travaux Disciplinaire au CFPT")]
+[assembly: AssemblyCopyright("Copyright © CFPT  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
