@@ -15,7 +15,7 @@ namespace TravauxDisciplinaireCFPT
 
         const string AVERTISSEMENT = @"/!\ ATTENTION /!\ Ce fichier est protégé, en cas de modifications, ce fichier sera affiché comme illisible ou corrompu lorsqu'il sera rechargé par le programme Travaux Disciplinaire au CFPT /!\ ATTENTION /!\";
         //Champs..
-
+        private string _dernierEmplacement;
         private DateTime _dateDeDebut;
         private Personne _professeur;
         private Eleve _eleve;
@@ -66,13 +66,26 @@ namespace TravauxDisciplinaireCFPT
             set { _cleValidation = value; }
         }
 
+        public string DernierEmplacement
+        {
+            get
+            {
+                return _dernierEmplacement;
+            }
+
+            set
+            {
+                _dernierEmplacement = value;
+            }
+        }
+
 
         //Constructeurs...
 
         /// <summary>
         /// Créer un travail disciplinaire avec des valeurs par défaut
         /// </summary>
-        public TravailDisciplinaire() : this("NomProfesseur", "PrenomProfesseur", "NomEleve", "PrenomEleve", "ClasseEleve", new Niveau()) { }
+        public TravailDisciplinaire() : this(new Eleve("NomEleve", "PrenomEleve", "ClasseEleve"),new Personne("NomProfesseur", "PrenomProfesseur"), new Niveau()) { }
 
 
         /// <summary>
@@ -84,11 +97,11 @@ namespace TravauxDisciplinaireCFPT
         /// <param name="paramPrenomEleve">Prenom de l'élève</param>
         /// <param name="paramClasse">Classe de l'élève</param>
         /// <param name="paramNiveau">Niveau du travail</param>
-        public TravailDisciplinaire(string paramNomProf, string paramPrenomProf, string paramNomEleve, string paramPrenomEleve, string paramClasse, Niveau paramNiveau)
+        public TravailDisciplinaire(Eleve paramEleve, Personne paramProfesseur, Niveau paramNiveau)
         {
             //Initialise les données
-            this.Eleve = new Eleve(paramNomEleve, paramPrenomEleve, paramClasse);
-            this.Professeur = new Personne(paramNomProf, paramPrenomProf);
+            this.Eleve = paramEleve;
+            this.Professeur = paramProfesseur;
             this.Niveau = paramNiveau;
 
             //Pour choisir le texte selon le niveau
@@ -249,6 +262,7 @@ namespace TravauxDisciplinaireCFPT
         public void SerialiserTravail(string paramChemin)
         {
             this.CryptageTravail();
+            this.DernierEmplacement = paramChemin;
             FileStream stream = File.Create(paramChemin);
             var formatter = new BinaryFormatter();
             formatter.Serialize(stream, this);
@@ -267,6 +281,7 @@ namespace TravauxDisciplinaireCFPT
             try
             {
                 TravailDisciplinaire td = (TravailDisciplinaire)formatter.Deserialize(stream);
+               
                 //td.VerifierCleValidation();
                 return td;
 

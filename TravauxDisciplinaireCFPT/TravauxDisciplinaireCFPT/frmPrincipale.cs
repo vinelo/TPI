@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,12 @@ namespace TravauxDisciplinaireCFPT
         private ToolTip _tlpInfoProgression;
         private ToolTip _tlpInfoTravail;
         private ToolTip _tlpInfoListe;
-        
+        private ToolTip _tlpBoutonNouveau;
+        private ToolTip _tlpBoutonAjouter;
+        private ToolTip _tlpBoutonSupprimer;
+        private ToolTip _tlpBoutonReprendre;
+        private ToolTip _tlpBoutonJournaliser;
+
 
         //Propriétés...
 
@@ -125,6 +131,71 @@ namespace TravauxDisciplinaireCFPT
             set { _tlpInfoListe = value; }
         }
 
+        public ToolTip TlpBoutonNouveau
+        {
+            get
+            {
+                return _tlpBoutonNouveau;
+            }
+
+            set
+            {
+                _tlpBoutonNouveau = value;
+            }
+        }
+
+        public ToolTip TlpBoutonAjouter
+        {
+            get
+            {
+                return _tlpBoutonAjouter;
+            }
+
+            set
+            {
+                _tlpBoutonAjouter = value;
+            }
+        }
+
+        public ToolTip TlpBoutonSupprimer
+        {
+            get
+            {
+                return _tlpBoutonSupprimer;
+            }
+
+            set
+            {
+                _tlpBoutonSupprimer = value;
+            }
+        }
+
+        public ToolTip TlpBoutonReprendre
+        {
+            get
+            {
+                return _tlpBoutonReprendre;
+            }
+
+            set
+            {
+                _tlpBoutonReprendre = value;
+            }
+        }
+
+        public ToolTip TlpBoutonJournaliser
+        {
+            get
+            {
+                return _tlpBoutonJournaliser;
+            }
+
+            set
+            {
+                _tlpBoutonJournaliser = value;
+            }
+        }
+
 
         //Constructeurs...
 
@@ -139,7 +210,26 @@ namespace TravauxDisciplinaireCFPT
 
         //Méthodes...
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SelectionnerTravail()
+        {
+            this.EstTravailSelectionne = true;
+            //Sélectionne le travail choisi par l'utilisateur
+            this.IndexTravailSelectionne = lsbListeTravaux.SelectedIndex;
+            tbcPrincipale.SelectTab(0);
+
+            UpdateVueAfficherTextes();
+            UpdateVueBouton();
+            UpdateVueTexteUtilisateur();
+            UpdateVueTexteExemple();
+            UpdateVueProgression();
+        }
         //__________________________UpdateVue__________________________\\
+        /// <summary>
+        /// Cache ou affiche les infosbulles
+        /// </summary>
         public void UpdateVueInfosBulles()
         {
             TlpInfoListe.Active = !TlpInfoListe.Active;
@@ -149,6 +239,9 @@ namespace TravauxDisciplinaireCFPT
             TlpInfoTravail.Active = !TlpInfoTravail.Active;
 
         }
+        /// <summary>
+        /// Éfface les données affiché dans l'onglet travail
+        /// </summary>
         public void UpdateVueAucunTravail()
         {
             rbxTexteExemple.Text = "";
@@ -246,55 +339,6 @@ namespace TravauxDisciplinaireCFPT
         }
 
         /// <summary>
-        /// Sauvegarde la liste de travaux sur le chemin spécifier
-        /// </summary>
-        /// <param name="paramChemin">Chemin ou l'on veut enregistrer la liste</param>
-        public void SerialiserListeTravaux(string paramChemin)
-        {
-            FileStream stream = File.Create(paramChemin);
-            var formatter = new BinaryFormatter();
-            foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
-            {
-                td.CryptageTravail();
-            }
-            formatter.Serialize(stream, this.ListeTravauxDisciplinaires);
-            stream.Close();
-        }
-
-        public void DeserialiserListeTravaux(string paramFichier)
-        {
-            var formatter = new BinaryFormatter();
-            FileStream stream = File.OpenRead(paramFichier);
-
-            try
-            {
-                List<TravailDisciplinaire> listeTravaux = (List<TravailDisciplinaire>)formatter.Deserialize(stream);
-                bool Verification = true;
-                foreach (TravailDisciplinaire td in listeTravaux)
-                {
-                    if (!td.VerifierDonneeTravail())
-                    {
-                        Verification = false;
-                    }
-                }
-                if (Verification)
-                    this.ListeTravauxDisciplinaires = listeTravaux;
-                else
-                    MessageBox.Show("Ce fichier est incompatible ou corrompu");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ce fichier est incompatible ou corrompu");
-
-            }
-            finally
-            {
-                stream.Close();
-            }
-
-        }
-
-        /// <summary>
         /// Créer un fichier log
         /// </summary>
         /// <param name="paramChemin"></param>
@@ -345,15 +389,20 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        /// <summary>
+        /// Dessine dans la liste de travaux les informations de chaque travail
+        /// </summary>
         private void lsbListeTravaux_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
             // Determine la couleur des stylos que l'on va utiliser
             Brush Fond = Brushes.White;
-            Brush FondSelectionne = Brushes.LightGray;
+            Brush FondSelectionne = Brushes.Beige;
             Brush Stylo = Brushes.Black;
             Brush Vert = Brushes.Green;
             Brush Gris = Brushes.Gray;
+            Brush Bleu = Brushes.DarkBlue;
+            Font Police = new Font("Arial", 10, FontStyle.Italic);
 
             //remplis l'arrière plan d'une couleur différente en fonction de si c'est l'item sélectionné
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -364,41 +413,50 @@ namespace TravauxDisciplinaireCFPT
             //Pour chaque item de la liste dessine l'intérieur
             if (e.Index >= 0)
             {
+                string CompteCaractere = ListeTravauxDisciplinaires[e.Index].ProgressionToString();
+
                 //Affichage professeur
                 e.Graphics.DrawString("Professeur :",
-                   e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 10);
+                   e.Font, Stylo, e.Bounds.X + 19, e.Bounds.Y + 10);
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
-                   e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 10);
+                   Police, Bleu, e.Bounds.X + 105, e.Bounds.Y + 11);
                 //Affichage élève
                 e.Graphics.DrawString("Élève :",
-                   e.Font, Stylo, e.Bounds.X + 35, e.Bounds.Y + 30);
+                   e.Font, Stylo, e.Bounds.X + 54, e.Bounds.Y + 40);
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
-                   e.Font, Stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
-                //Affichage du temps passé sur le travail
-                e.Graphics.DrawString("Temps effectif du travail :",
-                   e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 50);
-                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].MinutesEtSecondesToString(),
-                   e.Font, Stylo, e.Bounds.X + 180, e.Bounds.Y + 50);
+                   Police, Bleu, e.Bounds.X + 105, e.Bounds.Y + 41);
                 //Date de début
                 e.Graphics.DrawString("Date de début :",
-                   e.Font, Stylo, e.Bounds.X + 300, e.Bounds.Y + 50);
+                   e.Font, Stylo, e.Bounds.X, e.Bounds.Y + 70);
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].DateDeDebut.ToString("dd/MM/yyyy"),
-                   e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 50);
+                   Police, Bleu, e.Bounds.X + 105, e.Bounds.Y + 71);
+
+                //Affichage du temps passé sur le travail
+                e.Graphics.DrawString("Temps effectif du travail :",
+                   e.Font, Stylo, e.Bounds.X + 300, e.Bounds.Y + 70);
+                e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].MinutesEtSecondesToString(),
+                   Police, Bleu, e.Bounds.X + 480, e.Bounds.Y + 71);
                 //Affichage Niveau
                 e.Graphics.DrawString("Niveau :",
-                   e.Font, Stylo, e.Bounds.X + 345, e.Bounds.Y + 10);
+                   e.Font, Stylo, e.Bounds.X + 410, e.Bounds.Y + 10);
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NiveauToString(),
-                   e.Font, Stylo, e.Bounds.X + 415, e.Bounds.Y + 10);
+                   Police, Bleu, e.Bounds.X + 480, e.Bounds.Y + 11);
 
                 //Barre de progression
 
                 e.Graphics.DrawString("Progression :",
-                   e.Font, Stylo, e.Bounds.X + 310, e.Bounds.Y + 30);
-                Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 418, e.Bounds.Y + 30, 304, 16);
+                   e.Font, Stylo, e.Bounds.X + 377, e.Bounds.Y + 35);
+                Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 480, e.Bounds.Y + 36, 304, 16);
                 e.Graphics.FillRectangle(Gris, BarreProgressionGris);
 
-                Rectangle BarreProgressionVert = new Rectangle(e.Bounds.X + 420, e.Bounds.Y + 34, this.ListeTravauxDisciplinaires[e.Index].CalculerPoucentageEffectue() * 3, 10);
+                Rectangle BarreProgressionVert = new Rectangle(e.Bounds.X + 482, e.Bounds.Y + 39, this.ListeTravauxDisciplinaires[e.Index].CalculerPoucentageEffectue() * 3, 10);
                 e.Graphics.FillRectangle(Vert, BarreProgressionVert);
+                SizeF LargeurString = new SizeF();
+                LargeurString = e.Graphics.MeasureString(CompteCaractere, new Font("Arial", 16), 400);
+                e.Graphics.DrawString(CompteCaractere,
+                Police, Bleu, e.Bounds.X + 550, e.Bounds.Y + 55);
+
+
                 //Temps passé sur le travail
                 //e.Graphics.DrawString("Élève :",
                 //   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
@@ -412,19 +470,10 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+
         private void btnEditer_Click(object sender, EventArgs e)
         {
-            this.EstTravailSelectionne = true;
-            //Sélectionne le travail choisi par l'utilisateur
-            this.IndexTravailSelectionne = lsbListeTravaux.SelectedIndex;
-            tbcPrincipale.SelectTab(0);
-
-            UpdateVueAfficherTextes();
-            UpdateVueBouton();
-            UpdateVueTexteUtilisateur();
-            UpdateVueTexteExemple();
-            UpdateVueProgression();
-
+            this.SelectionnerTravail();
         }
 
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
@@ -513,10 +562,26 @@ namespace TravauxDisciplinaireCFPT
 
         private void tsiEnregistrer_Click(object sender, EventArgs e)
         {
-            //Ouvre l'onglet d'enregistrement et enregistre le travail à l'emplacement demandé par l'utilisateur
-            if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
+            int TravailASauvegarder = -1;
+            if (tbcPrincipale.SelectedIndex == 0)
             {
-                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
+                if (EstIndexSelectionne())
+                    TravailASauvegarder = IndexTravailSelectionne;
+                //Ouvre l'onglet d'enregistrement et enregistre le travail à l'emplacement demandé par l'utilisateur
+            }
+            else
+            {
+                if (lsbListeTravaux.SelectedIndex != -1)
+                    TravailASauvegarder = lsbListeTravaux.SelectedIndex;
+            }
+            if (TravailASauvegarder != -1)
+            {
+                if (this.ListeTravauxDisciplinaires[TravailASauvegarder].DernierEmplacement != null && File.Exists(this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DernierEmplacement))
+                    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DernierEmplacement);
+                else if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
+                    this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
+                else
+                    MessageBox.Show("Veuillez choisir un travail à enregistrer.", "Enregistrer un travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -536,16 +601,16 @@ namespace TravauxDisciplinaireCFPT
                         {
                             ListeTravauxDisciplinaires.Add(td);
                             UpdateVueList();
-                            MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.");
+                            MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                            MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
@@ -566,22 +631,6 @@ namespace TravauxDisciplinaireCFPT
                 NbCaractereTapeDepuisDernierScroll = 0;
             }
 
-        }
-
-        private void tsiExporter_Click(object sender, EventArgs e)
-        {
-            if (sfdSauvegarderListe.ShowDialog() == DialogResult.OK)
-            {
-                this.SerialiserListeTravaux(sfdSauvegarderListe.FileName);
-            }
-        }
-
-        private void tsiImporter_Click(object sender, EventArgs e)
-        {
-            //Importe la liste choisie
-            if (ofdOuvrirListe.ShowDialog() == DialogResult.OK)
-                this.DeserialiserListeTravaux(ofdOuvrirListe.FileName);
-            UpdateVueList();
         }
 
         private void btnSauvegarderLog_Click(object sender, EventArgs e)
@@ -627,16 +676,16 @@ namespace TravauxDisciplinaireCFPT
                     {
                         ListeTravauxDisciplinaires.Add(td);
                         UpdateVueList();
-                        MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.");
+                        MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.","État du travail",MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                        MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu");
+                    MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
             UpdateVueList();
@@ -651,33 +700,50 @@ namespace TravauxDisciplinaireCFPT
         private void frmPrincipale_Load(object sender, EventArgs e)
         {
             tbcPrincipale.SelectTab(1);
+            //try
+            //{
+            //    //si le chemin du fichier est passé en argument
+            //    if (Environment.GetCommandLineArgs().Length == 2)
+            //    {
+            //        MessageBox.Show("Chargement du fichier: " + Environment.GetCommandLineArgs()[1]);
+            //        string fileContents;
+            //        //lecture du contenu du fichier
+            //        using (System.IO.StreamReader sr = new System.IO.StreamReader(Environment.GetCommandLineArgs()[1]))
+            //        {
+            //            fileContents = sr.ReadToEnd();
+            //        }
+            //        //on met le contenu du fichier dans la textbox
+            //        rbxCopieTexte.Text = fileContents;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Erreur lors du chargement: " + ex.Message);
+            //}
+            //Si il y a une erreur au niveau de la lecture du fichier alors celui-ci est incompatible ou corrompu
             try
             {
-                //si le chemin du fichier est passé en argument
-                if (Environment.GetCommandLineArgs().Length == 2)
+                TravailDisciplinaire td = new TravailDisciplinaire();
+                td = td.DeserialiserTravail(Environment.GetCommandLineArgs()[1]);
+                if (td.VerifierDonneeTravail())
                 {
-                    MessageBox.Show("Chargement du fichier: " + Environment.GetCommandLineArgs()[1]);
-                    string fileContents;
-                    //lecture du contenu du fichier
-                    using (System.IO.StreamReader sr = new System.IO.StreamReader(Environment.GetCommandLineArgs()[1]))
-                    {
-                        fileContents = sr.ReadToEnd();
-                    }
-                    //on met le contenu du fichier dans la textbox
-                    rbxCopieTexte.Text = fileContents;
+                    ListeTravauxDisciplinaires.Add(td);
+                    UpdateVueList();
+                    MessageBox.Show("Le travail : \"" + Environment.GetCommandLineArgs()[1] + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Le fichier : \"" + Environment.GetCommandLineArgs()[1] + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Erreur lors du chargement: " + ex.Message);
+                MessageBox.Show("Le fichier : \"" + fichier + "\" fichier est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            MessageBox.Show("zer");
-            rbxCopieTexte.Text = "Zer";
-            //}
-            //rbxCopieTexte.Text = Environment.GetCommandLineArgs()[1];
+            UpdateVueBouton();
 
+            //Création des infosbulles
 
-            string contenu;
             TlpInfoTexteExemple = new ToolTip();
             TlpInfoTexteExemple.IsBalloon = true;
             TlpInfoTexteExemple.ReshowDelay = 1;
@@ -685,6 +751,46 @@ namespace TravauxDisciplinaireCFPT
             TlpInfoTexteExemple.ToolTipIcon = ToolTipIcon.Info;
             TlpInfoTexteExemple.ToolTipTitle = "Texte à recopier";
             TlpInfoTexteExemple.Active = true;
+
+            TlpBoutonAjouter = new ToolTip();
+            TlpBoutonAjouter.IsBalloon = true;
+            TlpBoutonAjouter.ReshowDelay = 1;
+            TlpBoutonAjouter.SetToolTip(btnOuvrir, "Cliquez sur ce bouton pour ajouter un travail disciplinaire déjà créer à la liste.");
+            TlpBoutonAjouter.ToolTipIcon = ToolTipIcon.Info;
+            TlpBoutonAjouter.ToolTipTitle = "Ajouter un travail disciplinaire";
+            TlpBoutonAjouter.Active = true;
+
+            TlpBoutonJournaliser = new ToolTip();
+            TlpBoutonJournaliser.IsBalloon = true;
+            TlpBoutonJournaliser.ReshowDelay = 1;
+            TlpBoutonJournaliser.SetToolTip(btnSauvegarderLog, "Enregistre sous forme de fichier texte les données importante de la liste de travaux disciplinaires.");
+            TlpBoutonJournaliser.ToolTipIcon = ToolTipIcon.Info;
+            TlpBoutonJournaliser.ToolTipTitle = "Journalisation de la liste";
+            TlpBoutonJournaliser.Active = true;
+
+            TlpBoutonNouveau = new ToolTip();
+            TlpBoutonNouveau.IsBalloon = true;
+            TlpBoutonNouveau.ReshowDelay = 1;
+            TlpBoutonNouveau.SetToolTip(btnNouveau, "Enregistre sous forme de fichier texte les informations importante de la liste de travaux disciplinaire.");
+            TlpBoutonNouveau.ToolTipIcon = ToolTipIcon.Info;
+            TlpBoutonNouveau.ToolTipTitle = "Journalisation de la liste";
+            TlpBoutonNouveau.Active = true;
+
+            TlpBoutonReprendre = new ToolTip();
+            TlpBoutonReprendre.IsBalloon = true;
+            TlpBoutonReprendre.ReshowDelay = 1;
+            TlpBoutonReprendre.SetToolTip(btnEditer, "Affiche le travail disciplinaire sélectionné dans l'onglet \"travail\" afin que vous puissiez continuer celui-ci.");
+            TlpBoutonReprendre.ToolTipIcon = ToolTipIcon.Info;
+            TlpBoutonReprendre.ToolTipTitle = "Reprendre le travail disciplinaire";
+            TlpBoutonReprendre.Active = true;
+
+            TlpBoutonSupprimer = new ToolTip();
+            TlpBoutonSupprimer.IsBalloon = true;
+            TlpBoutonSupprimer.ReshowDelay = 1;
+            TlpBoutonSupprimer.SetToolTip(btnSupprimer, "Supprime de la liste le travail disciplinaire sélectionné");
+            TlpBoutonSupprimer.ToolTipIcon = ToolTipIcon.Info;
+            TlpBoutonSupprimer.ToolTipTitle = "Suppression du travail disciplinaire";
+            TlpBoutonSupprimer.Active = true;
 
             TlpInfoTexteUtilisateur = new ToolTip();
             TlpInfoTexteUtilisateur.IsBalloon = true;
@@ -697,31 +803,25 @@ namespace TravauxDisciplinaireCFPT
             TlpInfoTravail = new ToolTip();
             TlpInfoTravail.IsBalloon = true;
             TlpInfoTravail.ReshowDelay = 1;
-            TlpInfoTravail.SetToolTip(gbxDetails, "C'est ici que s'affichera les informations dit \"statiques\"sur le travail.\r\nOn peut y voir les informations sur l'élève, le professeur et le texte ");
+            TlpInfoTravail.SetToolTip(gbxDetails, "C'est ici que s'affichera les informations dit \"statiques\"sur le travail disciplinaire.\r\nOn peut y voir les informations sur l'élève, le professeur et le texte ");
             TlpInfoTravail.ToolTipIcon = ToolTipIcon.Info;
-            TlpInfoTravail.ToolTipTitle = "Informations concernant le travail";
+            TlpInfoTravail.ToolTipTitle = "Informations concernant le travail disciplinaire";
             TlpInfoTravail.Active = true;
 
             TlpInfoProgression = new ToolTip();
             TlpInfoProgression.IsBalloon = true;
             TlpInfoProgression.ReshowDelay = 1;
-            TlpInfoProgression.SetToolTip(gbxProgression, "C'est ici que s'affichera le \"suivi\" de la progression de votre travail. \r\nOn peut y voir la durée effective ou l'avancé du travail.");
+            TlpInfoProgression.SetToolTip(gbxProgression, "C'est ici que s'affichera le \"suivi\" de la progression de votre travail disciplinaire. \r\nOn peut y voir la durée effective ou l'avancé du travail disciplinaire.");
             TlpInfoProgression.ToolTipIcon = ToolTipIcon.Info;
-            TlpInfoProgression.ToolTipTitle = "Informations concernant la progression du travail";
+            TlpInfoProgression.ToolTipTitle = "Informations concernant la progression du travail disciplinaire";
             TlpInfoProgression.Active = true;
 
             TlpInfoListe = new ToolTip();
             TlpInfoListe.IsBalloon = true;
             TlpInfoListe.ReshowDelay = 1;
-            contenu = "C'est ici que les travaux que vous créez ou que vous ajoutez s'affiche. Sur cette liste vous pouvez :\r\n";
-            contenu += " - Créer un nouveau travail en appuyant sur le bouton \"Nouveau\" \r\n";
-            contenu += " - Ajouter un travail en appuyant sur le bouton \"Ajouter\" ou en glissant le fichier dans la liste \r\n";
-            contenu += " - Enlever un travail de la liste en le sélectionnant avant de cliquer sur le bouton \"Supprimer\" \r\n";
-            contenu += " - Reprendre le travail la où il a été laissé la dernière fois en le sélectionnant avant de cliquer sur le bouton \"Reprendre\" \r\n";
-            contenu += " - Créer un fichier contenant la journalisation de la liste en cliquant sur le bouton \"Journaliser\" \r\n";
-            TlpInfoListe.SetToolTip(lsbListeTravaux, contenu);
+            TlpInfoListe.SetToolTip(lsbListeTravaux, "Ceci est la liste de travaux disciplinaires. C'est ici que s'affichent les travaux disciplinaires actuellement gérés par l'application.");
             TlpInfoListe.ToolTipIcon = ToolTipIcon.Info;
-            TlpInfoListe.ToolTipTitle = "Liste des travaux ajoutés ou créés";
+            TlpInfoListe.ToolTipTitle = "Liste des travaux disciplinaires ajoutés ou créés";
             TlpInfoListe.AutomaticDelay = 1500;
             TlpInfoListe.Active = true;
         }
@@ -730,15 +830,36 @@ namespace TravauxDisciplinaireCFPT
         {
             UpdateVueInfosBulles();
             if (TlpInfoTravail.Active == true)
-                tsiDesactiverInfosBulles.Text = "Désactiver les infosbulles";
+                tsiInfosbulles.Text = "Désactiver les infosbulles";
             else
-                tsiDesactiverInfosBulles.Text = "Activer les infosbulles";
+                tsiInfosbulles.Text = "Activer les infosbulles";
         }
 
         private void tsiAPropos_Click(object sender, EventArgs e)
         {
             frmAPropos APropos = new frmAPropos();
             APropos.ShowDialog();
+        }
+
+        private void lsbListeTravaux_DoubleClick(object sender, EventArgs e)
+        {
+            if (lsbListeTravaux.SelectedIndex != -1)
+                SelectionnerTravail();
+        }
+
+        private void tsiEnregistrerSous_Click(object sender, EventArgs e)
+        {
+            if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
+            {
+                this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
+            }
+        }
+
+        private void tsiAide_Click(object sender, EventArgs e)
+        {
+            string locationToSavePdf = Path.Combine(Path.GetTempPath(), "manuel.pdf");  // select other location if you want
+            File.WriteAllBytes(locationToSavePdf, Properties.Resources.NAEF_PlanningTPIV2);    // write the file from the resources to the location you want
+            Process.Start(locationToSavePdf);
         }
     }
 }

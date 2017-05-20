@@ -291,7 +291,7 @@
             this.btnCreer.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnCreer.Enabled = false;
             this.btnCreer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btnCreer.Location = new System.Drawing.Point(397, 404);
+            this.btnCreer.Location = new System.Drawing.Point(394, 434);
             this.btnCreer.Name = "btnCreer";
             this.btnCreer.Size = new System.Drawing.Size(104, 52);
             this.btnCreer.TabIndex = 12;
@@ -302,12 +302,16 @@
             // 
             this.btnAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAnnuler.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btnAnnuler.Location = new System.Drawing.Point(12, 404);
+            this.btnAnnuler.Location = new System.Drawing.Point(12, 434);
             this.btnAnnuler.Name = "btnAnnuler";
             this.btnAnnuler.Size = new System.Drawing.Size(104, 52);
             this.btnAnnuler.TabIndex = 13;
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
+            // 
+            // ofdOuvrir
+            // 
+            this.ofdOuvrir.Filter = "Fichier texte|*.txt";
             // 
             // groupBox3
             // 
@@ -315,7 +319,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 275);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(486, 123);
+            this.groupBox3.Size = new System.Drawing.Size(486, 153);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Aperçu du texte";
@@ -325,7 +329,7 @@
             this.rbxApercu.Font = new System.Drawing.Font("Consolas", 12.75F);
             this.rbxApercu.Location = new System.Drawing.Point(6, 23);
             this.rbxApercu.Name = "rbxApercu";
-            this.rbxApercu.Size = new System.Drawing.Size(474, 94);
+            this.rbxApercu.Size = new System.Drawing.Size(474, 124);
             this.rbxApercu.TabIndex = 16;
             this.rbxApercu.Text = "";
             // 
@@ -334,7 +338,7 @@
             this.AcceptButton = this.btnCreer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 468);
+            this.ClientSize = new System.Drawing.Size(513, 498);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnCreer);
@@ -348,6 +352,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Création d\'un travail";
+            this.Load += new System.EventHandler(this.frmCreation_Load);
             this.gbxProfesseur.ResumeLayout(false);
             this.gbxProfesseur.PerformLayout();
             this.groupBox1.ResumeLayout(false);

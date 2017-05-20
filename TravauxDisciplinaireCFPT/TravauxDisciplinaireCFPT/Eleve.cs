@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TravauxDisciplinaireCFPT
 {
     [Serializable]
-    class Eleve : Personne
+    public class Eleve : Personne
     {
         private string _classe;
 

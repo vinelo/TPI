@@ -17,19 +17,38 @@ namespace TravauxDisciplinaireCFPT
 
         //Champs...
         private string _texte;
+        private Niveau _niveauSelectionne;
 
         //Propriétés...
-        public string Texte
+        private string Texte
         {
             get { return _texte; }
             set { _texte = value; }
+        }
+
+        private Niveau NiveauSelectionne
+        {
+            get
+            {
+                return _niveauSelectionne;
+            }
+
+            set
+            {
+                _niveauSelectionne = value;
+                if (value == null)
+                    UpdateVuePasDeNiveau();
+                else
+                    UpdateVueNiveauSelectionne();
+                
+            }
         }
 
         //Constructeurs...
         public frmCreation()
         {
             InitializeComponent();
-            UpdateVue();
+
         }
         //Méthodes...
 
@@ -44,16 +63,9 @@ namespace TravauxDisciplinaireCFPT
             string NomEleve = tbxNomEleve.Text;
             string PrenomEleve = tbxPrenomEleve.Text;
             string ClasseEleve = tbxClasseEleve.Text;
-            Niveau NiveauTravail = new Niveau();
-
-            if (ChoisirNiveau() == 6)
-                NiveauTravail = new Niveau(ChoisirNiveau(), this.Texte);
-            else
-                NiveauTravail = new Niveau(ChoisirNiveau());
-
 
             TravailDisciplinaire Td;
-            Td = new TravailDisciplinaire(NomProfesseur, PrenomProfesseur, NomEleve, PrenomEleve, ClasseEleve, NiveauTravail);
+            Td = new TravailDisciplinaire(new Eleve(NomEleve, PrenomEleve, ClasseEleve), new Personne(NomProfesseur, PrenomProfesseur), NiveauSelectionne);
 
             return Td;
         }
@@ -62,21 +74,12 @@ namespace TravauxDisciplinaireCFPT
         /// Vérifie si les champs sont remplis
         /// </summary>
         /// <returns>Renvoie vrai si les champs sont remplis</returns>
-        public bool VerifierChamps()
+        public bool VerifierChampsEtNiveau()
         {
             bool Validation = false;
-
-            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "")
+            if (this.tbxClasseEleve.Text != "" && this.tbxNomEleve.Text != "" && this.tbxNomProf.Text != "" && this.tbxPrenomEleve.Text != "" && this.tbxPrenomProf.Text != "" && NiveauSelectionne != null)
             {
                 Validation = true;
-                if (rbnPersonnaliser.Checked == true)
-                {
-                    Validation = false;
-                    if (Texte != "" &&Texte != null)
-                    {
-                        Validation = true;
-                    }
-                }
             }
             return Validation;
         }
@@ -84,7 +87,7 @@ namespace TravauxDisciplinaireCFPT
 
 
         // A REFAIRE POUR SUPPRIMER LES ENTER EN TROP
-        public string FiltrerTexte(string paramFichier)
+        public string LireTexte(string paramFichier)
         {
             string[] lireText = File.ReadAllLines(paramFichier, Encoding.Default);
 
@@ -95,33 +98,22 @@ namespace TravauxDisciplinaireCFPT
             }
             return Texte;
         }
-
+        public void UpdateVuePasDeNiveau()
+        {
+            rbxApercu.Text = "Veuillez sélectionner un texte.";
+            btnCreer.Enabled = VerifierChampsEtNiveau();
+            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
+        }
 
         /// <summary>
         /// Raffraichit la vue
         /// </summary>
-        public void UpdateVue()
+        public void UpdateVueNiveauSelectionne()
         {
             //Choisi le texte à afficher en fonction du niveau
 
-            //A REVOIR
-            //----------------------------------------------------------------
-            if (ChoisirNiveau() == 6 && this.Texte != "")
-            {
-                Niveau Niveau = new Niveau(ChoisirNiveau(), this.Texte);
-                rbxApercu.Text = Niveau.TexteARecopier;
-            }
-            else
-            {
-                Niveau Niveau = new Niveau(ChoisirNiveau());
-                rbxApercu.Text = Niveau.ChoisirTexte();
-            }
-            //-------------------------------------------------------------------
-
-            //Determine si le bouton "Creer" est grisé ou pas
-            btnCreer.Enabled = VerifierChamps();
-
-            //Determine si le bouton "Personnaliser (...)" est grisé ou pas
+            rbxApercu.Text = NiveauSelectionne.TexteARecopier;
+            btnCreer.Enabled = VerifierChampsEtNiveau();
             btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
         }
 
@@ -154,22 +146,38 @@ namespace TravauxDisciplinaireCFPT
         {
             if (DialogResult.OK == ofdOuvrir.ShowDialog())
             {
-                this.Texte = FiltrerTexte(ofdOuvrir.FileName);
+                NiveauSelectionne = new Niveau(ChoisirNiveau(), LireTexte(ofdOuvrir.FileName));
+                if (DialogResult.Cancel == MessageBox.Show("Ce texte prendra environ " + Convert.ToString(NiveauSelectionne.CalculerMinutesDuTexte() + " minutes à être recopié."), "Durée du texte", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+                    NiveauSelectionne = null;
+                
             }
-            UpdateVue();
+
         }
 
         private void tbx_TextChanged(object sender, EventArgs e)
         {
-            UpdateVue();
+            UpdateVueNiveauSelectionne();
         }
 
         private void rbnNiveau_CheckedChanged(object sender, EventArgs e)
         {
-            if (ChoisirNiveau() != 6)
-                this.Texte = null;
-            UpdateVue();
+            if (ChoisirNiveau() == 6)
+            {
+                NiveauSelectionne = null;
+                UpdateVuePasDeNiveau();
+            }
+
+            else
+            {
+                NiveauSelectionne = new Niveau(ChoisirNiveau());
+                UpdateVueNiveauSelectionne();
+            }
         }
 
+        private void frmCreation_Load(object sender, EventArgs e)
+        {
+            NiveauSelectionne = new Niveau(ChoisirNiveau());
+            UpdateVueNiveauSelectionne();
+        }
     }
 }
