@@ -249,6 +249,10 @@ namespace TravauxDisciplinaireCFPT
             minutesEtSecondes += Convert.ToString(seconde) + " sec";
             return minutesEtSecondes;
         }
+        public string AsciiDuCaractereATaperToString()
+        {
+            return Convert.ToString((int)this.Niveau.TexteARecopier[Progression]);
+        }
 
 
 

@@ -115,6 +115,18 @@ namespace TravauxDisciplinaireCFPT
             {
                 paramTexteAFiltrer = paramTexteAFiltrer.Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine);
             }
+            while (paramTexteAFiltrer.Contains("  "))
+            {
+                paramTexteAFiltrer = paramTexteAFiltrer.Replace("  "," ");
+            }
+            while (paramTexteAFiltrer.Contains(" " + Environment.NewLine))
+            {
+                paramTexteAFiltrer = paramTexteAFiltrer.Replace(" " + Environment.NewLine, Environment.NewLine);
+            }
+            while (paramTexteAFiltrer.Contains(Environment.NewLine + " "))
+            {
+                paramTexteAFiltrer = paramTexteAFiltrer.Replace(Environment.NewLine + " "  , Environment.NewLine);
+            }
             paramTexteAFiltrer = paramTexteAFiltrer.Replace(Convert.ToString((char)10), "");
 
             return paramTexteAFiltrer;

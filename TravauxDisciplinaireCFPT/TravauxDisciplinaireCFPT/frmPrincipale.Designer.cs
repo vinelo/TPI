@@ -578,6 +578,7 @@
             this.MaximizeBox = false;
             this.Name = "frmPrincipale";
             this.Text = "Travaux disciplinaires au CFPT";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPrincipale_FormClosing);
             this.Load += new System.EventHandler(this.frmPrincipale_Load);
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();

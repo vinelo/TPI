@@ -61,12 +61,32 @@ namespace TravauxDisciplinaireCFPT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnCours {
+            get {
+                object obj = ResourceManager.GetObject("EnCours", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon_project_management {
+        internal static System.Drawing.Icon logo {
             get {
-                object obj = ResourceManager.GetObject("icon_project_management", resourceCulture);
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logoAPropos {
+            get {
+                object obj = ResourceManager.GetObject("logoAPropos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -132,6 +152,26 @@ namespace TravauxDisciplinaireCFPT.Properties {
         internal static string TexteNiveau5 {
             get {
                 return ResourceManager.GetString("TexteNiveau5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Travail_fini {
+            get {
+                object obj = ResourceManager.GetObject("Travail_fini", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TravailEnCours {
+            get {
+                object obj = ResourceManager.GetObject("TravailEnCours", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
