@@ -527,6 +527,7 @@ namespace TravauxDisciplinaireCFPT
                 //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
                 else
                 {
+                    FausseTape = 0;
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                     UpdateVueProgression();
                     SecondesInactif = 0;
