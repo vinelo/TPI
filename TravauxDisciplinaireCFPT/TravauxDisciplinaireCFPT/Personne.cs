@@ -1,8 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la classe : Personne
+ * Description de la classe : Ceci est la classe ou seront stockés le nom et le prénom d'une personne
+ * Date de dernière modification : 23 mai 2017
+ */
+using System;
 
 namespace TravauxDisciplinaireCFPT
 {

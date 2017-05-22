@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la forme : frmCreation
+ * Description de la forme : Ceci est la forme de création. C'est dans cette forme que l'utilisateur définira les données d'un travail avant de le créer.
+ * Date de dernière modification : 23 mai 2017
+ */
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Resources;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TravauxDisciplinaireCFPT
@@ -45,9 +46,13 @@ namespace TravauxDisciplinaireCFPT
         }
 
         //Constructeurs...
+        /// <summary>
+        /// Constructeur de la forme frmCreation. Créer un nouveau niveau.
+        /// </summary>
         public frmCreation()
         {
             InitializeComponent();
+            NiveauSelectionne = new Niveau(ChoisirNiveau());
 
         }
         //Méthodes...
@@ -86,7 +91,11 @@ namespace TravauxDisciplinaireCFPT
 
 
 
-        // A REFAIRE POUR SUPPRIMER LES ENTER EN TROP
+        /// <summary>
+        /// Lis le texte dans le fichier passé en paramètre
+        /// </summary>
+        /// <param name="paramFichier">Fichier à lire</param>
+        /// <returns>Texte du fichier passé en paramètre</returns>
         public string LireTexte(string paramFichier)
         {
             string[] lireText = File.ReadAllLines(paramFichier, Encoding.Default);
@@ -98,26 +107,7 @@ namespace TravauxDisciplinaireCFPT
             }
             return Texte;
         }
-        public void UpdateVuePasDeNiveau()
-        {
-            rbxApercu.Text = "Veuillez sélectionner un texte.";
-            btnCreer.Enabled = VerifierChampsEtNiveau();
-            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
-        }
 
-        /// <summary>
-        /// Raffraichit la vue
-        /// </summary>
-        public void UpdateVueNiveauSelectionne()
-        {
-            //Choisi le texte à afficher en fonction du niveau
-
-            rbxApercu.Text = NiveauSelectionne.TexteARecopier;
-            btnCreer.Enabled = VerifierChampsEtNiveau();
-            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
-        }
-
-        //A REVOIR
         /// <summary>
         /// Choisi le niveau correspondant à la "case" coché
         /// </summary>
@@ -140,8 +130,30 @@ namespace TravauxDisciplinaireCFPT
 
             return NiveauARetourner;
         }
+        /// <summary>
+        /// Affiche un texte incitant l'utilisateur à séléctionner un texte
+        /// </summary>
+        public void UpdateVuePasDeNiveau()
+        {
+            rbxApercu.Text = "Veuillez sélectionner un texte.";
+            btnCreer.Enabled = VerifierChampsEtNiveau();
+            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
+        }
 
-        // A Refaire au propre pour filtrer les caractères et mettre dans une fonction
+        /// <summary>
+        /// Raffraichit la vue en fonction des paramètres du niveau actuel
+        /// </summary>
+        public void UpdateVueNiveauSelectionne()
+        {
+            rbxApercu.Text = NiveauSelectionne.TexteARecopier;
+            btnCreer.Enabled = VerifierChampsEtNiveau();
+            btnPersonnaliser.Enabled = rbnPersonnaliser.Checked;
+        }
+
+        //Événements
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton "...". Il lui permet de sélectionner un texte à travers une boîte de dialogue prévu à cette effet.
+        /// </summary>
         private void btnPersonnaliser_Click(object sender, EventArgs e)
         {
             if (DialogResult.OK == ofdOuvrir.ShowDialog())
@@ -149,16 +161,22 @@ namespace TravauxDisciplinaireCFPT
                 NiveauSelectionne = new Niveau(ChoisirNiveau(), LireTexte(ofdOuvrir.FileName));
                 if (DialogResult.Cancel == MessageBox.Show("Ce texte prendra environ " + Convert.ToString(NiveauSelectionne.CalculerMinutesDuTexte() + " minutes à être recopié."), "Durée du texte", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                     NiveauSelectionne = null;
-                
             }
 
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur tape du texte dans les zones de saisie. Il raffraîchit la vue.
+        /// </summary>
         private void tbx_TextChanged(object sender, EventArgs e)
         {
-            UpdateVueNiveauSelectionne();
+            if(NiveauSelectionne != null)
+                UpdateVueNiveauSelectionne();
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur change de niveau. Il raffraîchit la vue en fonction du bouton radio coché.
+        /// </summary>
         private void rbnNiveau_CheckedChanged(object sender, EventArgs e)
         {
             if (ChoisirNiveau() == 6)
@@ -174,9 +192,12 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque la forme se crée. Il raffraichît la vue.
+        /// </summary>
         private void frmCreation_Load(object sender, EventArgs e)
         {
-            NiveauSelectionne = new Niveau(ChoisirNiveau());
+            
             UpdateVueNiveauSelectionne();
         }
     }

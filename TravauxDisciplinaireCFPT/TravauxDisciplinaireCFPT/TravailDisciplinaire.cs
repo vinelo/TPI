@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la classe : Travail Disciplinaire
+ * Description de la classe : Ceci est la classe ou est stocké toutes les informations concernant le travail disciplinaire. C'est aussi dans cette classe que les opérations lié à l'enregistrement du travail, la progression ou encore la durée du travail seront géré.k
+ * Date de dernière modification : 23 mai 2017
+ */
+using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TravauxDisciplinaireCFPT
 {
@@ -317,7 +321,7 @@ namespace TravauxDisciplinaireCFPT
         /// <summary>
         /// Vérifie si le travail a été modifié 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Vérification du travail</returns>
         public bool VerifierDonneeTravail()
         {
             bool Verification = false;

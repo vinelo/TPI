@@ -1,14 +1,15 @@
-﻿using System;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la forme : frmPrincipale
+ * Description de la forme : Ceci est la forme principale de l'application. C'est ici que l'utilisateur pourra continuer son travail disciplinaire ou encore gérer une liste de travaux.
+ * Date de dernière modification : 23 mai 2017
+ */
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TravauxDisciplinaireCFPT
@@ -113,23 +114,47 @@ namespace TravauxDisciplinaireCFPT
 
         public ToolTip TlpInfoTexteUtilisateur
         {
-            get { return _tlpInfoTexteUtilisateur; }
-            set { _tlpInfoTexteUtilisateur = value; }
+            get
+            {
+                return _tlpInfoTexteUtilisateur;
+            }
+            set
+            {
+                _tlpInfoTexteUtilisateur = value;
+            }
         }
         public ToolTip TlpInfoProgression
         {
-            get { return _tlpInfoProgression; }
-            set { _tlpInfoProgression = value; }
+            get
+            {
+                return _tlpInfoProgression;
+            }
+            set
+            {
+                _tlpInfoProgression = value;
+            }
         }
         public ToolTip TlpInfoTravail
         {
-            get { return _tlpInfoTravail; }
-            set { _tlpInfoTravail = value; }
+            get
+            {
+                return _tlpInfoTravail;
+            }
+            set
+            {
+                _tlpInfoTravail = value;
+            }
         }
         public ToolTip TlpInfoListe
         {
-            get { return _tlpInfoListe; }
-            set { _tlpInfoListe = value; }
+            get
+            {
+                return _tlpInfoListe;
+            }
+            set
+            {
+                _tlpInfoListe = value;
+            }
         }
 
         public ToolTip TlpBoutonNouveau
@@ -226,7 +251,7 @@ namespace TravauxDisciplinaireCFPT
         //Méthodes...
 
         /// <summary>
-        /// 
+        /// Affiche le travail sélectionné
         /// </summary>
         public void SelectionnerTravail()
         {
@@ -280,7 +305,8 @@ namespace TravauxDisciplinaireCFPT
         public void UpdateVueBouton()
         {
             this.btnSupprimer.Enabled = EstIndexSelectionne();
-            this.btnEditer.Enabled = EstIndexSelectionne();
+            this.btnReprendre.Enabled = EstIndexSelectionne();
+            this.btnEnregistrer.Enabled = EstIndexSelectionne();
         }
         /// <summary>
         /// Raffraichit la liste
@@ -407,6 +433,7 @@ namespace TravauxDisciplinaireCFPT
                 if (ListeTravauxDisciplinaires != null)
                     UpdateVueList();
                 tbcPrincipale.SelectTab(1);
+                UpdateVueBouton();
             }
         }
 
@@ -463,30 +490,25 @@ namespace TravauxDisciplinaireCFPT
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].NiveauToString(),
                    Police, Bleu, e.Bounds.X + 480, e.Bounds.Y + 11);
 
-                //Barre de progression
+
 
                 e.Graphics.DrawString("Progression :",
                    e.Font, Stylo, e.Bounds.X + 377, e.Bounds.Y + 35);
+                //Barre de progression
                 Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 480, e.Bounds.Y + 36, 304, 16);
                 e.Graphics.FillRectangle(Gris, BarreProgressionGris);
-
                 Rectangle BarreProgressionVert = new Rectangle(e.Bounds.X + 482, e.Bounds.Y + 39, this.ListeTravauxDisciplinaires[e.Index].CalculerPoucentageEffectue() * 3, 10);
                 e.Graphics.FillRectangle(Vert, BarreProgressionVert);
-                SizeF LargeurString = new SizeF();
-                LargeurString = e.Graphics.MeasureString(CompteCaractere, new Font("Arial", 16), 400);
+
+                //Affichage du compte du nombre de caractères tapés sur le nombre de caractères totaux
                 e.Graphics.DrawString(CompteCaractere,
                 Police, Bleu, e.Bounds.X + 550, e.Bounds.Y + 55);
+                //Affiche la bonne image en fontion de
                 if (ListeTravauxDisciplinaires[e.Index].EstFini())
                     e.Graphics.DrawImage(Properties.Resources.Travail_fini, e.Bounds.Width - 82, e.Bounds.Y + 11, 80, 80);
                 else
                     e.Graphics.DrawImage(Properties.Resources.TravailEnCours, e.Bounds.Width - 82, e.Bounds.Y + 11, 80, 80);
 
-
-                //Temps passé sur le travail
-                //e.Graphics.DrawString("Élève :",
-                //   e.Font, stylo, e.Bounds.X, e.Bounds.Y + 30);
-                //e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Eleve.ToString(),
-                //   e.Font, stylo, e.Bounds.X + 90, e.Bounds.Y + 30);
 
                 e.DrawFocusRectangle();
                 //Contour
@@ -495,24 +517,30 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
-
-        private void btnEditer_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton "Reprendre". Il affiche le travail séléctionné dans la page de travail
+        /// </summary>
+        private void btnReprendre_Click(object sender, EventArgs e)
         {
             this.SelectionnerTravail();
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur tape un caractère dans la zone de saisie "Votre saisie". Il se charge d'avancer la progression si celle-ci doit être avancé
+        /// </summary>
         private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (EstTravailSelectionne)
             {
-                //Si c'est effacer
+                //Ne laisse pas l'utilisateur effacer du texte
                 if (e.KeyChar == (char)8)
                 {
+                    //Réaffiche le texte correspondant à la progression du travail.
                     UpdateVueTexteUtilisateur();
                     UpdateVueProgression();
                 }
 
-                //Si l'index est hors du tableau alors ne fait rien
+                //Avance la progression de 1 pour autant que le caractère tapé soit le bon
                 if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaracteres() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
                 {
                     e.Handled = true;
@@ -524,7 +552,6 @@ namespace TravauxDisciplinaireCFPT
                     }
 
                 }
-                //Sinon Avance la progression de 1 et Update la vue du travail sélectionné
                 else
                 {
                     FausseTape = 0;
@@ -536,15 +563,15 @@ namespace TravauxDisciplinaireCFPT
                     NbCaractereTapeDepuisDernierScroll = 0;
                 }
 
-                //verifie si le travail est fini
+                //Verifie si le travail est fini
                 if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
                 {
-                    MessageBox.Show("Vous avez fini votre travail disciplinaire.", "Travail fini", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Ce travail disciplinaire est terminé.", "Travail fini", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     tmrTempsEffectif.Enabled = false;
                 }
 
 
-                //Timer activer
+                //Activation du timer
                 tmrTempsEffectif.Enabled = true;
             }
             else
@@ -553,6 +580,9 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton supprimer
+        /// </summary>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
             //Vérifie si un travail est sélectionné
@@ -568,16 +598,21 @@ namespace TravauxDisciplinaireCFPT
             this.UpdateVueBouton();
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'index sélectionné de la liste change. Il raffraîchit les boutons de la liste.
+        /// </summary>
         private void lsbListeTravaux_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.UpdateVueBouton();
         }
 
+        /// <summary>
+        /// Cet événement est appelé chaque seconde que l'utilisateur passe à taper son texte. Ajoute une seconde au temps du travail pour chaque secondes que celui-ci passe à recopier son texte.
+        /// </summary>
         private void tmrTempsEffectif_Tick(object sender, EventArgs e)
         {
             if (EstTravailSelectionne)
             {
-                //Gère le temps à ajouté au travail en fonction de l'activité de l'utilisateur
                 if (SecondesInactif >= SECONDS_AVANT_ARRET_DU_TIMER)
                     tmrTempsEffectif.Enabled = false;
                 else
@@ -593,14 +628,18 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
-        private void tsiEnregistrer_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur un des deux boutons enregistrer. Il enregistre le travail séléctionné dans sa denière location.
+        /// </summary>
+        private void Enregistrer_Click(object sender, EventArgs e)
         {
-            int TravailASauvegarder = -1;
+            
+            int TravailASauvegarder = -1; //index du travail à enregistrer
+            //Obtient le
             if (tbcPrincipale.SelectedIndex == 0)
             {
                 if (EstIndexSelectionne())
                     TravailASauvegarder = IndexTravailSelectionne;
-                //Ouvre l'onglet d'enregistrement et enregistre le travail à l'emplacement demandé par l'utilisateur
             }
             else
             {
@@ -619,14 +658,16 @@ namespace TravauxDisciplinaireCFPT
                 MessageBox.Show("Veuillez choisir un travail à enregistrer.", "Enregistrer un travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton ouvrir ou ajouter. Ajoute à la liste de travaux les travaux séléctionnés dans la boîte de dialogue prévu à cet effet.
+        /// </summary>
         private void Ouvrir_Click(object sender, EventArgs e)
         {
-            //Ajoute à la liste le fichier ouvert si celui-ci n'est pas incompatible ou corrompu
             if (ofdOuvrirFichier.ShowDialog() == DialogResult.OK)
             {
+                //Pour chaque travail sélectionné, un teste est effectué afin de voir si le travail est compatible et il n'a pas été modifié sans l'aide du programme Travail Disciplinaire au CFPT
                 foreach (string fichier in ofdOuvrirFichier.FileNames)
                 {
-                    //Si il y a une erreur au niveau de la lecture du fichier alors celui-ci est incompatible ou corrompu
                     try
                     {
                         TravailDisciplinaire td = new TravailDisciplinaire();
@@ -634,7 +675,6 @@ namespace TravauxDisciplinaireCFPT
                         if (td.VerifierDonneeTravail())
                         {
                             ListeTravauxDisciplinaires.Add(td);
-                            UpdateVueList();
                             MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -647,10 +687,15 @@ namespace TravauxDisciplinaireCFPT
                         MessageBox.Show("Le fichier : \"" + fichier + "\" est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                UpdateVueList();
+                UpdateVueBouton();
 
             }
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur tape du texte. Il s'occupe de l'affichage du texte à recopier ainsi que du texte copié par l'utilisateur.
+        /// </summary>
         private void tbxCopieTexte_TextChanged(object sender, EventArgs e)
         {
             //Scroll afin d'afficher le texte à recopier
@@ -658,7 +703,6 @@ namespace TravauxDisciplinaireCFPT
             if (NbCaractereTapeDepuisDernierScroll == 100)
             {
                 rbxCopieTexte.SelectionStart = rbxCopieTexte.Text.Length;
-                // scroll it automatically
                 rbxCopieTexte.ScrollToCaret();
                 rbxTexteExemple.SelectionStart = rbxCopieTexte.Text.Length - 100;
                 rbxTexteExemple.ScrollToCaret();
@@ -667,40 +711,48 @@ namespace TravauxDisciplinaireCFPT
 
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton "Journalisation". Il enregistre un fichier log sous format texte sur le chemin spécifié dans la boîte de dialogue prévu à cet effet.
+        /// </summary>
         private void btnSauvegarderLog_Click(object sender, EventArgs e)
         {
-            //Créer un fichier Log
             if (sfdSauvegarderLog.ShowDialog() == DialogResult.OK)
             {
                 this.JournalisationListeTravaux(sfdSauvegarderLog.FileName);
             }
-            MessageBox.Show("Zer");
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur la zone de saisie dans "Votre texte". Il réaffiche le texte afin que l'utilisateur puisse reprendre sa progression.
+        /// </summary>
         private void rbxCopieTexte_MouseClick(object sender, MouseEventArgs e)
         {
-            //
             if (EstTravailSelectionne)
             {
                 UpdateVueTexteUtilisateur();
             }
         }
-
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur tape un caractère dans la zone de saisie "Votre saisie". Il empêche que l'utilisateur puisse utiliser les touches directionnel.
+        /// </summary>
         private void rbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
         {
-            //Empêche l'utilisateur de se déplacer dans la forme
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
             {
                 e.Handled = true;
             }
         }
 
-        //Événement Drop
+
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur drag and drop un ou plusieurs fichiers fans la liste. Il ajoute à la liste de travaux les travaux glissé dans la liste.
+        /// </summary>
         private void lsbListeTravaux_DragDrop(object sender, DragEventArgs e)
         {
             //Ajoute un à un les fichier si ceux-ci sont compatible
             string[] fichiers = (string[])e.Data.GetData(DataFormats.FileDrop);
-            foreach (string fichier in fichiers)
+            //Pour chaque travail sélectionné, un teste est effectué afin de voir si le travail est compatible et il n'a pas été modifié sans l'aide du programme Travail Disciplinaire au CFPT
+            foreach (string fichier in ofdOuvrirFichier.FileNames)
             {
                 try
                 {
@@ -709,12 +761,11 @@ namespace TravauxDisciplinaireCFPT
                     if (td.VerifierDonneeTravail())
                     {
                         ListeTravauxDisciplinaires.Add(td);
-                        UpdateVueList();
                         MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Le fichier : \"" + fichier + "\" est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Le fichier : \"" + fichier + "\"  est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
@@ -723,14 +774,20 @@ namespace TravauxDisciplinaireCFPT
                 }
             }
             UpdateVueList();
+            UpdateVueBouton();
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur entre dans la liste avec un fichier. Le curseur de la souris affiche une icone de copie
+        /// </summary>
         private void lsbListeTravaux_DragEnter(object sender, DragEventArgs e)
         {
-
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque la form de charge. Si l'application à été ouverte depuis un fichier personnalisé, celle-ci le fichier depuis lequel il a été ouvert. Il créer aussi les infosbulles qui serviront à guider l'utilisateur.
+        /// </summary>
         private void frmPrincipale_Load(object sender, EventArgs e)
         {
             tbcPrincipale.SelectTab(1);
@@ -798,7 +855,7 @@ namespace TravauxDisciplinaireCFPT
             TlpBoutonReprendre = new ToolTip();
             TlpBoutonReprendre.IsBalloon = true;
             TlpBoutonReprendre.ReshowDelay = 1;
-            TlpBoutonReprendre.SetToolTip(btnEditer, "Ce bouton permet d'afficher le travail disciplinaire sélectionné dans l'onglet \"travail\" afin que vous puissiez continuer celui-ci.");
+            TlpBoutonReprendre.SetToolTip(btnReprendre, "Ce bouton permet d'afficher le travail disciplinaire sélectionné dans l'onglet \"travail\" afin que vous puissiez continuer celui-ci.");
             TlpBoutonReprendre.ToolTipIcon = ToolTipIcon.Info;
             TlpBoutonReprendre.ToolTipTitle = "Reprendre le travail disciplinaire";
             TlpBoutonReprendre.Active = true;
@@ -841,7 +898,10 @@ namespace TravauxDisciplinaireCFPT
             TlpInfoListe.Active = true;
         }
 
-        private void tsiDesactiverInfosBulles_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Cette événement est appelé lorsque l'utilisateur clique sur le bouton d'activation / de désactivation d'infosbulles. 
+        /// </summary>
+        private void tsiInfosBulles_Click(object sender, EventArgs e)
         {
             UpdateVueInfosBulles();
             if (TlpInfoTravail.Active == true)
@@ -850,18 +910,27 @@ namespace TravauxDisciplinaireCFPT
                 tsiInfosbulles.Text = "Activer les infosbulles";
         }
 
+        /// <summary>
+        /// Cette événement est appelé lorsque l'utilisateur clique sur le bouton "à propos de". Il affiche une fenêtre à propos.
+        /// </summary>
         private void tsiAPropos_Click(object sender, EventArgs e)
         {
             frmAPropos APropos = new frmAPropos();
             APropos.ShowDialog();
         }
 
+        /// <summary>
+        /// Cette événement est appelé lorsque l'utilisateur double clique sur la liste de travaux. Il séléctionne le travail.
+        /// </summary>
         private void lsbListeTravaux_DoubleClick(object sender, EventArgs e)
         {
             if (lsbListeTravaux.SelectedIndex != -1)
                 SelectionnerTravail();
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur un des deux boutons enregistrer. Il enregistre le travail séléctionné dans le répertoire sélectionné dans la boîte de dialogue prévue à cette effet.
+        /// </summary>
         private void tsiEnregistrerSous_Click(object sender, EventArgs e)
         {
             if (tbcPrincipale.SelectedIndex == 0)
@@ -887,13 +956,19 @@ namespace TravauxDisciplinaireCFPT
             }
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'utilisateur clique sur le bouton "Aide". Il affiche le manuel utilisateur.
+        /// </summary>
         private void tsiAide_Click(object sender, EventArgs e)
         {
-            string locationToSavePdf = Path.Combine(Path.GetTempPath(), "manuel.pdf");  // select other location if you want
-            File.WriteAllBytes(locationToSavePdf, Properties.Resources.NAEF_PlanningTPIV2);    // write the file from the resources to the location you want
+            string locationToSavePdf = Path.Combine(Path.GetTempPath(), "manuel.pdf");
+            File.WriteAllBytes(locationToSavePdf, Properties.Resources.NAEF_PlanningTPIV2);
             Process.Start(locationToSavePdf);
         }
 
+        /// <summary>
+        /// Cet événement est appelé lorsque l'application se ferme. Il enregistre les travaux si l'utilisateur veut qu'il en soit ainsi.
+        /// </summary>
         private void frmPrincipale_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ListeTravauxDisciplinaires.Count != 0)
@@ -902,12 +977,12 @@ namespace TravauxDisciplinaireCFPT
                 if (DialogResult.Yes == DR)
                 {
                     foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
-                        //Ouvre l'onglet d'enregistrement et enregistre le travail à l'emplacement demandé par l'utilisateur
-
+                    {
                         if (td.DernierEmplacement != "" && File.Exists(td.DernierEmplacement))
                             td.SerialiserTravail(td.DernierEmplacement);
                         else if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
                             td.SerialiserTravail(sfdSauvegarderTravail.FileName);
+                    }
                 }
                 else if (DialogResult.Cancel == DR)
                     e.Cancel = true;

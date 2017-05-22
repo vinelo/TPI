@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la classe : Niveau
+ * Description de la classe : Ceci est la classe ou est stocké le niveau et le texte du travail disciplinaire.  C'est aussi dans cette classe que les opérations lié au texte ou au niveau se feront.
+ * Date de dernière modification : 23 mai 2017
+ */
+using System;
 using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TravauxDisciplinaireCFPT
 {

@@ -1,8 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Auteur : Vincent Naef 
+ * Application : Travaux Disciplinaires au CFPT
+ * Nom de la classe : Eleve
+ * Description de la classe : Cette classe descend de la classe "Personne". C'est ici qu'est stocké, en plus du nom et du prénom, la classe de l'élève chargé du travail disciplinaire.
+ * Date de dernière modification : 23 mai 2017
+ */
+
+using System;
 
 namespace TravauxDisciplinaireCFPT
 {

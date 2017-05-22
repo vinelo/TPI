@@ -66,13 +66,14 @@
             this.pgbBarreProgression = new System.Windows.Forms.ProgressBar();
             this.label6 = new System.Windows.Forms.Label();
             this.tbpGestion = new System.Windows.Forms.TabPage();
+            this.btnEnregistrer = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lsbListeTravaux = new System.Windows.Forms.ListBox();
             this.btnSauvegarderLog = new System.Windows.Forms.Button();
             this.btnOuvrir = new System.Windows.Forms.Button();
             this.btnNouveau = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
-            this.btnEditer = new System.Windows.Forms.Button();
+            this.btnReprendre = new System.Windows.Forms.Button();
             this.tmrTempsEffectif = new System.Windows.Forms.Timer(this.components);
             this.sfdSauvegarderTravail = new System.Windows.Forms.SaveFileDialog();
             this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
@@ -142,7 +143,7 @@
             this.tsiEnregistrer.Name = "tsiEnregistrer";
             this.tsiEnregistrer.Size = new System.Drawing.Size(191, 24);
             this.tsiEnregistrer.Text = "Enregistrer";
-            this.tsiEnregistrer.Click += new System.EventHandler(this.tsiEnregistrer_Click);
+            this.tsiEnregistrer.Click += new System.EventHandler(this.Enregistrer_Click);
             // 
             // tsiEnregistrerSous
             // 
@@ -174,7 +175,7 @@
             this.tsiInfosbulles.Name = "tsiInfosbulles";
             this.tsiInfosbulles.Size = new System.Drawing.Size(363, 24);
             this.tsiInfosbulles.Text = "Désactiver les infosbulles";
-            this.tsiInfosbulles.Click += new System.EventHandler(this.tsiDesactiverInfosBulles_Click);
+            this.tsiInfosbulles.Click += new System.EventHandler(this.tsiInfosBulles_Click);
             // 
             // toolStripSeparator2
             // 
@@ -439,12 +440,13 @@
             // 
             // tbpGestion
             // 
+            this.tbpGestion.Controls.Add(this.btnEnregistrer);
             this.tbpGestion.Controls.Add(this.groupBox3);
             this.tbpGestion.Controls.Add(this.btnSauvegarderLog);
             this.tbpGestion.Controls.Add(this.btnOuvrir);
             this.tbpGestion.Controls.Add(this.btnNouveau);
             this.tbpGestion.Controls.Add(this.btnSupprimer);
-            this.tbpGestion.Controls.Add(this.btnEditer);
+            this.tbpGestion.Controls.Add(this.btnReprendre);
             this.tbpGestion.Location = new System.Drawing.Point(4, 27);
             this.tbpGestion.Name = "tbpGestion";
             this.tbpGestion.Padding = new System.Windows.Forms.Padding(3);
@@ -452,6 +454,18 @@
             this.tbpGestion.TabIndex = 1;
             this.tbpGestion.Text = "Gestion de travaux";
             this.tbpGestion.UseVisualStyleBackColor = true;
+            // 
+            // btnEnregistrer
+            // 
+            this.btnEnregistrer.BackColor = System.Drawing.Color.Transparent;
+            this.btnEnregistrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnregistrer.Location = new System.Drawing.Point(320, 458);
+            this.btnEnregistrer.Name = "btnEnregistrer";
+            this.btnEnregistrer.Size = new System.Drawing.Size(122, 55);
+            this.btnEnregistrer.TabIndex = 8;
+            this.btnEnregistrer.Text = "Enregistrer";
+            this.btnEnregistrer.UseVisualStyleBackColor = false;
+            this.btnEnregistrer.Click += new System.EventHandler(this.Enregistrer_Click);
             // 
             // groupBox3
             // 
@@ -485,9 +499,9 @@
             // 
             this.btnSauvegarderLog.BackColor = System.Drawing.Color.Transparent;
             this.btnSauvegarderLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSauvegarderLog.Location = new System.Drawing.Point(747, 453);
+            this.btnSauvegarderLog.Location = new System.Drawing.Point(779, 458);
             this.btnSauvegarderLog.Name = "btnSauvegarderLog";
-            this.btnSauvegarderLog.Size = new System.Drawing.Size(160, 55);
+            this.btnSauvegarderLog.Size = new System.Drawing.Size(122, 55);
             this.btnSauvegarderLog.TabIndex = 5;
             this.btnSauvegarderLog.Text = "Journalisation";
             this.btnSauvegarderLog.UseVisualStyleBackColor = false;
@@ -497,9 +511,9 @@
             // 
             this.btnOuvrir.BackColor = System.Drawing.Color.Transparent;
             this.btnOuvrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOuvrir.Location = new System.Drawing.Point(192, 453);
+            this.btnOuvrir.Location = new System.Drawing.Point(167, 458);
             this.btnOuvrir.Name = "btnOuvrir";
-            this.btnOuvrir.Size = new System.Drawing.Size(160, 55);
+            this.btnOuvrir.Size = new System.Drawing.Size(122, 55);
             this.btnOuvrir.TabIndex = 4;
             this.btnOuvrir.Text = "Ajouter";
             this.btnOuvrir.UseVisualStyleBackColor = false;
@@ -509,9 +523,9 @@
             // 
             this.btnNouveau.BackColor = System.Drawing.Color.Transparent;
             this.btnNouveau.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNouveau.Location = new System.Drawing.Point(7, 453);
+            this.btnNouveau.Location = new System.Drawing.Point(14, 458);
             this.btnNouveau.Name = "btnNouveau";
-            this.btnNouveau.Size = new System.Drawing.Size(160, 55);
+            this.btnNouveau.Size = new System.Drawing.Size(122, 55);
             this.btnNouveau.TabIndex = 3;
             this.btnNouveau.Text = "Nouveau";
             this.btnNouveau.UseVisualStyleBackColor = false;
@@ -521,25 +535,25 @@
             // 
             this.btnSupprimer.BackColor = System.Drawing.Color.Transparent;
             this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSupprimer.Location = new System.Drawing.Point(377, 453);
+            this.btnSupprimer.Location = new System.Drawing.Point(473, 458);
             this.btnSupprimer.Name = "btnSupprimer";
-            this.btnSupprimer.Size = new System.Drawing.Size(160, 55);
+            this.btnSupprimer.Size = new System.Drawing.Size(122, 55);
             this.btnSupprimer.TabIndex = 2;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = false;
             this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
-            // btnEditer
+            // btnReprendre
             // 
-            this.btnEditer.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditer.Location = new System.Drawing.Point(562, 453);
-            this.btnEditer.Name = "btnEditer";
-            this.btnEditer.Size = new System.Drawing.Size(160, 55);
-            this.btnEditer.TabIndex = 1;
-            this.btnEditer.Text = "Reprendre";
-            this.btnEditer.UseVisualStyleBackColor = false;
-            this.btnEditer.Click += new System.EventHandler(this.btnEditer_Click);
+            this.btnReprendre.BackColor = System.Drawing.Color.Transparent;
+            this.btnReprendre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReprendre.Location = new System.Drawing.Point(626, 458);
+            this.btnReprendre.Name = "btnReprendre";
+            this.btnReprendre.Size = new System.Drawing.Size(122, 55);
+            this.btnReprendre.TabIndex = 1;
+            this.btnReprendre.Text = "Reprendre";
+            this.btnReprendre.UseVisualStyleBackColor = false;
+            this.btnReprendre.Click += new System.EventHandler(this.btnReprendre_Click);
             // 
             // tmrTempsEffectif
             // 
@@ -627,7 +641,7 @@
         private System.Windows.Forms.Label lblTravailAccompli;
         private System.Windows.Forms.Label lblTemps;
         private System.Windows.Forms.Button btnSupprimer;
-        private System.Windows.Forms.Button btnEditer;
+        private System.Windows.Forms.Button btnReprendre;
         private System.Windows.Forms.ListBox lsbListeTravaux;
         private System.Windows.Forms.ToolStripMenuItem tsiNouveau;
         private System.Windows.Forms.Label label1;
@@ -646,6 +660,7 @@
         private System.Windows.Forms.Button btnSauvegarderLog;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ToolStripMenuItem tsiInfosbulles;
+        private System.Windows.Forms.Button btnEnregistrer;
     }
 }
 
