@@ -422,15 +422,14 @@ namespace TravauxDisciplinaireCFPT
         //Événements...
 
         //Affiche le formulaire de création et nous renvoie le résultat de celui-ci
-        private void tsiNouveau_Click(object sender, EventArgs e)
+        private void Nouveau_Click(object sender, EventArgs e)
         {
             frmCreation Creation = new frmCreation();
             //Si l'utilisateur a cliqué sur "OK", Récupère le travail créer dans le formulaire de création et l'ajoute dans la liste
             if (Creation.ShowDialog() == DialogResult.OK)
             {
                 ListeTravauxDisciplinaires.Add(Creation.CreerTravail());
-                if (ListeTravauxDisciplinaires != null)
-                    UpdateVueListe();
+                UpdateVueListe();
                 tbcPrincipale.SelectTab(1);
                 UpdateVueBouton();
             }
@@ -527,21 +526,25 @@ namespace TravauxDisciplinaireCFPT
         /// <summary>
         /// Cet événement est appelé lorsque l'utilisateur tape un caractère dans la zone de saisie "Votre saisie". Il se charge d'avancer la progression si celle-ci doit être avancé
         /// </summary>
-        private void tbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
+        private void rbxCopieTexte_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (EstTravailSelectionne)
             {
-
-                //Avance la progression de 1 pour autant que le caractère tapé soit le bon
-                if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression + 1 > ListeTravauxDisciplinaires[IndexTravailSelectionne].CompterCaracteres() || this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
+                if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
+                {
+                    MessageBox.Show("Ce travail disciplinaire est terminé.", "Travail fini", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tmrTempsEffectif.Enabled = false;
+                    e.Handled = true;
+                }
+                else if (this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].VerifierCaractere(e.KeyChar) == false)
                 {
                     e.Handled = true;
                     FausseTape += 1;
                     if (FausseTape > 3)
                     {
                         FausseTape = 0;
-                        if (Convert.ToInt32(ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString()) < 128)
-                            MessageBox.Show("Si vous n'arrivez pas à trouver le caractère, restez appuyé sur \"Alt\" et composez le numéro " + ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString() + " avec le pavé numérique.", "Caractère à taper", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //if (Convert.ToInt32(ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString()) < 128)
+                        MessageBox.Show("Si vous n'arrivez pas à trouver le caractère, restez appuyé sur \"Alt\" et composez le numéro " + ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString() + " avec le pavé numérique.", "Caractère à taper", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                 }
@@ -554,15 +557,15 @@ namespace TravauxDisciplinaireCFPT
                     SecondesInactif = 0;
                     if (NbCaractereTapeDepuisDernierScroll < 100)
                         NbCaractereTapeDepuisDernierScroll += 1;
-                    NbCaractereTapeDepuisDernierScroll = 0;
+                    else
+                    {
+                        UpdateVueTexteUtilisateur();
+                        UpdateVueTexteExemple();
+                    }
                 }
 
                 //Verifie si le travail est fini
-                if (this.ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
-                {
-                    MessageBox.Show("Ce travail disciplinaire est terminé.", "Travail fini", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tmrTempsEffectif.Enabled = false;
-                }
+
 
 
                 //Activation du timer
@@ -579,14 +582,10 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            //Vérifie si un travail est sélectionné
-            if (lsbListeTravaux.SelectedIndex != -1)
-            {
-                //Verifie si le travail supprimer correspond au travail dans l'onglet travail
-                if (lsbListeTravaux.SelectedIndex == this.IndexTravailSelectionne)
-                    EstTravailSelectionne = false;
-                ListeTravauxDisciplinaires.RemoveAt(lsbListeTravaux.SelectedIndex);
-            }
+            //Verifie si le travail supprimer correspond au travail dans l'onglet travail
+            if (lsbListeTravaux.SelectedIndex == this.IndexTravailSelectionne)
+                EstTravailSelectionne = false;
+            ListeTravauxDisciplinaires.RemoveAt(lsbListeTravaux.SelectedIndex);
 
             this.UpdateVueListe();
             this.UpdateVueBouton();
@@ -627,7 +626,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void Enregistrer_Click(object sender, EventArgs e)
         {
-            
+
             int TravailASauvegarder = -1; //index du travail à enregistrer
             //Obtient le
             if (tbcPrincipale.SelectedIndex == 0)
@@ -690,7 +689,7 @@ namespace TravauxDisciplinaireCFPT
         /// <summary>
         /// Cet événement est appelé lorsque l'utilisateur tape du texte. Il s'occupe de l'affichage du texte à recopier ainsi que du texte copié par l'utilisateur.
         /// </summary>
-        private void tbxCopieTexte_TextChanged(object sender, EventArgs e)
+        private void rbxCopieTexte_TextChanged(object sender, EventArgs e)
         {
             //Scroll afin d'afficher le texte à recopier
             this.NbCaractereTapeDepuisDernierScroll += 1;
@@ -967,7 +966,7 @@ namespace TravauxDisciplinaireCFPT
         {
             if (ListeTravauxDisciplinaires.Count != 0)
             {
-                DialogResult DR = MessageBox.Show("Voulez-vous enregistrer les travaux disciplinaires de la liste avant de fermer l'application ?", "Enregistrer les travaux", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                DialogResult DR = MessageBox.Show("Voulez-vous enregistrer les travaux disciplinaires de la liste avant de fermer l'application ?", "Enregistrer les travaux", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 if (DialogResult.Yes == DR)
                 {
                     foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)

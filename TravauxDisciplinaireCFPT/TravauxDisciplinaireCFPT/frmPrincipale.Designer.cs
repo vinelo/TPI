@@ -120,7 +120,7 @@
             this.tsiNouveau.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.tsiNouveau.Size = new System.Drawing.Size(199, 24);
             this.tsiNouveau.Text = "Nouveau";
-            this.tsiNouveau.Click += new System.EventHandler(this.tsiNouveau_Click);
+            this.tsiNouveau.Click += new System.EventHandler(this.Nouveau_Click);
             // 
             // toolStripSeparator3
             // 
@@ -241,9 +241,9 @@
             this.rbxCopieTexte.TabIndex = 0;
             this.rbxCopieTexte.Text = "";
             this.rbxCopieTexte.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbxCopieTexte_MouseClick);
-            this.rbxCopieTexte.TextChanged += new System.EventHandler(this.tbxCopieTexte_TextChanged);
+            this.rbxCopieTexte.TextChanged += new System.EventHandler(this.rbxCopieTexte_TextChanged);
             this.rbxCopieTexte.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbxCopieTexte_KeyDown);
-            this.rbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxCopieTexte_KeyPress);
+            this.rbxCopieTexte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rbxCopieTexte_KeyPress);
             // 
             // groupBox1
             // 
@@ -532,7 +532,7 @@
             this.btnNouveau.TabIndex = 3;
             this.btnNouveau.Text = "Nouveau";
             this.btnNouveau.UseVisualStyleBackColor = false;
-            this.btnNouveau.Click += new System.EventHandler(this.tsiNouveau_Click);
+            this.btnNouveau.Click += new System.EventHandler(this.Nouveau_Click);
             // 
             // btnSupprimer
             // 
