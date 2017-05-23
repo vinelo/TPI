@@ -737,7 +737,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void rbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Delete || e.KeyCode == Keys.Enter || e.KeyCode == Keys.EraseEof || e.KeyCode == Keys.Back )
             {
                 e.Handled = true;
             }
@@ -752,7 +752,7 @@ namespace TravauxDisciplinaireCFPT
             //Ajoute un à un les fichier si ceux-ci sont compatible
             string[] fichiers = (string[])e.Data.GetData(DataFormats.FileDrop);
             //Pour chaque travail sélectionné, un teste est effectué afin de voir si le travail est compatible et il n'a pas été modifié sans l'aide du programme Travail Disciplinaire au CFPT
-            foreach (string fichier in ofdOuvrirFichier.FileNames)
+            foreach (string fichier in fichiers)
             {
                 try
                 {
