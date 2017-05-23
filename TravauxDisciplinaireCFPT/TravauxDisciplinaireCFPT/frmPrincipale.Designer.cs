@@ -117,38 +117,41 @@
             // tsiNouveau
             // 
             this.tsiNouveau.Name = "tsiNouveau";
-            this.tsiNouveau.Size = new System.Drawing.Size(191, 24);
+            this.tsiNouveau.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsiNouveau.Size = new System.Drawing.Size(199, 24);
             this.tsiNouveau.Text = "Nouveau";
             this.tsiNouveau.Click += new System.EventHandler(this.tsiNouveau_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
             // 
             // tsiOuvrir
             // 
             this.tsiOuvrir.Name = "tsiOuvrir";
-            this.tsiOuvrir.Size = new System.Drawing.Size(191, 24);
+            this.tsiOuvrir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsiOuvrir.Size = new System.Drawing.Size(199, 24);
             this.tsiOuvrir.Text = "Ouvrir";
             this.tsiOuvrir.Click += new System.EventHandler(this.Ouvrir_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
             // 
             // tsiEnregistrer
             // 
             this.tsiEnregistrer.Name = "tsiEnregistrer";
-            this.tsiEnregistrer.Size = new System.Drawing.Size(191, 24);
+            this.tsiEnregistrer.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsiEnregistrer.Size = new System.Drawing.Size(199, 24);
             this.tsiEnregistrer.Text = "Enregistrer";
             this.tsiEnregistrer.Click += new System.EventHandler(this.Enregistrer_Click);
             // 
             // tsiEnregistrerSous
             // 
             this.tsiEnregistrerSous.Name = "tsiEnregistrerSous";
-            this.tsiEnregistrerSous.Size = new System.Drawing.Size(191, 24);
+            this.tsiEnregistrerSous.Size = new System.Drawing.Size(199, 24);
             this.tsiEnregistrerSous.Text = "Enregistrer sous...";
             this.tsiEnregistrerSous.Click += new System.EventHandler(this.tsiEnregistrerSous_Click);
             // 
@@ -255,7 +258,7 @@
             // 
             // rbxTexteExemple
             // 
-            this.rbxTexteExemple.BackColor = System.Drawing.Color.White;
+            this.rbxTexteExemple.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rbxTexteExemple.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rbxTexteExemple.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbxTexteExemple.Location = new System.Drawing.Point(7, 24);

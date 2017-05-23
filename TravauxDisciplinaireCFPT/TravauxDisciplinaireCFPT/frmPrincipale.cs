@@ -290,7 +290,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         public void UpdateVueAucunTravail()
         {
-            rbxTexteExemple.Text = "";
+            rbxTexteExemple.Text = "Veuillez sélectionner un travail afin de pouvoir commencer.";
             rbxCopieTexte.Text = "";
             lblClasse.Text = "";
             lblEleve.Text = "";
