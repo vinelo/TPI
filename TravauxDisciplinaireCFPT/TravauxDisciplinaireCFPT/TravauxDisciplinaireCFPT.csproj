@@ -119,6 +119,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ManuelUtilisateur.pdf" />
     <None Include="Resources\NAEF_PlanningTPIV2.pdf" />
     <None Include="Resources\TexteExemple.txt" />
   </ItemGroup>

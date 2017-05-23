@@ -962,7 +962,7 @@ namespace TravauxDisciplinaireCFPT
         private void tsiAide_Click(object sender, EventArgs e)
         {
             string locationToSavePdf = Path.Combine(Path.GetTempPath(), "manuel.pdf");
-            File.WriteAllBytes(locationToSavePdf, Properties.Resources.NAEF_PlanningTPIV2);
+            File.WriteAllBytes(locationToSavePdf, Properties.Resources.ManuelUtilisateur);
             Process.Start(locationToSavePdf);
         }
 
