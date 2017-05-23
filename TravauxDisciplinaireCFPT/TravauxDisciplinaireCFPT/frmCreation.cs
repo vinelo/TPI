@@ -17,16 +17,9 @@ namespace TravauxDisciplinaireCFPT
     {
 
         //Champs...
-        private string _texte;
         private Niveau _niveauSelectionne;
 
         //Propriétés...
-        private string Texte
-        {
-            get { return _texte; }
-            set { _texte = value; }
-        }
-
         private Niveau NiveauSelectionne
         {
             get
@@ -100,7 +93,7 @@ namespace TravauxDisciplinaireCFPT
         {
             string[] lireText = File.ReadAllLines(paramFichier, Encoding.Default);
 
-            Texte = "";
+            string Texte = "";
             foreach (string uneLigne in lireText)
             {
                 Texte += uneLigne + Environment.NewLine;

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravauxDisciplinaireCFPT", "TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT.csproj", "{EDE8E2A9-39A4-4D65-AF4C-899618FCD831}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TravauxDisciplinaires", "TravauxDisciplinaires\TravauxDisciplinaires.vdproj", "{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TravauxDisciplinairesAuCfpt", "TravauxDisciplinairesAuCfpt\TravauxDisciplinairesAuCfpt.vdproj", "{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,11 +26,11 @@ Global
 		{EDE8E2A9-39A4-4D65-AF4C-899618FCD831}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDE8E2A9-39A4-4D65-AF4C-899618FCD831}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{EDE8E2A9-39A4-4D65-AF4C-899618FCD831}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}.CD_ROM|Any CPU.ActiveCfg = Release
-		{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}.Debug|Any CPU.ActiveCfg = Debug
-		{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}.DVD-5|Any CPU.ActiveCfg = Debug
-		{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}.Release|Any CPU.ActiveCfg = Release
-		{5AC2A34A-CAE6-46B6-A1B4-7F0E15F3CB8F}.SingleImage|Any CPU.ActiveCfg = Release
+		{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}.CD_ROM|Any CPU.ActiveCfg = Release
+		{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}.Debug|Any CPU.ActiveCfg = Debug
+		{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}.DVD-5|Any CPU.ActiveCfg = Debug
+		{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}.Release|Any CPU.ActiveCfg = Release
+		{2A1740F6-2A18-40D9-99F6-61CCD192A0BC}.SingleImage|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
