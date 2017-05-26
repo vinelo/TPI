@@ -260,6 +260,7 @@ namespace TravauxDisciplinaireCFPT
             //Sélectionne le travail choisi par l'utilisateur
             this.IndexTravailSelectionne = lsbListeTravaux.SelectedIndex;
             tbcPrincipale.SelectTab(0);
+            this.ActiveControl = rbxCopieTexte;
 
             UpdateVueAfficherTextes();
             UpdateVueBouton();
@@ -352,7 +353,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         public void UpdateVueTexteExemple()
         {
-            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression;
+            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression + 1;
             rbxTexteExemple.ScrollToCaret();
         }
         /// <summary>
@@ -463,7 +464,7 @@ namespace TravauxDisciplinaireCFPT
 
                 //Affichage professeur
                 e.Graphics.DrawString("Professeur :",
-                   e.Font, Stylo, e.Bounds.X + 19, e.Bounds.Y + 10);
+                   e.Font, Stylo, e.Bounds.X + 18, e.Bounds.Y + 10);
                 e.Graphics.DrawString(ListeTravauxDisciplinaires[e.Index].Professeur.ToString(),
                    Police, Bleu, e.Bounds.X + 105, e.Bounds.Y + 11);
                 //Affichage élève
@@ -491,7 +492,7 @@ namespace TravauxDisciplinaireCFPT
 
 
                 e.Graphics.DrawString("Progression :",
-                   e.Font, Stylo, e.Bounds.X + 377, e.Bounds.Y + 35);
+                   e.Font, Stylo, e.Bounds.X + 374, e.Bounds.Y + 35);
                 //Barre de progression
                 Rectangle BarreProgressionGris = new Rectangle(e.Bounds.X + 480, e.Bounds.Y + 36, 304, 16);
                 e.Graphics.FillRectangle(Gris, BarreProgressionGris);
@@ -554,14 +555,6 @@ namespace TravauxDisciplinaireCFPT
                     FausseTape = 0;
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                     UpdateVueProgression();
-                    SecondesInactif = 0;
-                    if (NbCaractereTapeDepuisDernierScroll < 100)
-                        NbCaractereTapeDepuisDernierScroll += 1;
-                    else
-                    {
-                        UpdateVueTexteUtilisateur();
-                        UpdateVueTexteExemple();
-                    }
                 }
 
                 //Verifie si le travail est fini
@@ -628,7 +621,6 @@ namespace TravauxDisciplinaireCFPT
         {
 
             int TravailASauvegarder = -1; //index du travail à enregistrer
-            //Obtient le
             if (tbcPrincipale.SelectedIndex == 0)
             {
                 if (EstIndexSelectionne())
@@ -658,6 +650,7 @@ namespace TravauxDisciplinaireCFPT
         {
             if (ofdOuvrirFichier.ShowDialog() == DialogResult.OK)
             {
+                string TravauxCorrompu = "";
                 //Pour chaque travail sélectionné, un teste est effectué afin de voir si le travail est compatible et il n'a pas été modifié sans l'aide du programme Travail Disciplinaire au CFPT
                 foreach (string fichier in ofdOuvrirFichier.FileNames)
                 {
@@ -668,18 +661,19 @@ namespace TravauxDisciplinaireCFPT
                         if (td.VerifierDonneeTravail())
                         {
                             ListeTravauxDisciplinaires.Add(td);
-                            MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Le fichier : \"" + fichier + "\"  est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            TravauxCorrompu += fichier + "\n";
                         }
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Le fichier : \"" + fichier + "\" est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        TravauxCorrompu += fichier + "\n";
                     }
                 }
+                if (TravauxCorrompu != "")
+                    MessageBox.Show("Ces fichiers sont corrompu : \n" + TravauxCorrompu, "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UpdateVueListe();
                 UpdateVueBouton();
 
@@ -695,10 +689,8 @@ namespace TravauxDisciplinaireCFPT
             this.NbCaractereTapeDepuisDernierScroll += 1;
             if (NbCaractereTapeDepuisDernierScroll == 100)
             {
-                rbxCopieTexte.SelectionStart = rbxCopieTexte.Text.Length;
-                rbxCopieTexte.ScrollToCaret();
-                rbxTexteExemple.SelectionStart = rbxCopieTexte.Text.Length - 100;
-                rbxTexteExemple.ScrollToCaret();
+                UpdateVueTexteExemple();
+                UpdateVueTexteUtilisateur();
                 NbCaractereTapeDepuisDernierScroll = 0;
             }
 
@@ -742,6 +734,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void lsbListeTravaux_DragDrop(object sender, DragEventArgs e)
         {
+            string TravauxCorrompu = "";
             //Ajoute un à un les fichier si ceux-ci sont compatible
             string[] fichiers = (string[])e.Data.GetData(DataFormats.FileDrop);
             //Pour chaque travail sélectionné, un teste est effectué afin de voir si le travail est compatible et il n'a pas été modifié sans l'aide du programme Travail Disciplinaire au CFPT
@@ -754,18 +747,19 @@ namespace TravauxDisciplinaireCFPT
                     if (td.VerifierDonneeTravail())
                     {
                         ListeTravauxDisciplinaires.Add(td);
-                        MessageBox.Show("Le travail : \"" + fichier + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Le fichier : \"" + fichier + "\"  est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        TravauxCorrompu += fichier + "\n";
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Le fichier : \"" + fichier + "\" est incompatible ou corrompu", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TravauxCorrompu += fichier + "\n";
                 }
             }
+            if (TravauxCorrompu != "")
+                MessageBox.Show("Ces fichiers sont corrompu : \n" + TravauxCorrompu, "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             UpdateVueListe();
             UpdateVueBouton();
         }
@@ -794,7 +788,6 @@ namespace TravauxDisciplinaireCFPT
                     {
                         ListeTravauxDisciplinaires.Add(td);
                         UpdateVueListe();
-                        MessageBox.Show("Le travail : \"" + Environment.GetCommandLineArgs()[1] + "\" à bien été ajouté.", "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     else
@@ -926,10 +919,12 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void tsiEnregistrerSous_Click(object sender, EventArgs e)
         {
+
             if (tbcPrincipale.SelectedIndex == 0)
             {
                 if (EstIndexSelectionne())
                 {
+                    sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Nom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Prenom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DateDeDebut.ToString("ddMMyy");
                     if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
                         this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
                 }
@@ -940,6 +935,7 @@ namespace TravauxDisciplinaireCFPT
             {
                 if (lsbListeTravaux.SelectedIndex != -1)
                 {
+                    sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].Eleve.Nom + this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].Eleve.Prenom + this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].DateDeDebut.ToString("ddMMyy");
                     if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
                         this.ListeTravauxDisciplinaires[IndexTravailSelectionne].SerialiserTravail(sfdSauvegarderTravail.FileName);
                 }

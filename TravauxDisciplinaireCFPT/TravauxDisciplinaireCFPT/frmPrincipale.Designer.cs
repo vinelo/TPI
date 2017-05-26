@@ -566,7 +566,6 @@
             // sfdSauvegarderTravail
             // 
             this.sfdSauvegarderTravail.DefaultExt = "td";
-            this.sfdSauvegarderTravail.FileName = "travail.td";
             this.sfdSauvegarderTravail.Filter = "Travaux Disciplinaire au CFPT|*.td";
             this.sfdSauvegarderTravail.Title = "Enregistrer le travail";
             // 

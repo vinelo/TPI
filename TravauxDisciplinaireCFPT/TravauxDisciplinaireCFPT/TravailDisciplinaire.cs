@@ -288,9 +288,10 @@ namespace TravauxDisciplinaireCFPT
 
             try
             {
+                
                 TravailDisciplinaire td = (TravailDisciplinaire)formatter.Deserialize(stream);
-               
-                //td.VerifierCleValidation();
+
+                td.DernierEmplacement = paramFichier;
                 return td;
 
             }
