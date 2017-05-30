@@ -78,6 +78,8 @@
             this.sfdSauvegarderTravail = new System.Windows.Forms.SaveFileDialog();
             this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
             this.sfdSauvegarderLog = new System.Windows.Forms.SaveFileDialog();
+            this.tsiQuitter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mspMenu.SuspendLayout();
             this.tbcPrincipale.SuspendLayout();
             this.tbpTravail.SuspendLayout();
@@ -109,7 +111,9 @@
             this.tsiOuvrir,
             this.toolStripSeparator1,
             this.tsiEnregistrer,
-            this.tsiEnregistrerSous});
+            this.tsiEnregistrerSous,
+            this.toolStripSeparator4,
+            this.tsiQuitter});
             this.tsmFichier.Name = "tsmFichier";
             this.tsmFichier.Size = new System.Drawing.Size(64, 24);
             this.tsmFichier.Text = "Fichier";
@@ -200,7 +204,7 @@
             this.tbcPrincipale.Location = new System.Drawing.Point(0, 42);
             this.tbcPrincipale.Name = "tbcPrincipale";
             this.tbcPrincipale.SelectedIndex = 0;
-            this.tbcPrincipale.Size = new System.Drawing.Size(916, 593);
+            this.tbcPrincipale.Size = new System.Drawing.Size(958, 593);
             this.tbcPrincipale.TabIndex = 1;
             this.tbcPrincipale.TabStop = false;
             // 
@@ -453,7 +457,7 @@
             this.tbpGestion.Location = new System.Drawing.Point(4, 27);
             this.tbpGestion.Name = "tbpGestion";
             this.tbpGestion.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpGestion.Size = new System.Drawing.Size(908, 562);
+            this.tbpGestion.Size = new System.Drawing.Size(950, 562);
             this.tbpGestion.TabIndex = 1;
             this.tbpGestion.Text = "Gestion de travaux";
             this.tbpGestion.UseVisualStyleBackColor = true;
@@ -580,6 +584,19 @@
             this.sfdSauvegarderLog.FileName = "Log";
             this.sfdSauvegarderLog.Filter = "Fichier Texte |*.txt";
             // 
+            // tsiQuitter
+            // 
+            this.tsiQuitter.Name = "tsiQuitter";
+            this.tsiQuitter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsiQuitter.Size = new System.Drawing.Size(199, 24);
+            this.tsiQuitter.Text = "Quitter";
+            this.tsiQuitter.Click += new System.EventHandler(this.tsiQuitter_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(196, 6);
+            // 
             // frmPrincipale
             // 
             this.AllowDrop = true;
@@ -663,6 +680,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ToolStripMenuItem tsiInfosbulles;
         private System.Windows.Forms.Button btnEnregistrer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem tsiQuitter;
     }
 }
 

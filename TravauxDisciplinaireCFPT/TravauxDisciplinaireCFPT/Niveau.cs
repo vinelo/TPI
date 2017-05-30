@@ -101,7 +101,12 @@ namespace TravauxDisciplinaireCFPT
         {
             string NiveauToString = "";
             if (this.NumeroNiveau == 6)
-                NiveauToString = "Personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
+            {
+                if (this.CalculerMinutesDuTexte() != 0)
+                    NiveauToString = "Personnalisé" + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
+                else
+                    NiveauToString = "Personnalisé" + " ( moins de 10 min. )";
+            }
             else
                 NiveauToString = this.NumeroNiveau + " ( ~ " + Convert.ToString(this.CalculerMinutesDuTexte()) + " min. )";
             return NiveauToString;

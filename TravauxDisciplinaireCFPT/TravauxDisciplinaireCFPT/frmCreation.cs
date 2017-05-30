@@ -152,8 +152,16 @@ namespace TravauxDisciplinaireCFPT
             if (DialogResult.OK == ofdOuvrir.ShowDialog())
             {
                 NiveauSelectionne = new Niveau(ChoisirNiveau(), LireTexte(ofdOuvrir.FileName));
-                if (DialogResult.Cancel == MessageBox.Show("Ce texte prendra environ " + Convert.ToString(NiveauSelectionne.CalculerMinutesDuTexte() + " minutes à être recopié."), "Durée du texte", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
-                    NiveauSelectionne = null;
+                if (NiveauSelectionne.CalculerMinutesDuTexte() != 0)
+                {
+                    if (DialogResult.Cancel == MessageBox.Show("Ce texte prendra environ " + Convert.ToString(NiveauSelectionne.CalculerMinutesDuTexte() + " minutes à être recopié."), "Durée du texte", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+                        NiveauSelectionne = null;
+                }
+                else
+                {
+                    if (DialogResult.Cancel == MessageBox.Show("Ce texte prendra moins de 10 minutes à être recopié.", "Durée du texte", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+                        NiveauSelectionne = null;
+                }
             }
 
         }

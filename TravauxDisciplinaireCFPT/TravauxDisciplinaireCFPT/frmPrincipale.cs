@@ -265,8 +265,9 @@ namespace TravauxDisciplinaireCFPT
             UpdateVueAfficherTextes();
             UpdateVueBouton();
             UpdateVueTexteUtilisateur();
-            UpdateVueTexteExemple();
             UpdateVueProgression();
+            if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression != 0)
+                UpdateVueTexteExemple();
         }
         //__________________________UpdateVue__________________________\\
         /// <summary>
@@ -353,7 +354,8 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         public void UpdateVueTexteExemple()
         {
-            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression + 1;
+
+            rbxTexteExemple.SelectionStart = this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression - 1;
             rbxTexteExemple.ScrollToCaret();
         }
         /// <summary>
@@ -433,6 +435,10 @@ namespace TravauxDisciplinaireCFPT
                 UpdateVueListe();
                 tbcPrincipale.SelectTab(1);
                 UpdateVueBouton();
+            }
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
             }
         }
 
@@ -555,9 +561,22 @@ namespace TravauxDisciplinaireCFPT
                     FausseTape = 0;
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                     UpdateVueProgression();
-                }
 
-                //Verifie si le travail est fini
+
+                    int premierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().IndexOf((char)13);
+                    int dernierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().LastIndexOf((char)13);
+                    this.NbCaractereTapeDepuisDernierScroll += 1;
+                    //if (ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Contains(Convert.ToString((char)13)) || ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Length >= 100)
+                    if (premierIndex != dernierIndex || ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Length >= 200)
+                    {
+                        if (NbCaractereTapeDepuisDernierScroll >= 5 && this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression >= 0)
+                        {
+                            UpdateVueTexteExemple();
+                            UpdateVueTexteUtilisateur();
+                            NbCaractereTapeDepuisDernierScroll = 0;
+                        }
+                    }
+                }
 
 
 
@@ -582,6 +601,10 @@ namespace TravauxDisciplinaireCFPT
 
             this.UpdateVueListe();
             this.UpdateVueBouton();
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -590,6 +613,14 @@ namespace TravauxDisciplinaireCFPT
         private void lsbListeTravaux_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.UpdateVueBouton();
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -619,17 +650,22 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void Enregistrer_Click(object sender, EventArgs e)
         {
-
             int TravailASauvegarder = -1; //index du travail à enregistrer
             if (tbcPrincipale.SelectedIndex == 0)
             {
                 if (EstIndexSelectionne())
+                {
                     TravailASauvegarder = IndexTravailSelectionne;
+                    sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Nom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Prenom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DateDeDebut.ToString("ddMMyy");
+                }
             }
             else
             {
                 if (lsbListeTravaux.SelectedIndex != -1)
+                {
+                    sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].Eleve.Nom + this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].Eleve.Prenom + this.ListeTravauxDisciplinaires[lsbListeTravaux.SelectedIndex].DateDeDebut.ToString("ddMMyy");
                     TravailASauvegarder = lsbListeTravaux.SelectedIndex;
+                }
             }
             if (TravailASauvegarder != -1)
             {
@@ -641,6 +677,11 @@ namespace TravauxDisciplinaireCFPT
             }
             else
                 MessageBox.Show("Veuillez choisir un travail à enregistrer.", "Enregistrer un travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -676,7 +717,10 @@ namespace TravauxDisciplinaireCFPT
                     MessageBox.Show("Ces fichiers sont corrompu : \n" + TravauxCorrompu, "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UpdateVueListe();
                 UpdateVueBouton();
-
+            }
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
             }
         }
 
@@ -686,13 +730,6 @@ namespace TravauxDisciplinaireCFPT
         private void rbxCopieTexte_TextChanged(object sender, EventArgs e)
         {
             //Scroll afin d'afficher le texte à recopier
-            this.NbCaractereTapeDepuisDernierScroll += 1;
-            if (NbCaractereTapeDepuisDernierScroll == 100)
-            {
-                UpdateVueTexteExemple();
-                UpdateVueTexteUtilisateur();
-                NbCaractereTapeDepuisDernierScroll = 0;
-            }
 
         }
 
@@ -704,6 +741,10 @@ namespace TravauxDisciplinaireCFPT
             if (sfdSauvegarderLog.ShowDialog() == DialogResult.OK)
             {
                 this.JournalisationListeTravaux(sfdSauvegarderLog.FileName);
+            }
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
             }
         }
 
@@ -762,6 +803,10 @@ namespace TravauxDisciplinaireCFPT
                 MessageBox.Show("Ces fichiers sont corrompu : \n" + TravauxCorrompu, "État du travail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             UpdateVueListe();
             UpdateVueBouton();
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -882,6 +927,10 @@ namespace TravauxDisciplinaireCFPT
             TlpInfoListe.ToolTipIcon = ToolTipIcon.Info;
             TlpInfoListe.ToolTipTitle = "Liste des travaux disciplinaires ajoutés ou créés";
             TlpInfoListe.Active = true;
+            if (lsbListeTravaux.Items.Count != 0 && lsbListeTravaux.SelectedIndex == -1)
+            {
+                lsbListeTravaux.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -955,18 +1004,30 @@ namespace TravauxDisciplinaireCFPT
             Process.Start(locationToSavePdf);
         }
 
+
         /// <summary>
         /// Cet événement est appelé lorsque l'application se ferme. Il enregistre les travaux si l'utilisateur veut qu'il en soit ainsi.
         /// </summary>
         private void frmPrincipale_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ListeTravauxDisciplinaires.Count != 0)
+            bool DoitEnregistrer = false;
+
+            foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
+            {
+                if (!td.VerifierDonneeTravail())
+                {
+                    DoitEnregistrer = true;
+                }
+            }
+
+            if (DoitEnregistrer)
             {
                 DialogResult DR = MessageBox.Show("Voulez-vous enregistrer les travaux disciplinaires de la liste avant de fermer l'application ?", "Enregistrer les travaux", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 if (DialogResult.Yes == DR)
                 {
                     foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
                     {
+                        sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Nom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Prenom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DateDeDebut.ToString("ddMMyy");
                         if (td.DernierEmplacement != "" && File.Exists(td.DernierEmplacement))
                             td.SerialiserTravail(td.DernierEmplacement);
                         else if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)
@@ -976,6 +1037,11 @@ namespace TravauxDisciplinaireCFPT
                 else if (DialogResult.Cancel == DR)
                     e.Cancel = true;
             }
+        }
+
+        private void tsiQuitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
