@@ -77,6 +77,7 @@
             // 
             this.tbxPrenomProf.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPrenomProf.Location = new System.Drawing.Point(84, 67);
+            this.tbxPrenomProf.MaxLength = 16;
             this.tbxPrenomProf.Name = "tbxPrenomProf";
             this.tbxPrenomProf.Size = new System.Drawing.Size(166, 27);
             this.tbxPrenomProf.TabIndex = 1;
@@ -96,6 +97,7 @@
             // 
             this.tbxNomProf.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxNomProf.Location = new System.Drawing.Point(84, 35);
+            this.tbxNomProf.MaxLength = 16;
             this.tbxNomProf.Name = "tbxNomProf";
             this.tbxNomProf.Size = new System.Drawing.Size(166, 27);
             this.tbxNomProf.TabIndex = 0;
@@ -131,6 +133,7 @@
             // 
             this.tbxClasseEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxClasseEleve.Location = new System.Drawing.Point(84, 99);
+            this.tbxClasseEleve.MaxLength = 16;
             this.tbxClasseEleve.Name = "tbxClasseEleve";
             this.tbxClasseEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxClasseEleve.TabIndex = 4;
@@ -150,6 +153,7 @@
             // 
             this.tbxPrenomEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPrenomEleve.Location = new System.Drawing.Point(84, 67);
+            this.tbxPrenomEleve.MaxLength = 16;
             this.tbxPrenomEleve.Name = "tbxPrenomEleve";
             this.tbxPrenomEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxPrenomEleve.TabIndex = 3;
@@ -169,6 +173,7 @@
             // 
             this.tbxNomEleve.Font = new System.Drawing.Font("Consolas", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxNomEleve.Location = new System.Drawing.Point(84, 35);
+            this.tbxNomEleve.MaxLength = 16;
             this.tbxNomEleve.Name = "tbxNomEleve";
             this.tbxNomEleve.Size = new System.Drawing.Size(166, 27);
             this.tbxNomEleve.TabIndex = 2;

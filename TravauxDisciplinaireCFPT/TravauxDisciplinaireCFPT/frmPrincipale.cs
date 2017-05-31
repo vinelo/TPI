@@ -550,7 +550,7 @@ namespace TravauxDisciplinaireCFPT
                     if (FausseTape > 3)
                     {
                         FausseTape = 0;
-                        //if (Convert.ToInt32(ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString()) < 128)
+                        if (Convert.ToInt32(ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString()) < 128)
                         MessageBox.Show("Si vous n'arrivez pas à trouver le caractère, restez appuyé sur \"Alt\" et composez le numéro " + ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString() + " avec le pavé numérique.", "Caractère à taper", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
@@ -566,8 +566,9 @@ namespace TravauxDisciplinaireCFPT
                     int premierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().IndexOf((char)13);
                     int dernierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().LastIndexOf((char)13);
                     this.NbCaractereTapeDepuisDernierScroll += 1;
+                    SecondesInactif = 0;
                     //if (ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Contains(Convert.ToString((char)13)) || ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Length >= 100)
-                    if (premierIndex != dernierIndex || ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Length >= 200)
+                    if (premierIndex != dernierIndex || ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().Length >= 250)
                     {
                         if (NbCaractereTapeDepuisDernierScroll >= 5 && this.ListeTravauxDisciplinaires[this.IndexTravailSelectionne].Progression >= 0)
                         {
@@ -1027,7 +1028,7 @@ namespace TravauxDisciplinaireCFPT
                 {
                     foreach (TravailDisciplinaire td in ListeTravauxDisciplinaires)
                     {
-                        sfdSauvegarderTravail.FileName = this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Nom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Eleve.Prenom + this.ListeTravauxDisciplinaires[IndexTravailSelectionne].DateDeDebut.ToString("ddMMyy");
+                        sfdSauvegarderTravail.FileName = td.Eleve.Nom + td.Eleve.Prenom + td.DateDeDebut.ToString("ddMMyy");
                         if (td.DernierEmplacement != "" && File.Exists(td.DernierEmplacement))
                             td.SerialiserTravail(td.DernierEmplacement);
                         else if (sfdSauvegarderTravail.ShowDialog() == DialogResult.OK)

@@ -43,3 +43,13 @@ C:\Users\NAEFV_INFO\Desktop\Nouveau dossier (2)\TPI\TravauxDisciplinaireCFPT\Tra
 C:\Users\NAEFV_INFO\Desktop\Nouveau dossier (2)\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmPrincipale.resources
 C:\Users\NAEFV_INFO\Desktop\Nouveau dossier (2)\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
 C:\Users\NAEFV_INFO\Desktop\Nouveau dossier (2)\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe.config
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.exe
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.pdb
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.pdb
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmAPropos.resources
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmCreation.resources
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmPrincipale.resources
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
+C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
