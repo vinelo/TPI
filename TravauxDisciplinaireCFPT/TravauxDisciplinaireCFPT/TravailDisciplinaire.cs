@@ -207,7 +207,7 @@ namespace TravauxDisciplinaireCFPT
         /// <returns>Objet "TravailDisciplinaire" sous forme de texte</returns>
         public override string ToString()
         {
-            string Travail = AVERTISSEMENT + this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.DureeEffective) + Niveau.ToString() + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier + AVERTISSEMENT;
+            string Travail = AVERTISSEMENT + this.Eleve.ToString() + this.Professeur.ToString() + Convert.ToString(this.Progression) + Convert.ToString(this.DureeEffective) + this.DateDeDebut + this.Niveau.ToString() + this.Niveau.TexteARecopier + AVERTISSEMENT;
             return Travail;
         }
         /// <summary>
@@ -328,7 +328,6 @@ namespace TravauxDisciplinaireCFPT
             bool Verification = false;
             MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
             byte[] DonneesAVerifier = Encoding.Default.GetBytes(this.ToString());
-            DonneesAVerifier = Encoding.Default.GetBytes(this.ToString());
             DonneesAVerifier = MD5.ComputeHash(DonneesAVerifier);
             string DonneesEncodeesAVerifier = Convert.ToBase64String(DonneesAVerifier);
 

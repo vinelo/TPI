@@ -53,3 +53,4 @@ C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\Travau
 C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmPrincipale.resources
 C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
 C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
+E:\Desktop\École\TPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csprojResolveAssemblyReference.cache
