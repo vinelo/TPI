@@ -268,8 +268,33 @@ namespace TravauxDisciplinaireCFPT
             UpdateVueProgression();
             if (ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression != 0)
                 UpdateVueTexteExemple();
+
+            if (ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
+            {
+                UpdateVueFini();
+            }
+            else
+            {
+                UpdateVuePasFini();
+            }
+
         }
         //__________________________UpdateVue__________________________\\
+
+        public void UpdateVueFini()
+        {
+            rbxCopieTexte.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            rbxTexteExemple.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            gbxProgression.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            gbxDetails.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+        }
+        public void UpdateVuePasFini()
+        {
+            rbxCopieTexte.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            rbxTexteExemple.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            gbxProgression.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+            gbxDetails.Enabled = !ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini();
+        }
         /// <summary>
         /// Cache ou affiche les infosbulles
         /// </summary>
@@ -551,17 +576,19 @@ namespace TravauxDisciplinaireCFPT
                     {
                         FausseTape = 0;
                         if (Convert.ToInt32(ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString()) < 128)
-                        MessageBox.Show("Si vous n'arrivez pas à trouver le caractère, restez appuyé sur \"Alt\" et composez le numéro " + ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString() + " avec le pavé numérique.", "Caractère à taper", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Si vous n'arrivez pas à trouver le caractère, restez appuyé sur \"Alt\" et composez le numéro " + ListeTravauxDisciplinaires[IndexTravailSelectionne].AsciiDuCaractereATaperToString() + " avec le pavé numérique.", "Caractère à taper", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                 }
                 else
                 {
-
                     FausseTape = 0;
                     this.ListeTravauxDisciplinaires[IndexTravailSelectionne].AvancerProgression();
                     UpdateVueProgression();
 
+                    e.Handled = true;
+                    rbxCopieTexte.Text += this.ListeTravauxDisciplinaires[IndexTravailSelectionne].Niveau.TexteARecopier[ListeTravauxDisciplinaires[IndexTravailSelectionne].Progression - 1];
+                    rbxCopieTexte.SelectionStart = rbxCopieTexte.Text.Length;
 
                     int premierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().IndexOf((char)13);
                     int dernierIndex = ListeTravauxDisciplinaires[IndexTravailSelectionne].GetTexteTapeParUtilisateur().LastIndexOf((char)13);
@@ -576,6 +603,14 @@ namespace TravauxDisciplinaireCFPT
                             UpdateVueTexteUtilisateur();
                             NbCaractereTapeDepuisDernierScroll = 0;
                         }
+                    }
+
+                    if (ListeTravauxDisciplinaires[IndexTravailSelectionne].EstFini())
+                    {
+                        MessageBox.Show("Ce travail disciplinaire est terminé.", "Travail fini", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        tmrTempsEffectif.Enabled = false;
+                        e.Handled = true;
+                        UpdateVueFini();
                     }
                 }
 
@@ -764,7 +799,7 @@ namespace TravauxDisciplinaireCFPT
         /// </summary>
         private void rbxCopieTexte_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Delete || e.KeyCode == Keys.EraseEof || e.KeyCode == Keys.Back)
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Delete || e.KeyCode == Keys.EraseEof || e.KeyCode == Keys.Back || e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
             }

@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_C59D939AFA714728938723D5B194F830"
+        "MsmKey" = "8:_7B0BB1972541482888B1390F5A2E126C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -28,7 +28,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C59D939AFA714728938723D5B194F830"
+        "OwnerKey" = "8:_7B0BB1972541482888B1390F5A2E126C"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -88,6 +88,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -118,14 +126,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C59D939AFA714728938723D5B194F830"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7B0BB1972541482888B1390F5A2E126C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:TravauxDisciplinaireCFPT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C59D939AFA714728938723D5B194F830"
+                    "_7B0BB1972541482888B1390F5A2E126C"
                     {
                     "Name" = "8:TravauxDisciplinaireCFPT.exe"
                     "Attributes" = "3:512"
@@ -182,7 +190,7 @@
             "IconIndex" = "3:0"
                 "Command"
                 {
-                "Command" = "8:_C59D939AFA714728938723D5B194F830"
+                "Command" = "8:_7B0BB1972541482888B1390F5A2E126C"
                 }
                 "Verbs"
                 {
@@ -249,7 +257,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Installation"
         "ProductCode" = "8:{053182CF-1099-4D24-8A91-9E3533A9D05D}"
-        "PackageCode" = "8:{0A687EA6-DAE7-4769-AB41-C74BB5D3D308}"
+        "PackageCode" = "8:{F8BB1C39-F93A-4E92-8EF2-86979701067D}"
         "UpgradeCode" = "8:{57B33304-BE0B-4C55-80D8-8F0BCB1302A8}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

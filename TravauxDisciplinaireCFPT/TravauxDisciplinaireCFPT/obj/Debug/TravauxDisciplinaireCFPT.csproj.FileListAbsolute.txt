@@ -54,3 +54,14 @@ C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\Travau
 C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
 C:\Users\NAEFV_INFO\Desktop\PrésentationTPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache
 E:\Desktop\École\TPI\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csprojResolveAssemblyReference.cache
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe.config
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.exe
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.pdb
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.exe
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\bin\Debug\TravauxDisciplinaireCFPT.pdb
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csprojResolveAssemblyReference.cache
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmAPropos.resources
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmCreation.resources
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.frmPrincipale.resources
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.Properties.Resources.resources
+E:\Desktop\Finale\TPI\TravauxDisciplinaireCFPT\TravauxDisciplinaireCFPT\obj\Debug\TravauxDisciplinaireCFPT.csproj.GenerateResource.Cache

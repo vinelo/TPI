@@ -38,6 +38,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsiEnregistrer = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiEnregistrerSous = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsiQuitter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiAide = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiInfosbulles = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,8 +80,6 @@
             this.sfdSauvegarderTravail = new System.Windows.Forms.SaveFileDialog();
             this.ofdOuvrirFichier = new System.Windows.Forms.OpenFileDialog();
             this.sfdSauvegarderLog = new System.Windows.Forms.SaveFileDialog();
-            this.tsiQuitter = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mspMenu.SuspendLayout();
             this.tbcPrincipale.SuspendLayout();
             this.tbpTravail.SuspendLayout();
@@ -159,6 +159,19 @@
             this.tsiEnregistrerSous.Text = "Enregistrer sous...";
             this.tsiEnregistrerSous.Click += new System.EventHandler(this.tsiEnregistrerSous_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(196, 6);
+            // 
+            // tsiQuitter
+            // 
+            this.tsiQuitter.Name = "tsiQuitter";
+            this.tsiQuitter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsiQuitter.Size = new System.Drawing.Size(199, 24);
+            this.tsiQuitter.Text = "Quitter";
+            this.tsiQuitter.Click += new System.EventHandler(this.tsiQuitter_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -217,7 +230,7 @@
             this.tbpTravail.Location = new System.Drawing.Point(4, 27);
             this.tbpTravail.Name = "tbpTravail";
             this.tbpTravail.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpTravail.Size = new System.Drawing.Size(908, 562);
+            this.tbpTravail.Size = new System.Drawing.Size(950, 562);
             this.tbpTravail.TabIndex = 0;
             this.tbpTravail.Text = "Travail";
             this.tbpTravail.UseVisualStyleBackColor = true;
@@ -419,18 +432,18 @@
             // 
             this.lblTemps.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTemps.ForeColor = System.Drawing.Color.DarkBlue;
-            this.lblTemps.Location = new System.Drawing.Point(208, 40);
+            this.lblTemps.Location = new System.Drawing.Point(211, 40);
             this.lblTemps.Name = "lblTemps";
-            this.lblTemps.Size = new System.Drawing.Size(268, 18);
+            this.lblTemps.Size = new System.Drawing.Size(265, 18);
             this.lblTemps.TabIndex = 3;
             // 
             // pgbBarreProgression
             // 
-            this.pgbBarreProgression.Location = new System.Drawing.Point(208, 71);
+            this.pgbBarreProgression.Location = new System.Drawing.Point(211, 71);
             this.pgbBarreProgression.MarqueeAnimationSpeed = 1;
             this.pgbBarreProgression.Maximum = 1000;
             this.pgbBarreProgression.Name = "pgbBarreProgression";
-            this.pgbBarreProgression.Size = new System.Drawing.Size(268, 20);
+            this.pgbBarreProgression.Size = new System.Drawing.Size(265, 20);
             this.pgbBarreProgression.Step = 1;
             this.pgbBarreProgression.TabIndex = 2;
             // 
@@ -583,19 +596,6 @@
             // 
             this.sfdSauvegarderLog.FileName = "Log";
             this.sfdSauvegarderLog.Filter = "Fichier Texte |*.txt";
-            // 
-            // tsiQuitter
-            // 
-            this.tsiQuitter.Name = "tsiQuitter";
-            this.tsiQuitter.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsiQuitter.Size = new System.Drawing.Size(199, 24);
-            this.tsiQuitter.Text = "Quitter";
-            this.tsiQuitter.Click += new System.EventHandler(this.tsiQuitter_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(196, 6);
             // 
             // frmPrincipale
             // 
